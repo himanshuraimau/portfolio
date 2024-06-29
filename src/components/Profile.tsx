@@ -7,21 +7,21 @@ import { FaGithub } from "react-icons/fa";
 
 const Profile = () => {
   return (
-    <div className="flex flex-row items-start justify-center mt-12 text-lg leading-7 space-x-8">
+    <div className="flex flex-row items-start justify-center mt-12 text-lg leading-7 space-x-12">
     
       <div className="flex justify-start ">
         <Image
           src="/profile.jpg"
           alt="Profile Image"
-          width={200}
-          height={200}
-          className="rounded-full border-2 border-gray-400"
+          width={180}
+          height={180}
+          className="rounded-full outline outline-offset-1 outline-white"
         />
       </div>
       
      
-      <div className="flex flex-col justify-start mt-9">
-        <div className="text-center">
+      <div className="flex flex-col  mt-9">
+        <div className="">
           <span className="font-bold text-accent-orange text-4xl">
             <a href="/about">Hey, I'm Himanshu.</a>
           </span>
@@ -36,7 +36,7 @@ const Profile = () => {
               rel="noopener noreferrer"
               className="flex items-center space-x-2"
             >
-              <RiTwitterXFill style={{color:"black"}} />
+              <RiTwitterXFill style={{color:"white"}} />
               <span className="text-xl">Twitter</span>
             </a>
 
