@@ -22,7 +22,7 @@ const Profile = () => {
      
       <div className="flex flex-col  mt-9">
         <div className="">
-          <span className="font-bold text-accent-orange text-4xl">
+          <span className="font-bold hover:text-blue-400 text-4xl">
             <a href="/about">Hey, I'm Himanshu.</a>
           </span>
           <br />
@@ -37,7 +37,7 @@ const Profile = () => {
               className="flex items-center space-x-2"
             >
               <RiTwitterXFill style={{color:"white"}} />
-              <span className="text-xl">Twitter</span>
+              <span className="text-xl hover:text-white">Twitter</span>
             </a>
 
          
@@ -48,7 +48,7 @@ const Profile = () => {
               className="flex items-center space-x-2"
             >
                 <FaInstagram style={{color:"red"}}/>
-              <span>Instagram</span>
+              <span className="hover:text-red-700">Instagram</span>
             </a>
 
           <a
@@ -58,7 +58,7 @@ const Profile = () => {
               className="flex items-center space-x-2"
             >
                 <FaLinkedin style={{color:"blue"}} />
-              <span>LinkedIn</span>
+              <span className="hover:text-blue-700">LinkedIn</span>
             </a>
           
           <a
@@ -68,7 +68,7 @@ const Profile = () => {
               className="flex items-center space-x-2"
             >
                 <FaGithub />
-              <span>Github</span>
+              <span className="text-white-800 hover:text-white-400">Github</span>
             </a>
         </nav>
       </div>
