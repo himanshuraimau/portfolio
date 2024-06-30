@@ -5,7 +5,7 @@ import { FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Profile = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center md:justify-start lg:justify-between items-center md:items-start lg:space-x-20 p-10">
+    <div className="flex flex-col  md:flex-row  md:justify-start lg:justify-between items-center md:items-start lg:space-x-20 pt-12 pb-10 space-x-8">
       <div className="flex-shrink-0 mb-6 md:mb-0">
         <Image
           src="/profile.jpg"
@@ -16,12 +16,12 @@ const Profile = () => {
         />
       </div>
 
-      <div className="flex flex-col items-center md:items-start text-center md:text-left">
+      <div className="flex flex-col items-center pt-2 md:items-start text-center md:text-left">
         <div className="pt-7 md:pt-0">
-          <span className="font-sans text-cyan-50 hover:text-blue-400 text-2xl block">
+          <span className="font-sans font-bold text-cyan-50 hover:text-blue-400 text-3xl block">
             <a href="/about">Hey, I'm Himanshu.</a>
           </span>
-          <span className="font-sans text-slate-300 text-2xl block">
+          <span className="font-sans text-slate-300 text-3xl block">
             I'm a software engineer.
           </span>
         </div>
