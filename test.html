@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Layout</title>
+    <style>
+        /* Reset some basic styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #1A202C; /* Equivalent to Tailwind's bg-gray-900 */
+        }
+
+        .container {
+            width: 60%; /* 2/3 of the width approximately */
+            height: 100%; /* Specific height, can adjust as needed */
+            background-color: aqua;
+            margin-left: 20%;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Main central box -->
+        <div class="central-box"></div>
+        
+        <!-- Left smaller box -->
+        <div class="small-box left-box"></div>
+        
+        <!-- Right smaller box -->
+        <div class="small-box right-box"></div>
+    </div>
+</body>
+</html>
