@@ -35,56 +35,28 @@ const NavBar = () => {
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="font-system text-xl font-bold text-center text-body-light"
-            style={{
-              lineHeight: '8px',
-              letterSpacing: '1.8px',
-              wordSpacing: '0px',
-              textDecoration: 'none solid rgb(67, 133, 215)',
-            }}
+            className="font-mono text-xl font-bold text-center text-body-light"
           >
-            <span className="hover:text-blue-400">HIMANSHU RAI</span>
+            <span className="hover:text-blue-400">himanshu rai</span>
           </Link>
 
           <div className="hidden md:flex space-x-10">
             <Link
               href="#projects"
-              className="font-sans text-[18px] text-body-light hover:text-blue-400"
-              style={{
-                lineHeight: '34px',
-                letterSpacing: '0.9px',
-                fontWeight: 400,
-                textDecoration: 'none solid rgb(67, 133, 215)',
-                textAlign: 'start',
-              }}
+              className="font-mono text-[18px] text-body-light hover:text-blue-400"
             >
-              Projects
+              all projects
             </Link>
             <Link
               href="#about"
-              className="font-sans-serif text-[18px] hover:text-blue-400 text-body-light"
-              style={{
-                lineHeight: '34px',
-                letterSpacing: '0.9px',
-                fontWeight: 400,
-                textDecoration: 'none solid rgb(67, 133, 215)',
-                textAlign: 'start',
-              }}
-            >
-              About
+              className="font-mono text-[18px] hover:text-blue-400 text-body-light">
+              about
             </Link>
             <Link
               href="#blogs"
-              className="font-sans-serif text-[18px] hover:text-blue-400 text-body-light"
-              style={{
-                lineHeight: '34px',
-                letterSpacing: '0.9px',
-                fontWeight: 400,
-                textDecoration: 'none solid rgb(67, 133, 215)',
-                textAlign: 'start',
-              }}
+              className="font-mono text-[18px] hover:text-blue-400 text-body-light"
             >
-              Blogs
+              blogs
             </Link>
           </div>
 
@@ -111,21 +83,21 @@ const NavBar = () => {
               className="block py-2 text-center text-[18px] text-body-light hover:text-blue-400"
               onClick={toggleDropdown}
             >
-              Projects
+              projects
             </Link>
             <Link
               href="#about"
               className="block py-2 text-center text-[18px] text-body-light hover:text-blue-400"
               onClick={toggleDropdown}
             >
-              About
+              about
             </Link>
             <Link
               href="#blogs"
               className="block py-2 text-center text-[18px] text-body-light hover:text-blue-400"
               onClick={toggleDropdown}
             >
-              Blogs
+              blogs
             </Link>
           </div>
         </div>

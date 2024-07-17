@@ -36,6 +36,7 @@ const config: Config = {
       },
       fontFamily: {
         system: ['system-ui', 'Roboto', 'Helvetica Neue', 'sans-serif'],
+        mono: ['Noto Sans Mono', 'monospace'],
       },
     },
   },
