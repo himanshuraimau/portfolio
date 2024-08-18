@@ -5,7 +5,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Profile = () => {
   return (
-    <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:items-start lg:space-x-20 pt-8 sm:pt-12 pb-10 px-4 sm:px-8 lg:px-12 max-w-5xl mx-auto">
+    <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:items-start lg:space-x-20 pt-8 sm:pt-12 pb-10 px-4 sm:px-8 lg:px-14 max-w-5xl mx-auto">
       <div className="flex-shrink-0 mb-6 sm:mb-0 transition-transform duration-300 hover:scale-105">
         <Image
           src="/profile.jpg"
@@ -32,7 +32,7 @@ const Profile = () => {
             { href: "https://www.linkedin.com/in/himanshu-rai-246121278/", icon: FaLinkedin, label: "linkedin", hoverColor: "hover:text-blue-700" },
             { href: "https://github.com/himanshuraimau", icon: FaGithub, label: "github", hoverColor: "hover:text-white" },
           ].map((link) => (
-            
+            <a
               key={link.href}
               href={link.href}
               target="_blank"
