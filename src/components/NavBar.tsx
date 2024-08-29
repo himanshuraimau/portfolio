@@ -29,9 +29,9 @@ const NavBar = () => {
   }, [isDropdownOpen]);
 
   const navLinks = [
-    { href: "#projects", label: "all projects" },
-    { href: "#about", label: "about" },
-    { href: "#blogs", label: "blogs" },
+    { href: "/projects", label: "/stuff" },
+    { href: "/me", label: "/me" },
+    { href: "/blogs", label: "/blogs" },
   ];
 
   return (
