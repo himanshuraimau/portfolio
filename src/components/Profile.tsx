@@ -22,7 +22,7 @@ const Profile = () => {
             <a href="/about">hey, i'm himanshu.</a>
           </h1>
           <p className="font-mono text-slate-300 text-xl sm:text-2xl max-w-md">
-            i'm a full-stack devloper who loves building cool projects.
+            i'm a full-stack devloper who loves building cool products.
           </p>
         </div>
 
