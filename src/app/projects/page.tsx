@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { PinContainer } from '@/components/ui/3d-pin';
 import Image from 'next/image';
 
-export function Projects() {
+const Page = ()=> {
   const [isClient, setIsClient] = useState(false);
 
   // Ensures the component is rendered only after the client has mounted
@@ -70,4 +70,4 @@ export function Projects() {
   );
 }
 
-export default Projects;
+export default Page;
