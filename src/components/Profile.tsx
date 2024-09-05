@@ -2,9 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
+import TechStack from "./TechStack";
 
 const Profile = () => {
   return (
+    <div>
     <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:items-start lg:space-x-20 pt-8 sm:pt-12 pb-10 px-4 sm:px-8 lg:px-14 max-w-5xl mx-auto">
       <div className="flex-shrink-0 mb-6 sm:mb-0 transition-transform duration-300 hover:scale-105">
         <Image
@@ -45,6 +47,9 @@ const Profile = () => {
           ))}
         </nav>
       </div>
+     
+    </div>
+    <TechStack/>
     </div>
   );
 };
