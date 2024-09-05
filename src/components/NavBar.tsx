@@ -31,7 +31,7 @@ const NavBar = () => {
   const navLinks = [
     { href: "/projects", label: "/stuff" },
     { href: "/me", label: "/me" },
-    { href: "/blogs", label: "/blog" },
+    { href: "/blog", label: "/blog" },
   ];
 
   return (
@@ -68,13 +68,13 @@ const NavBar = () => {
       </nav>
 
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black bg-opacity-50 z-60 transition-opacity duration-300 ${
           isDropdownOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
         <div
           ref={dropdownRef}
-          className={`fixed right-0 top-0 h-screen w-64 sm:w-80 bg-black text-gray-300 p-5 transform transition-transform duration-300 ease-in-out ${
+          className={`fixed right-0 top-0 h-screen w-64 sm:w-80 bg-black text-gray-300 p-5 z-70 transform transition-transform duration-300 ease-in-out ${
             isDropdownOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
