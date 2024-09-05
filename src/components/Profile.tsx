@@ -3,6 +3,7 @@ import Image from "next/image";
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import TechStack from "./TechStack";
+import Me from "./Me";
 
 const Profile = () => {
   return (
@@ -50,6 +51,7 @@ const Profile = () => {
      
     </div>
     <TechStack/>
+    <Me/>
     </div>
   );
 };
