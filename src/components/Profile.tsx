@@ -22,7 +22,7 @@ const Profile = () => {
         <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
           <div className="space-y-3">
             <h1 className="font-mono font-bold text-cyan-50 hover:text-cyan-400 transition-colors duration-300 text-3xl sm:text-4xl lg:text-5xl">
-              <a href="/about">hey, i'm himanshu.</a>
+                   hey, i'm himanshu.            
             </h1>
             <p className="font-mono text-slate-300 text-lg sm:text-xl lg:text-2xl">
               i'm a full-stack developer who loves building cool products.

@@ -5,12 +5,12 @@ import { RiTwitterXFill } from 'react-icons/ri';
 import { MdEmail } from 'react-icons/md';
 
 const socialLinks = [
-  { name: 'LinkedIn', icon: FaLinkedin, url: 'https://www.linkedin.com/in/your-linkedin' },
-  { name: 'GitHub', icon: FaGithub, url: 'https://github.com/your-github' },
-  { name: 'X', icon: RiTwitterXFill, url: 'https://twitter.com/your-twitter' },
-  { name: 'Email', icon: MdEmail, url: 'mailto:your.email@example.com' },
-  { name: 'Instagram', icon: FaInstagram, url: 'https://www.instagram.com/your-instagram' },
-  { name: 'Discord', icon: FaDiscord, url: 'https://discordapp.com/users/your-discord-id' },
+  { name: 'LinkedIn', icon: FaLinkedin, url: 'https://www.linkedin.com/in/himanshu-rai-246121278/' },
+  { name: 'GitHub', icon: FaGithub, url: 'https://github.com/himanshuraimau' },
+  { name: 'X', icon: RiTwitterXFill, url: 'https://twitter.com/himanshura_i' },
+  { name: 'Email', icon: MdEmail, url: 'mailto:himanshuraimau9@gmail.com' },
+  { name: 'Instagram', icon: FaInstagram, url: 'https://www.instagram.com/enghimanshu' },
+  { name: 'Discord', icon: FaDiscord, url: 'https://discordapp.com/users/himanshurai' },
 ];
 
 const Footer = () => {
