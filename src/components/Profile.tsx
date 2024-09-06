@@ -7,14 +7,14 @@ import Me from "./Me";
 
 const Profile = () => {
   return (
-    <div className="h-screen">
-    <div className="flex flex-col  sm:flex-row sm:justify-between items-center sm:items-start lg:space-x-20 pt-8 sm:pt-12 pb-10 px-4 sm:px-8 lg:px-14 max-w-5xl mx-auto">
-      <div className="pt-2 pl-2 flex-shrink-0 mb-6 sm:mb-0 transition-transform duration-300 hover:scale-105">
+    <div className="">
+    <div className="flex flex-col sm:flex-row sm:justify-between items-center sm:items-start lg:space-x-20 pt-8 sm:pt-12 pb-10 px-4 sm:px-8 lg:px-14 max-w-5xl mx-auto">
+      <div className="pt-2 pl-8 flex-shrink-0 mb-6 sm:mb-0 transition-transform duration-300 hover:scale-105">
         <Image
           src="/file.jpg"
           alt="Profile Image"
           width={120}
-          height={180}
+          height={100}
           className="rounded-large outline outline-2 outline-offset-4 outline-cyan-400 shadow-lg shadow-cyan-500/50"
         />
       </div>
