@@ -16,7 +16,7 @@ const Page = ()=> {
   }
 
   return (
-    <div className="flex flex-row justify-start items-start flex-wrap gap-4">
+    <div className="flex flex-row justify-start items-start flex-wrap gap-2 pt-10 h-screen">
       <PinContainer
         title="Mood"
         href="https://mood-nine-omega.vercel.app"
