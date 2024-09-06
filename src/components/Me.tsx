@@ -28,7 +28,7 @@ const Me = () => {
         </p>
         <p>
           outside of programming, i enjoy doing photography, singing, and traveling. some of my photos and music can be found on{' '}
-          <Link href="https://instagram.com" className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 relative group">
+          <Link href="https://www.instagram.com/enghimanshu" className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 relative group">
             <span className="glow-effect">instagram</span>
             <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-cyan-400 transition-all duration-300 group-hover:w-full"></span>
           </Link>.
