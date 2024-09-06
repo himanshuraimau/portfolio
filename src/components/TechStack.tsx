@@ -19,11 +19,6 @@ const techStack = {
     { name: 'NodeJS', icon: '/icons/Node.js.svg', url: 'https://nodejs.org/' },
     { name: 'Tailwind', icon: '/icons/Tailwind.svg', url: 'https://tailwindcss.com/' }
   ],
-  // blockchainTech: [
-  //   { name: 'Ethereum', icon: '/icons/ethereum.svg', url: 'https://ethereum.org/' },
-  //   { name: 'Solidity', icon: '/icons/solidity.svg', url: 'https://soliditylang.org/' },
-  //   { name: 'Blockchain', icon: '/icons/blockchain.svg', url: 'https://blockchain.com/' },
-  // ],
   tools: [
     { name: 'Git', icon: '/icons/Git.svg', url: 'https://git-scm.com/' },
     { name: 'Docker', icon: '/icons/Docker.svg', url: 'https://www.docker.com/' },
@@ -34,7 +29,7 @@ const techStack = {
 };
 
 const TechLink = ({ name, icon, url }: {name: string, icon: string, url: string}) => (
-  <Link href={url}>
+  <Link href={url} target="_blank" rel="noopener noreferrer">
     <div className="inline-flex items-center text-xs border border-gray-200 rounded-sm px-1 py-0.5 border-opacity-30 shadow-[0_0_2px_rgba(59,130,246,0.5)] transition-shadow hover:shadow-[0_0_4px_rgba(59,130,246,0.7)] mr-2 mb-2">
       <Image src={icon} alt={name.toLowerCase()} width={16} height={16} />
       <span className="ml-1">{name}</span>
@@ -43,9 +38,9 @@ const TechLink = ({ name, icon, url }: {name: string, icon: string, url: string}
 );
 
 const TechCategory = ({ category, title }: {category: {name: string, icon: string, url: string}[], title: string}) => (
-  <div className='flex flex-row'>
-    <span className='font-semibold'>{title}:</span>
-    <div className='pt-0.5 pl-2 flex flex-wrap'>
+  <div className='flex flex-col sm:flex-row sm:items-start'>
+    <span className='font-semibold mb-2 sm:mb-0 sm:mr-4 sm:w-32'>{title}:</span>
+    <div className='flex flex-wrap'>
       {category.map((item) => (
         <TechLink key={item.name} {...item} />
       ))}
@@ -55,17 +50,14 @@ const TechCategory = ({ category, title }: {category: {name: string, icon: strin
 
 const TechStack = () => {
   return (
-    <div>  
-      <div>          
-        <div className='font-mono text-2xl text-center pt-6 '>
-          <p>my stack</p>
-        </div>
-        <div className='pt-6 font-mono text-md space-y-3'>
-          <TechCategory category={techStack.languages} title="languages" />
-          <TechCategory category={techStack.frameworks} title="frameworks/tech" />
-          {/* <TechCategory category={techStack.blockchainTech} title="Blockchain Tech" /> */}
-          <TechCategory category={techStack.tools} title="tools" />
-        </div>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">  
+      <h2 className='font-mono text-xl sm:text-3xl text-center mb-8'>
+        my stack
+      </h2>
+      <div className='font-mono text-lg space-y-6'>
+        <TechCategory category={techStack.languages} title="languages" />
+        <TechCategory category={techStack.frameworks} title="frameworks" />
+        <TechCategory category={techStack.tools} title="tools" />
       </div>
     </div>
   );
