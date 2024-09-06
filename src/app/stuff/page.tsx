@@ -6,13 +6,13 @@ import Image from 'next/image';
 const Page = ()=> {
   const [isClient, setIsClient] = useState(false);
 
-  // Ensures the component is rendered only after the client has mounted
+ 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   if (!isClient) {
-    return null; // Don't render anything on the server
+    return null;
   }
 
   return (

@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react';
 import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="w-full max-w-4xl px-3 sm:px-6 md:px-10 ">
             <NavBar />
             {children}
+            <Footer/>
             <Analytics />
           </div>
-          <div className="h-20 bg-black"></div> 
         </div>
       </body>
     </html>
