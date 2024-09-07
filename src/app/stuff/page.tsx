@@ -66,6 +66,33 @@ const Page = ()=> {
           </div>
         </div>
       </PinContainer>
+
+      <PinContainer
+        title="Music School"
+        href="https://music-school-nextjs-lime-1.vercel.app"
+        className="custom-class-name"
+        containerClassName="custom-container-class"
+      >
+        <div className="relative flex flex-col p-3 tracking-tight text-slate-100/50 w-[15rem] h-[13rem]">
+          <h2 className="pb-1 m-0 font-bold text-base text-slate-100">
+           Music School
+          </h2>
+          <p className="text-sm m-0 p-0 font-normal text-slate-500">
+          A Nextjs Frontend Application using Aceternity UI
+          </p>
+          <div className="relative flex-1 mt-2 w-full h-full">
+            <Image
+              src="/music-school.png"
+              alt="Music School Application"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          </div>
+        </div>
+      </PinContainer>
+
+      
     </div>
   );
 }
