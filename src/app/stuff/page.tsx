@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <div className="flex flex-row justify-start items-start flex-wrap gap-2 pt-10 h-full">
        <PinContainer
-        title="Mood"
+        title="True Feedback"
         href="https://ama-app-sooty.vercel.app/"
         className="custom-class-name"
         containerClassName="custom-container-class"
