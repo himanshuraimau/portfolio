@@ -36,7 +36,7 @@ const config: Config = {
       },
       fontFamily: {
         system: ['system-ui', 'Roboto', 'Helvetica Neue', 'sans-serif'],
-        mono: ['Noto Sans Mono', 'monospace'],
+        mono: ['DM Mono', 'Input Mono', 'Fira Code', 'monospace'],
       },
       typography: (theme: any) => ({
         DEFAULT: {
@@ -44,9 +44,59 @@ const config: Config = {
             color: theme('colors.text-light'),
             a: {
               color: theme('colors.accent-orange'),
+              textDecoration: 'none',
+              borderBottom: '1px solid rgba(125, 125, 125, 0.3)',
+              transition: 'border 0.3s ease-in-out',
               '&:hover': {
-                color: theme('colors.accent-green'),
+                borderBottom: `1px solid ${theme('colors.text-light')}`,
               },
+            },
+            'a code': {
+              color: 'inherit',
+            },
+            blockquote: {
+              fontWeight: 'normal',
+              fontStyle: 'normal',
+              lineHeight: '1.6em',
+              padding: '0.5em 1em',
+              marginLeft: '-1.1em',
+              opacity: 0.7,
+            },
+            'blockquote > :first-child': {
+              marginTop: 0,
+            },
+            'blockquote > :last-child': {
+              marginBottom: 0,
+            },
+            'blockquote p:first-of-type::before': {
+              content: 'none',
+            },
+            'blockquote p:first-of-type::after': {
+              content: 'none',
+            },
+            em: {
+              color: theme('colors.text-dark'),
+              fontSize: '1.05em',
+            },
+            code: {
+              fontFamily: theme('fontFamily.mono').join(', '),
+              fontSize: '0.92em',
+              lineHeight: 1.4,
+            },
+            pre: {
+              fontFamily: theme('fontFamily.mono').join(', '),
+              fontSize: '0.92em',
+              lineHeight: 1.4,
+              margin: '0.5em 0',
+              padding: '1em',
+              backgroundColor: '#fafafa',
+            },
+            img: {
+              width: '100%',
+              borderRadius: theme('borderRadius.lg'),
+              boxShadow: theme('boxShadow.lg'),
+              transform: 'scale(1.05)',
+              margin: '2.6em 0',
             },
           },
         },
@@ -56,53 +106,21 @@ const config: Config = {
             a: {
               color: theme('colors.accent-orange'),
               '&:hover': {
-                color: theme('colors.accent-green'),
+                borderBottom: `1px solid ${theme('colors.text-dark')}`,
               },
+            },
+            pre: {
+              backgroundColor: '#0e0e0e',
             },
           },
         },
       }),
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
-      },
-      borderRadius: {
-        '4xl': '2rem',
-      },
-      maxWidth: {
-        '8xl': '88rem',
-        '9xl': '96rem',
-      },
-      zIndex: {
-        '60': '60',
-        '70': '70',
-        '80': '80',
-        '90': '90',
-        '100': '100',
-      },
     },
   },
   plugins: [
     addVariablesForColors,
     nextui(),
     require('@tailwindcss/typography'),
-    function ({ addUtilities }: any) {
-      const newUtilities = {
-        '.text-shadow': {
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
-        },
-        '.text-shadow-md': {
-          textShadow: '4px 4px 8px rgba(0, 0, 0, 0.12)',
-        },
-        '.text-shadow-lg': {
-          textShadow: '15px 15px 30px rgba(0, 0, 0, 0.11)',
-        },
-        '.text-shadow-none': {
-          textShadow: 'none',
-        },
-      }
-      addUtilities(newUtilities, ['responsive', 'hover'])
-    },
   ],
 };
 
