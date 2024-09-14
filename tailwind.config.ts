@@ -38,9 +38,72 @@ const config: Config = {
         system: ['system-ui', 'Roboto', 'Helvetica Neue', 'sans-serif'],
         mono: ['Noto Sans Mono', 'monospace'],
       },
+      typography: (theme: any) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.text-light'),
+            a: {
+              color: theme('colors.accent-orange'),
+              '&:hover': {
+                color: theme('colors.accent-green'),
+              },
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.text-dark'),
+            a: {
+              color: theme('colors.accent-orange'),
+              '&:hover': {
+                color: theme('colors.accent-green'),
+              },
+            },
+          },
+        },
+      }),
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
+      zIndex: {
+        '60': '60',
+        '70': '70',
+        '80': '80',
+        '90': '90',
+        '100': '100',
+      },
     },
   },
-  plugins: [addVariablesForColors, nextui()],
+  plugins: [
+    addVariablesForColors,
+    nextui(),
+    require('@tailwindcss/typography'),
+    function ({ addUtilities }: any) {
+      const newUtilities = {
+        '.text-shadow': {
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
+        },
+        '.text-shadow-md': {
+          textShadow: '4px 4px 8px rgba(0, 0, 0, 0.12)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '15px 15px 30px rgba(0, 0, 0, 0.11)',
+        },
+        '.text-shadow-none': {
+          textShadow: 'none',
+        },
+      }
+      addUtilities(newUtilities, ['responsive', 'hover'])
+    },
+  ],
 };
 
 export default config;

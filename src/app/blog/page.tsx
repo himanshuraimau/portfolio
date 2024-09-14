@@ -13,9 +13,9 @@ export default async function BlogPage() {
               <h2 className="text-xl font-semibold">{post.frontmatter.title}</h2>
             </Link>
             <p className="text-gray-600">{post.frontmatter.date}</p>
-            {/* {post.frontmatter.excerpt && (
+            {post.frontmatter.excerpt && (
               <p className="mt-2">{post.frontmatter.excerpt}</p>
-            )} */}
+            )}
           </li>
         ))}
       </ul>

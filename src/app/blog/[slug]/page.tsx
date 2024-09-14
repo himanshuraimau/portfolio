@@ -19,8 +19,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
   return (
     <article className="max-w-4xl mx-auto py-8">
-      <h1 className="text-4xl font-bold mb-4 text-center">{post.frontmatter.title}</h1>
-      <p className="text-gray-600 mb-8 text-center">{post.frontmatter.date}</p>
+      <h1 className="text-4xl font-bold mb-4">{post.frontmatter.title}</h1>
+      <p className="text-gray-600 mb-8 ">{post.frontmatter.date}</p>
       <div className="prose lg:prose-xl">
         <MDXRemote source={post.content} components={MDXComponents} />
       </div>
