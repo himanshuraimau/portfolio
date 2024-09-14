@@ -25,7 +25,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, onClick }) => {
     <Link
       href={href}
       className={`font-mono text-lg lg:text-xl transition-colors duration-300 ${
-        isActive ? 'text-blue-400' : 'text-gray-300 hover:text-blue-400'
+        isActive ? 'text-green-300' : 'text-gray-300 hover:text-green-400'
       }`}
       onClick={onClick}
     >
@@ -65,7 +65,7 @@ const NavBar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 bg-black text-gray-300 py-4 lg:py-6 shadow-md">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-gray-300 hover:text-blue-400 transition-colors duration-300">
+        <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-gray-300 hover:text-green-300  transition-colors duration-300">
           himanshu rai
         </Link>
 

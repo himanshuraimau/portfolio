@@ -21,8 +21,8 @@ const Profile = () => {
 
         <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
           <div className="space-y-3">
-            <h1 className="font-mono font-bold text-cyan-50 hover:text-cyan-400 transition-colors duration-300 text-3xl sm:text-4xl lg:text-5xl">
-                   hey, i'm himanshu.            
+            <h1 className="font-mono font-bold text-white hover:text-green-300  transition-colors duration-300 text-3xl sm:text-4xl lg:text-5xl">
+                   hey, i'm himanshu.
             </h1>
             <p className="font-mono text-slate-300 text-lg sm:text-xl lg:text-2xl">
               i'm a full-stack developer who loves building cool products.
@@ -32,8 +32,8 @@ const Profile = () => {
           <nav className="flex flex-wrap justify-center md:justify-start mt-6 gap-4">
             {[
               { href: "https://twitter.com/himanshura_i", icon: RiTwitterXFill, label: "twitter", hoverColor: "hover:text-blue-400" },
-              { href: "https://www.linkedin.com/in/himanshu-rai-246121278/", icon: FaLinkedin, label: "linkedin", hoverColor: "hover:text-blue-700" },
-              { href: "https://github.com/himanshuraimau", icon: FaGithub, label: "github", hoverColor: "hover:text-white" },
+              { href: "https://www.linkedin.com/in/himanshu-rai-246121278/", icon: FaLinkedin, label: "linkedin", hoverColor: "hover:text-blue-600" },
+              { href: "https://github.com/himanshuraimau", icon: FaGithub, label: "github", hoverColor: "hover:text-gray-600" },
             ].map((link) => (
               <a
                 key={link.href}
