@@ -22,7 +22,6 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
 
   return (
     <article className="prose prose-lg max-w-none">
-      <h1>{post.metadata.title}</h1>
       <MDXRemote source={post.content} components={MDXComponents} />
     </article>
   )

@@ -1,33 +1,88 @@
 ---
-title: 'Hello, World!'
-date: '2023-04-18'
-description: 'Welcome to my first blog post using MDX'
+title: "Getting Started with TypeScript"
+date: "2024-09-14"
+
 ---
 
-# Hello, World!
+# Getting Started with TypeScript
 
-This is my first blog post using **MDX**.
+TypeScript is a statically typed superset of JavaScript that adds type safety and other features to enhance the development process. This blog post will introduce you to the basics of TypeScript and its key features.
 
-## What is MDX?
+## What is TypeScript?
 
-MDX is a format that lets you seamlessly write JSX in your Markdown documents. You can import components, such as interactive charts or alerts, and embed them within your content.
+TypeScript is a language developed by Microsoft that builds on JavaScript by adding static types. It helps catch errors early through a type system and improves the readability and maintainability of code. TypeScript code is transpiled to JavaScript, which can then be executed in any JavaScript environment.
 
-<Callout>
-  This is a custom callout component!
-</Callout>
+## Key Features of TypeScript
 
-### Code Example
+### Static Typing
 
-Here's a simple code example:
+One of TypeScript's core features is its static type system. Types can be added to variables, function parameters, and return values. Here’s an example:
 
-```javascript
-function greet(name) {
-  console.log(`Hello, ${name}!`);
-}
-
-greet('MDX');
+```typescript
+let name: string = 'John Doe';
+const age: number = 30;
 ```
 
-## Conclusion
+TypeScript also supports complex types like arrays, tuples, and enums.
 
-MDX makes it easy to write rich, interactive blog posts. Give it a try!
+### Interfaces and Type Aliases
+
+TypeScript provides `interface` and `type` to define custom types and structures. Here’s an example of using an interface:
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+const person: Person = {
+  name: 'Jane Doe',
+  age: 25
+};
+```
+
+### Classes and Inheritance
+
+TypeScript extends JavaScript's class system with additional features. You can define classes, create instances, and use inheritance:
+
+```typescript
+class Animal {
+  constructor(public name: string) {}
+
+  makeSound() {
+    console.log('Some sound');
+  }
+}
+
+class Dog extends Animal {
+  makeSound() {
+    console.log('Woof');
+  }
+}
+
+const dog = new Dog('Buddy');
+dog.makeSound(); // Woof
+```
+
+### Asynchronous Programming
+
+TypeScript supports asynchronous programming with `async`/`await` and promises, just like JavaScript. Here’s an example:
+
+```typescript
+async function fetchData(url: string): Promise<void> {
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data);
+}
+```
+
+## Learning Resources
+
+To deepen your understanding of TypeScript, check out these resources:
+
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html) - The official guide to TypeScript.
+- [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/) - A comprehensive book on TypeScript.
+- [TypeScript Tutorials](https://www.typescriptlang.org/docs/handbook/tutorials.html) - Official tutorials and examples.
+
+> "TypeScript is a superpower for JavaScript." — Microsoft
+

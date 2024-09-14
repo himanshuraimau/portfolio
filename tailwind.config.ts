@@ -33,10 +33,35 @@ const config: Config = {
         'nav-dark': '#32519A',
         'body-dark': '#1A1A2E',
         'text-dark': '#FFFFFF',
+        primary: {
+          50: '#E6FFFA',
+          100: '#B2F5EA',
+          200: '#81E6D9',
+          300: '#4FD1C5',
+          400: '#38B2AC',
+          500: '#319795',
+          600: '#2C7A7B',
+          700: '#285E61',
+          800: '#234E52',
+          900: '#1D4044',
+        },
+        secondary: {
+          50: '#F0FFF4',
+          100: '#C6F6D5',
+          200: '#9AE6B4',
+          300: '#68D391',
+          400: '#48BB78',
+          500: '#38A169',
+          600: '#2F855A',
+          700: '#276749',
+          800: '#22543D',
+          900: '#1C4532',
+        },
       },
       fontFamily: {
         system: ['system-ui', 'Roboto', 'Helvetica Neue', 'sans-serif'],
         mono: ['DM Mono', 'Input Mono', 'Fira Code', 'monospace'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       typography: (theme: any) => ({
         DEFAULT: {
@@ -46,9 +71,10 @@ const config: Config = {
               color: theme('colors.accent-orange'),
               textDecoration: 'none',
               borderBottom: '1px solid rgba(125, 125, 125, 0.3)',
-              transition: 'border 0.3s ease-in-out',
+              transition: 'border 0.3s ease-in-out, color 0.3s ease-in-out',
               '&:hover': {
-                borderBottom: `1px solid ${theme('colors.text-light')}`,
+                color: theme('colors.primary.400'),
+                borderBottom: `1px solid ${theme('colors.primary.400')}`,
               },
             },
             'a code': {
@@ -56,11 +82,12 @@ const config: Config = {
             },
             blockquote: {
               fontWeight: 'normal',
-              fontStyle: 'normal',
+              fontStyle: 'italic',
               lineHeight: '1.6em',
               padding: '0.5em 1em',
               marginLeft: '-1.1em',
-              opacity: 0.7,
+              opacity: 0.8,
+              borderLeftColor: theme('colors.primary.500'),
             },
             'blockquote > :first-child': {
               marginTop: 0,
@@ -75,21 +102,28 @@ const config: Config = {
               content: 'none',
             },
             em: {
-              color: theme('colors.text-dark'),
+              color: theme('colors.primary.300'),
               fontSize: '1.05em',
             },
             code: {
               fontFamily: theme('fontFamily.mono').join(', '),
               fontSize: '0.92em',
               lineHeight: 1.4,
+              backgroundColor: theme('colors.gray.100'),
+              color: theme('colors.primary.700'),
+              padding: '0.2em 0.4em',
+              borderRadius: '0.25em',
             },
             pre: {
               fontFamily: theme('fontFamily.mono').join(', '),
               fontSize: '0.92em',
               lineHeight: 1.4,
-              margin: '0.5em 0',
+              margin: '1em 0',
               padding: '1em',
-              backgroundColor: '#fafafa',
+              backgroundColor: theme('colors.gray.100'),
+              color: theme('colors.gray.900'),
+              borderRadius: theme('borderRadius.lg'),
+              overflow: 'auto',
             },
             img: {
               width: '100%',
@@ -106,11 +140,20 @@ const config: Config = {
             a: {
               color: theme('colors.accent-orange'),
               '&:hover': {
-                borderBottom: `1px solid ${theme('colors.text-dark')}`,
+                color: theme('colors.primary.300'),
+                borderBottom: `1px solid ${theme('colors.primary.300')}`,
               },
             },
+            em: {
+              color: theme('colors.primary.300'),
+            },
+            code: {
+              backgroundColor: theme('colors.gray.800'),
+              color: theme('colors.primary.300'),
+            },
             pre: {
-              backgroundColor: '#0e0e0e',
+              backgroundColor: theme('colors.gray.900'),
+              color: theme('colors.gray.100'),
             },
           },
         },
