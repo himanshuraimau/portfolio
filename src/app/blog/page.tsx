@@ -18,7 +18,7 @@ export default function Home() {
             >
               <Link href={`/blog/${post.slug}`} className="group block">
                 <article>
-                  <h2 className="text-xl font-semibold  group-hover:text-teal-200 transition-colors mb-2">
+                  <h2 className="text-xl font-semibold  group-hover:text-green-400 transition-colors mb-2">
                     {post.metadata.title}
                   </h2>
                   <time
