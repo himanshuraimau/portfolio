@@ -66,7 +66,7 @@ const NavBar: React.FC = () => {
     <header className="sticky top-0 z-50 bg-black text-gray-300 py-4 lg:py-6 shadow-md">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-gray-300 hover:text-green-300  transition-colors duration-300">
-          himanshu rai
+          Himanshu Rai
         </Link>
 
         <nav className="hidden md:flex space-x-8 lg:space-x-12">

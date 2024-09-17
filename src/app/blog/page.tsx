@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-12  text-center">
+        <h1 className="text-3xl font-mono mb-12  text-center">
           Read My Blogs
         </h1>
         <ul className="space-y-8">
@@ -18,12 +18,12 @@ export default function Home() {
             >
               <Link href={`/blog/${post.slug}`} className="group block">
                 <article>
-                  <h2 className="text-xl font-semibold  group-hover:text-green-400 transition-colors mb-2">
+                  <h2 className="text-xl font-semibold font-mono  group-hover:text-green-400 transition-colors mb-2">
                     {post.metadata.title}
                   </h2>
                   <time
                     dateTime={post.metadata.date}
-                    className="text-gray-400 text-sm block mb-2"
+                    className="text-gray-400 text-sm font-mono block mb-2"
                   >
                     {new Date(post.metadata.date).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -31,7 +31,7 @@ export default function Home() {
                       day: 'numeric'
                     })}
                   </time>
-                  <p className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                  <p className="text-gray-300 font-mono group-hover:text-gray-200 transition-colors">
                     {post.metadata.excerpt}
                   </p>
                 </article>

@@ -4,10 +4,10 @@ import Image from 'next/image'
 
 const MDXComponents = {
   h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1 className="text-xl sm:text-2xl md:text-3xl text-white font-bold mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 glow-text" {...props}>{children}</h1>
+    <h1 className="text-xl sm:text-2xl md:text-3xl text-white font-mono mt-8 sm:mt-10 md:mt-12 mb-4 sm:mb-5 md:mb-6 glow-text" {...props}>{children}</h1>
   ),
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2 className="text-lg sm:text-xl md:text-2xl text-gray-200 font-semibold mt-6 sm:mt-8 md:mt-10 mb-3 sm:mb-4 md:mb-5 glow-text" {...props}>{children}</h2>
+    <h2 className="text-lg sm:text-xl md:text-2xl text-gray-200 font-semibold font-mono mt-6 sm:mt-8 md:mt-10 mb-3 sm:mb-4 md:mb-5 glow-text" {...props}>{children}</h2>
   ),
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3 className="text-md sm:text-lg md:text-xl text-gray-300 font-medium mt-4 sm:mt-6 md:mt-8 mb-2 sm:mb-3 md:mb-4 glow-text" {...props}>{children}</h3>
