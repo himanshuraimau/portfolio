@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from 'next-themes';
 
 const navLinks = [
   { href: "/stuff", label: "/stuff" },
@@ -25,12 +26,33 @@ const NavLink: React.FC<NavLinkProps> = ({ href, label, onClick }) => {
     <Link
       href={href}
       className={`font-mono text-lg lg:text-xl transition-colors duration-300 ${
-        isActive ? 'text-green-300' : 'text-gray-300 hover:text-green-400'
+        isActive ? 'text-accent-green' : 'text-text hover:text-accent-green'
       }`}
       onClick={onClick}
     >
       {label}
     </Link>
+  );
+};
+
+const ThemeToggle: React.FC = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return (
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="p-2 rounded-full text-text hover:text-accent-green transition-colors duration-300 focus:outline-none"
+      aria-label="Toggle theme"
+    >
+      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+    </button>
   );
 };
 
@@ -57,31 +79,34 @@ const NavBar: React.FC = () => {
     return () => { document.body.style.overflow = 'visible'; };
   }, [isDropdownOpen]);
 
-  // Close the dropdown when the pathname changes
   useEffect(() => {
     setIsDropdownOpen(false);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-black text-gray-300 py-4 lg:py-6 shadow-md">
+    <header className="sticky top-0 z-50 bg-nav text-text py-4 lg:py-6 shadow-md">
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-gray-300 hover:text-green-300  transition-colors duration-300">
+        <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-text hover:text-accent-green transition-colors duration-300">
           Himanshu Rai
         </Link>
 
-        <nav className="hidden md:flex space-x-8 lg:space-x-12">
+        <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
+          <ThemeToggle />
         </nav>
 
-        <button
-          className="md:hidden text-gray-300 focus:outline-none"
-          onClick={toggleDropdown}
-          aria-label={isDropdownOpen ? "Close menu" : "Open menu"}
-        >
-          {isDropdownOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-4">
+          <ThemeToggle />
+          <button
+            className="text-text focus:outline-none"
+            onClick={toggleDropdown}
+            aria-label={isDropdownOpen ? "Close menu" : "Open menu"}
+          >
+            {isDropdownOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -91,7 +116,7 @@ const NavBar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black bg-opacity-50 z-60"
+            className="fixed inset-0 bg-body bg-opacity-50 z-60"
           >
             <motion.div
               ref={dropdownRef}
@@ -99,10 +124,10 @@ const NavBar: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="fixed right-0 top-0 h-screen w-64 sm:w-80 bg-black text-gray-300 p-5 z-70"
+              className="fixed right-0 top-0 h-screen w-64 sm:w-80 bg-nav text-text p-5 z-70"
             >
               <button
-                className="absolute top-4 right-4 text-gray-300 focus:outline-none"
+                className="absolute top-4 right-4 text-text focus:outline-none"
                 onClick={toggleDropdown}
                 aria-label="Close menu"
               >

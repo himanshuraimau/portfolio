@@ -3,6 +3,7 @@ import "./globals.css";
 import { Analytics } from '@vercel/analytics/react';
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from 'next-themes';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,14 +16,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="h-full flex flex-col items-center bg-black">
-          <div className="w-full max-w-4xl px-3 sm:px-6 md:px-10 ">
-            <NavBar />
-            {children}
-            <Footer/>
-            <Analytics />
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <div className="h-full flex flex-col items-center bg-body text-text">
+            <div className="w-full max-w-4xl px-3 sm:px-6 md:px-10">
+              <NavBar />
+              {children}
+              <Footer/>
+              <Analytics />
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

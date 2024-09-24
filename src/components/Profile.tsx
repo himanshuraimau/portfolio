@@ -15,25 +15,25 @@ const Profile = () => {
             alt="Profile Image"
             width={120}
             height={120}
-            className="rounded-full outline outline-2 outline-offset-4 outline-cyan-400 shadow-lg shadow-cyan-500/50"
+            className="rounded-full outline outline-2 outline-offset-4 outline-accent-primary shadow-lg shadow-accent-primary/50"
           />
         </div>
 
         <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-2xl">
           <div className="space-y-3">
-            <h1 className="font-mono font-bold text-white hover:text-green-300  transition-colors duration-300 text-3xl sm:text-4xl lg:text-5xl">
-                   Hey, i'm himanshu.
+            <h1 className="font-mono font-bold text-text hover:text-accent-secondary transition-colors duration-300 text-3xl sm:text-4xl lg:text-5xl">
+              Hey, i'm himanshu.
             </h1>
-            <p className="font-mono text-slate-300 text-lg sm:text-xl lg:text-2xl">
+            <p className="font-mono text-text/80 text-lg sm:text-xl lg:text-2xl">
               I'm a full-stack developer who loves building cool products.
             </p>
           </div>
 
           <nav className="flex flex-wrap justify-center md:justify-start mt-6 gap-4">
             {[
-              { href: "https://twitter.com/himanshura_i", icon: RiTwitterXFill, label: "twitter", hoverColor: "hover:text-blue-400" },
-              { href: "https://www.linkedin.com/in/himanshu-rai-246121278/", icon: FaLinkedin, label: "linkedin", hoverColor: "hover:text-blue-600" },
-              { href: "https://github.com/himanshuraimau", icon: FaGithub, label: "github", hoverColor: "hover:text-gray-600" },
+              { href: "https://twitter.com/himanshura_i", icon: RiTwitterXFill, label: "twitter", hoverColor: "hover:text-accent-primary" },
+              { href: "https://www.linkedin.com/in/himanshu-rai-246121278/", icon: FaLinkedin, label: "linkedin", hoverColor: "hover:text-accent-primary" },
+              { href: "https://github.com/himanshuraimau", icon: FaGithub, label: "github", hoverColor: "hover:text-accent-secondary" },
             ].map((link) => (
               <a
                 key={link.href}

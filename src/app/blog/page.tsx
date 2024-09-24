@@ -5,7 +5,7 @@ export default function Home() {
   const posts = getAllPosts()
 
   return (
-    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 dark:bg-black">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-mono mb-12  text-center">
           Read My Blogs
@@ -14,7 +14,7 @@ export default function Home() {
           {posts.map((post) => (
             <li
               key={post.slug}
-              className="border-l-4 border-green-300 pl-6  transition-all hover:border-green-400 rounded-r-lg shadow-md"
+              className="border-l-4 border-green-300 pl-6  dark:bg-black transition-all hover:border-green-400 rounded-r-lg shadow-md"
             >
               <Link href={`/blog/${post.slug}`} className="group block">
                 <article>
@@ -31,7 +31,7 @@ export default function Home() {
                       day: 'numeric'
                     })}
                   </time>
-                  <p className="text-gray-300 font-mono group-hover:text-gray-200 transition-colors">
+                  <p className="text-gray-600 font-mono group-hover:text-gray-500 transition-colors">
                     {post.metadata.excerpt}
                   </p>
                 </article>

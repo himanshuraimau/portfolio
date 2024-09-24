@@ -37,10 +37,9 @@ const techStack = {
     {name:'npm', icon: '/icons/NPM.svg', url: 'https://www.npmjs.com/'},
   ]
 };
-
 const TechLink = ({ name, icon, url }: {name: string, icon: string, url: string}) => (
   <Link href={url} target="_blank" rel="noopener noreferrer">
-    <div className="inline-flex items-center text-xs border border-gray-200 rounded-sm px-1 py-0.5 border-opacity-30 shadow-[0_0_2px_rgba(59,130,246,0.5)] transition-shadow hover:shadow-[0_0_4px_rgba(59,130,246,0.7)] mr-2 mb-2">
+    <div className="inline-flex items-center text-xs border border-subtle rounded-sm px-1 py-0.5 shadow-[0_0_2px_rgba(59,130,246,0.5)] transition-shadow hover:shadow-[0_0_4px_rgba(59,130,246,0.7)] mr-2 mb-2">
       <Image src={icon} alt={name.toLowerCase()} width={16} height={16} />
       <span className="ml-1">{name}</span>
     </div>

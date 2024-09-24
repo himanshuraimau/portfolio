@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { PinContainer } from '@/components/ui/3d-pin';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 const projects = [
   {
@@ -37,6 +38,7 @@ const projects = [
 
 const Page = () => {
   const [isClient, setIsClient] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setIsClient(true);
@@ -47,21 +49,21 @@ const Page = () => {
   }
 
   return (
-    <div className="h-full container mx-auto px-4 py-8">
+    <div className="h-full container mx-auto px-4 py-8 dark:bg-black dark:text-white">
       <div className="flex flex-wrap justify-center gap-4">
         {projects.map((project, index) => (
           <div key={index} className="w-full sm:w-auto">
             <PinContainer
               title={project.title}
               href={project.href}
-              className="custom-class-name"
+              className="custom-class-name dark:bg-black"
               containerClassName="custom-container-class"
             >
-              <div className="relative flex flex-col p-3 tracking-tight text-slate-100/50 w-[15rem] h-[13rem]">
-                <h2 className="pb-1 m-0 font-bold text-base text-slate-100">
+              <div className="relative flex flex-col p-3 tracking-tight text-slate-100/50 dark:text-slate-300/50 w-[15rem] h-[13rem]">
+                <h2 className="pb-1 m-0 font-bold text-base text-black dark:text-white">
                   {project.title}
                 </h2>
-                <p className="text-sm m-0 p-0 font-normal text-slate-500">
+                <p className="text-sm m-0 p-0 font-normal text-slate-500 dark:text-slate-400">
                   {project.description}
                 </p>
                 <div className="relative flex-1 mt-2 w-full h-full">
