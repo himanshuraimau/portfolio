@@ -185,9 +185,10 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 ```
 
 
- *Static Params Generation*: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each post at build time.
-
-*Dynamic Component*: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render the content with the defined MDX components.
+- *Static Params Generation*: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each 
+                              post at build time.
+- *Dynamic Component*: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render 
+                       the content with the defined MDX components.
 
 ---
 
