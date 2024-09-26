@@ -33,9 +33,9 @@ Ultimately, I chose to implement MDX using Next.js.
 ### Tech Stack
 
 The core technologies I used for this blog section were:
-- **Next.js**
-- **React**
-- **MDX (Markdown with JSX)**
+- *Next.js*
+- *React*
+- *MDX (Markdown with JSX)*
 
 Now, let me walk you through the setup process.
 
@@ -151,11 +151,11 @@ In the post, I can use the `MDXComponents` styles for headings, paragraphs, and 
 
 In this step, I set up dynamic routing to load each blog post by its slug. Using Next.js' app router, I structured the folder as follows:
 
-- **Dynamic Route Structure**:
+- *Dynamic Route Structure*:
   - `pages/blog/[slug]/page.tsx`: Handles dynamic blog content.
   - `posts/`: Contains individual blog posts in `.mdx` format.
 
-#### Dynamic Blog Post Component
+- *Dynamic Blog Post Component*
 
 To load the content of each blog post dynamically based on its slug, I created the following code in `pages/blog/[slug]/page.tsx`:
 
@@ -185,9 +185,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 ```
 
 
-- **Static Params Generation**: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each post at build time.
+- *Static Params Generation*: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each post at build time.
 
-- **Dynamic Component**: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render the content with the defined MDX components.
+- *Dynamic Component*: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render the content with the defined MDX components.
 
 ---
 
@@ -229,8 +229,8 @@ export default async function Home() {
 ```
 
 
-- **Post Fetching**: The `getAllPosts()` function retrieves all blog post metadata asynchronously.
-- **Mapping Posts**: Each post is rendered as a list item. The `Link` component creates a navigable link to the corresponding blog post using its slug.
+- *Post Fetching*: The `getAllPosts()` function retrieves all blog post metadata asynchronously.
+- *Mapping Posts*: Each post is rendered as a list item. The `Link` component creates a navigable link to the corresponding blog post using its slug.
 
 ---
 
