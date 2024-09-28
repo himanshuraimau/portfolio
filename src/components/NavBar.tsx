@@ -84,7 +84,7 @@ const NavBar: React.FC = () => {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-nav text-text py-4 lg:py-6 shadow-md">
+    <header className="top-0 z-50 text-text py-4 lg:py-6 ">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="font-mono text-xl lg:text-2xl font-bold text-text hover:text-accent-green transition-colors duration-300">
           Himanshu Rai

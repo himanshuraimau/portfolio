@@ -15,7 +15,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t border-subtle">
+    <footer className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-12 border-t dark:border-t dark:border-subtle border-subtle">
       <div className="flex flex-col items-center">
         <p className="font-mono text-sm mb-4">find me on:</p>
         <div className="flex space-x-4">
@@ -32,7 +32,7 @@ const Footer = () => {
             </Link>
           ))}
         </div>
-        <p className="font-mono text-xs mt-6 text-text/50">
+        <p className="font-mono text-xs text-center mt-6 text-text/50">
           © {new Date().getFullYear()} Himanshu Rai. All rights reserved.
         </p>
       </div>
