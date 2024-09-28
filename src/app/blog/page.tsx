@@ -5,7 +5,7 @@ export default function Home() {
   const posts = getAllPosts()
 
   return (
-    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 dark:bg-black">
+    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 ">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-mono mb-12  text-center">
           Read My Blogs

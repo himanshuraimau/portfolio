@@ -49,7 +49,7 @@ const Page = () => {
   }
 
   return (
-    <div className="h-full container mx-auto px-4 py-8 dark:bg-black dark:text-white">
+    <div className="h-full container mx-auto px-4 py-8 ">
       <div className="flex flex-wrap justify-center gap-4">
         {projects.map((project, index) => (
           <div key={index} className="w-full sm:w-auto">
