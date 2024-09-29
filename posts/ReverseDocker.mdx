@@ -1,0 +1,341 @@
+---
+title: "Building a Dynamic Reverse Proxy for Docker Containers: A Step-by-Step Guide"
+date: "2024-09-26"
+excerpt: "Learn how to set up a dynamic reverse proxy for Docker containers with detailed steps, code examples, and practical insights."
+---
+
+# Building a Dynamic Reverse Proxy for Docker Containers: A Step-by-Step Guide
+
+## At first, what is Docker?
+
+![image.png](/public/proxy/doc.webp)
+
+So basically, Docker is a platform that allows you to run different applications inside isolated environments called containers.
+
+**So basically, it is a virtual box that contains everything to run your application, from the OS to any tech dependencies.**
+
+## Now, why reverse proxy the containers or what is a reverse proxy?
+
+A reverse proxy is nothing but a middleware that forwards requests to the server on your behalf.
+
+**Then why reverse proxy the Docker containers?**
+
+Because when you run an application inside Docker, each container gets a port, and remembering all these ports is a very tedious task.
+
+And if we don’t assign specific ports, we cannot access the containers directly, since they might run on dynamically assigned ports that we have to track down manually.
+
+So what we’ll do instead is assign **names** (hostnames) to the containers. Our reverse proxy app, which also runs inside the Docker engine, will know these names and forward our requests to the right containers. We won’t have to remember their ports anymore, just their names.
+
+I hope you get what I’m trying to build.
+
+If not, brush up on your Docker networking concepts, then look into this article again.
+
+---
+
+Here is the system design of the app we will build:
+
+{% if site.theme == "dark" %}
+![System Design](/public/proxy/system-dark.png)
+{% else %}
+![System Design](/public/proxy/system-light.png)
+{% endif %}
+
+## Let's Build This App:
+
+First, we will set up the required dependencies. We will require:
+
+- **express**: For building the server.
+- **http**: For handling HTTP requests.
+- **dockerode**: For interacting with the Docker API.
+- **http-proxy**: For proxying HTTP requests.
+- **nodemon**: For automatically restarting the server during development.
+
+So, first, set up the Node.js environment:
+
+```bash
+npm init -y
+```
+
+Then install these dependencies:
+
+```bash
+npm install express http dockerode http-proxy
+```
+
+And install the development dependencies:
+
+```bash
+npm install --save-dev @types/express @types/http-proxy @types/node nodemon
+```
+
+---
+
+### 3. Setting Up Dockerode
+
+So, Dockerode is a tool that allows us to access Docker events and manage containers through an API. It’s key for interacting with Docker programmatically.
+
+Here’s how you initialize Dockerode:
+
+```jsx
+const Docker = require('dockerode');
+const docker = new Docker({
+  socket: "/var/run/docker.sock"
+});
+const db = new Map();
+```
+
+We create a new instance of Dockerode with `new Docker()`, enabling interaction with Docker.
+
+We use the Docker socket (`/var/run/docker.sock`) for communication. This socket connects our app to the Docker daemon, allowing us to send commands and capture events.
+
+By connecting through the Docker socket, we can manage containers effectively and respond to events in real-time.
+
+---
+
+### 4. Explaining the `docker.getEvents` Part
+
+With the `docker.getEvents()` function, we can listen to Docker events and monitor the state of containers in real-time. This helps us track when containers are started, stopped, or modified.
+
+```jsx
+docker.getEvents(function (err, stream) {
+  if (err) {
+    console.log("Error getting docker events", err);
+    return;
+  }
+```
+
+First, we call `getEvents()`. If something goes wrong, it logs the error and exits early. No need to proceed if we can't get Docker events.
+
+```jsx
+  stream.on('data', async (chunk) => {
+    try {
+      if (!chunk) return;
+      const event = JSON.parse(chunk.toString());
+```
+
+Next, we set up an event listener using `stream.on('data')` to catch incoming Docker events. We convert the data into a JavaScript object using `JSON.parse()`, allowing us to work with it.
+
+```jsx
+      if (event.Type === "container" && event.Action === "start") {
+        const container = docker.getContainer(event.id);
+        const containerInfo = await container.inspect();
+```
+
+Here, we check if the event is for a **container** and whether the **action** is `"start"`. If both are true, it means a container has just started. We then get the container's instance by using its `event.id`, and inspect it to pull more detailed info about that container.
+
+```jsx
+        const containerName = containerInfo.Name.substring(1);
+        const containerIP = containerInfo.NetworkSettings.IPAddress;
+        const exposedPorts = Object.keys(containerInfo.Config.ExposedPorts);
+```
+
+Now, we extract the container's **name** (removing the leading `/`), the container's **IP address**, and grab all the **exposed ports**. These are the ports through which the container can be accessed.
+
+```jsx
+        let defaultPort = null;
+
+        if (exposedPorts.length > 0) {
+          const [port, type] = exposedPorts[0].split("/");
+          if (type === "tcp") {
+            defaultPort = port;
+            console.log(`Container ${containerInfo.Name} is running on <http://$>{containerIP}:${port}`);
+          }
+        }
+```
+
+Here, we check if the container has any exposed ports. If yes, we take the first port, split it to get the port number and type (like TCP or UDP), and if it's TCP, we store the port as `defaultPort`. We also log the container's IP and port address, so we know where it’s running.
+
+```jsx
+        console.log(`Registering container ${containerName}.localhost ---> <http://$>{containerIP}:${defaultPort}`);
+        db.set(containerName, {
+          containerName,
+          containerIP,
+          defaultPort
+        });
+      }
+    } catch (e) {
+      console.log("Error parsing docker event", e);
+    }
+  });
+});
+```
+
+Finally, the container is **registered** in our local database. We save the **container name**, **IP address**, and **default port** for later use. If something goes wrong during this process (e.g., parsing errors), it logs the error and keeps running.
+
+---
+
+This is how `docker.getEvents` helps us manage containers by automatically detecting when they start and storing the necessary information, like container name, IP, and port, for easy access later.
+
+---
+
+### Setting Up the Reverse Proxy
+
+Next up, we’ll set up the reverse proxy in our app using **httpProxy**.
+
+The reverse proxy acts like a middleman, forwarding client requests to the right Docker container based on the subdomain in the request. This lets us access different services hosted in separate containers through unique subdomains.
+
+Here’s how we can set up the reverse proxy and handle HTTP requests:
+
+```jsx
+const reverseProxyApp = express();
+
+reverseProxyApp.use((req, res) => {
+  const hostname = req.hostname;
+  const subdomain = hostname.split(".")[0];
+```
+
+This code initializes an Express app for the reverse proxy. It grabs incoming requests and gets the hostname. The subdomain is extracted by splitting the hostname, which should be in the format `my-container.localhost`.
+
+```jsx
+  if (!db.has(subdomain)) {
+    return res.status(404).send('Not Found');
+  }
+```
+
+Next, we check if the subdomain exists in the database that maps subdomains to container details. If it’s not found, we return a 404 status code.
+
+```jsx
+  const { containerIP, defaultPort } = db.get(subdomain);
+  const target = `http://${containerIP}:${defaultPort}`;
+  console.log(`Forwarding ${hostname} to ${target}`);
+```
+
+If the subdomain is present, we get the container's IP and default port, creating the target URL for the request.
+
+```jsx
+  return proxy.web(req, res, { target, changeOrigin: true, ws: true });
+});
+```
+
+The `proxy.web()` method then forwards the HTTP request to the target container. We use `changeOrigin: true` to change the origin of the host header to the target URL and `ws: true` to handle WebSocket connections.
+
+### Example of Subdomain Mapping
+
+Let’s say you have a container running that you can access via the subdomain `my-container.localhost`. Here’s how the mapping works:
+
+- A request to `http://my-container.localhost` triggers the reverse proxy.
+- The proxy checks the database for `my-container`:
+  - If found, it might map to a container running at IP `172.17.0.2` on port `3000`.
+- The proxy then forwards the request to `http://172.17.0.2:3000`, and the client gets a response from that container.
+
+---
+
+### Setting Up the Management API
+
+Let’s write the Management API. It’s built using Express.js and exposes endpoints for managing Docker containers, specifically for pulling images and starting containers automatically.
+
+```jsx
+const managementAPI = express();
+managementAPI.use(express.json());
+
+managementAPI.get('/containers', async (req, res) => {
+  const { image, tags = "latest" } = req.body;
+```
+
+The `/containers` route handles `GET
+
+` requests, allowing clients to request the current running containers.
+
+```jsx
+  const newContainer = await docker.createContainer({
+    Image: image,
+    name: `${image.split(":")[0]}_${Math.random().toString(36).substring(2, 8)}`,
+    ExposedPorts: {
+      '3000/tcp': {}
+    },
+    HostConfig: {
+      PortBindings: {
+        '3000/tcp': [{
+          HostPort: "3000"
+        }]
+      }
+    }
+  });
+
+  await newContainer.start();
+```
+
+The code snippet creates and starts a new container using the specified image. It binds port `3000` to the container’s TCP port. The new container gets a unique name, ensuring no conflicts.
+
+```jsx
+  const containerInfo = await newContainer.inspect();
+  const containerName = containerInfo.Name.substring(1);
+  const containerIP = containerInfo.NetworkSettings.IPAddress;
+
+  db.set(containerName, {
+    containerName,
+    containerIP,
+    defaultPort: 3000
+  });
+
+  res.status(201).json({
+    message: "Container created successfully",
+    container: {
+      name: containerName,
+      ip: containerIP,
+    },
+  });
+});
+```
+
+After the container is started, its information is retrieved, and it’s registered in our database for later use.
+
+### Running Everything Together
+
+Finally, you can run both your reverse proxy and management API servers:
+
+```jsx
+const port = 3000;
+
+managementAPI.listen(port, () => {
+  console.log(`Management API running at http://localhost:${port}`);
+});
+
+reverseProxyApp.listen(80, () => {
+  console.log('Reverse proxy running at http://localhost');
+});
+```
+
+With everything set up, requests to your reverse proxy (on port `80`) are handled and forwarded to the appropriate Docker containers based on their subdomains.
+
+
+### Setting Up the Application
+
+To get started, let’s configure the [dockerfile.dev](http://dockerfile.dev/) and the `docker-compose.yaml` file to run the application locally. You can find the complete code for both files [here](https://github.com/himanshuraimau/rfa-docker-proxy).
+
+Once you have the files set up, run the following command to build and run the container:
+
+```bash
+docker-compose up
+```
+
+### Testing the Setup
+
+Now for the exciting part—let’s see if everything is working! Open a new terminal and execute the command below to start a new image:
+
+```bash
+docker run -itd --rm --name superman nginx
+```
+
+Next, check the logs of your Node.js application. You should see it proxying the request and generating a new URL for you: `superman.localhost`.
+
+![Reverse Proxy Setup](/public/proxy/logs.png)
+Now, open your browser and type `superman.localhost` in the address bar. Boom! You’ve successfully set up a reverse proxy! Congratulations!
+
+### Wrapping Up
+
+And that’s it! You now have a functional reverse proxy managing multiple Docker containers, forwarding requests based on subdomains, and a management API for creating new containers.
+
+This setup significantly simplifies working with multiple services by abstracting the complexity of port management and container networking.
+
+Give it a try and explore further with Docker and reverse proxies!
+
+### Future Considerations
+
+This solution is designed to scale effectively, accommodating multiple containers and services. Future enhancements could include managing multiple networks for improved isolation and implementing security measures for the containers. By integrating authentication and authorization, we can ensure that only authorized users have access to manage these containers.
+
+A special thanks to Piyush Garg for the excellent explanation! You can watch the tutorial [here](https://youtu.be/B9t1iNNiHUA?si=9_EoYeI3tn91wj1c).
+
+For all the code, visit [this GitHub repository](https://github.com/himanshuraimau/rfa-docker-proxy).
+
+Feel free to reach out if you need any assistance with this project, and I’d love to hear your feedback on this article!
