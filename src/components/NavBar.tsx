@@ -116,7 +116,7 @@ const NavBar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-body bg-opacity-50 z-60"
+            className="fixed inset-0 bg-body bg-opacity-50 z-[999]"
           >
             <motion.div
               ref={dropdownRef}
