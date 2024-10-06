@@ -10,6 +10,7 @@ import { useTheme } from 'next-themes';
 const navLinks = [
   { href: "/stuff", label: "/stuff" },
   { href: "/blog", label: "/blog" },
+  {href: "/my-zone", label: "/my-zone" },
 ];
 
 interface NavLinkProps {
