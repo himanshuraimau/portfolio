@@ -1,21 +1,39 @@
 "use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { ExternalLink, CheckSquare, MessageSquare, Trash2, Plus } from 'lucide-react'
+import Link from 'next/link';
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, CheckSquare, MessageSquare, Trash2, Plus } from 'lucide-react';
 
-export default function MyZoneClient({ initialTodos, initialMessages }) {
-  const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState(initialMessages)
-  const [todo, setTodo] = useState('')
-  const [todos, setTodos] = useState(initialTodos)
+// Define types for props
+interface Todo {
+  id: string;
+  text: string;
+  completed: number;
+}
 
-  const addMessage = async (e) => {
-    e.preventDefault()
+interface Message {
+  id: string;
+  text: string;
+  timestamp: string;
+}
+
+interface MyZoneClientProps {
+  initialTodos: Todo[];
+  initialMessages: Message[];
+}
+
+export default function MyZoneClient({ initialTodos, initialMessages }: MyZoneClientProps) {
+  const [message, setMessage] = useState<string>('');
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [todo, setTodo] = useState<string>('');
+  const [todos, setTodos] = useState<Todo[]>(initialTodos);
+
+  const addMessage = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (message.trim()) {
       const response = await fetch('/api/messages', {
         method: 'POST',
@@ -23,15 +41,15 @@ export default function MyZoneClient({ initialTodos, initialMessages }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ text: message }),
-      })
-      const newMessage = await response.json()
-      setMessages([newMessage, ...messages])
-      setMessage('')
+      });
+      const newMessage: Message = await response.json();
+      setMessages([newMessage, ...messages]);
+      setMessage('');
     }
-  }
+  };
 
-  const addTodo = async (e) => {
-    e.preventDefault()
+  const addTodo = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (todo.trim()) {
       const response = await fetch('/api/todos', {
         method: 'POST',
@@ -39,42 +57,42 @@ export default function MyZoneClient({ initialTodos, initialMessages }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ text: todo }),
-      })
-      const newTodo = await response.json()
-      setTodos([...todos, newTodo])
-      setTodo('')
+      });
+      const newTodo: Todo = await response.json();
+      setTodos([...todos, newTodo]);
+      setTodo('');
     }
-  }
+  };
 
-  const toggleTodo = async (id, completed) => {
+  const toggleTodo = async (id: string, completed: number) => {
     const response = await fetch('/api/todos', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id, completed: !completed }),
-    })
-    const updatedTodo = await response.json()
-    setTodos(todos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo))
-  }
+    });
+    const updatedTodo: Todo = await response.json();
+    setTodos(todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo)));
+  };
 
-  const deleteTodo = async (id) => {
+  const deleteTodo = async (id: string) => {
     const response = await fetch('/api/todos', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
-    })
+    });
     if (response.ok) {
-      setTodos(todos.filter(todo => todo.id !== id))
+      setTodos(todos.filter(todo => todo.id !== id));
     }
-  }
+  };
 
   return (
     <div className="min-h-screen dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-mono text-3xl sm:text-4xl text-center mb-12 ">
+        <h2 className="font-mono text-3xl sm:text-4xl text-center mb-12">
           My Zone
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -159,5 +177,5 @@ export default function MyZoneClient({ initialTodos, initialMessages }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
