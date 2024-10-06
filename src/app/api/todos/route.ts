@@ -1,3 +1,4 @@
+// app/api/todos/route.ts
 import { NextResponse } from 'next/server'
 import { getDb } from '@/lib/db'
 
@@ -21,4 +22,11 @@ export async function PUT(request: Request) {
   await db.run('UPDATE todos SET completed = ? WHERE id = ?', [completed ? 1 : 0, id])
   const updatedTodo = await db.get('SELECT * FROM todos WHERE id = ?', id)
   return NextResponse.json(updatedTodo)
+}
+
+export async function DELETE(request: Request) {
+  const { id } = await request.json()
+  const db = await getDb()
+  await db.run('DELETE FROM todos WHERE id = ?', [id])
+  return NextResponse.json({ message: 'Todo deleted successfully' }, { status: 200 })
 }
