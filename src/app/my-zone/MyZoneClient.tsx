@@ -95,7 +95,7 @@ export default function MyZoneClient({ initialTodos, initialMessages }: MyZoneCl
         <h2 className="font-mono text-3xl sm:text-4xl text-center mb-12">
           My Zone
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-cyan-700 dark:text-cyan-300">
