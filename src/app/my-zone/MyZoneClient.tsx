@@ -66,27 +66,6 @@ export default function MyZoneClient({ initialTodos, initialMessages }) {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <ExternalLink className="h-5 w-5" />
-              Important Links
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {['GitHub', 'LinkedIn', 'Twitter', 'Portfolio'].map((link) => (
-                <li key={link}>
-                  <Link href={`https://${link.toLowerCase()}.com/yourusername`} className="text-green-600 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-colors duration-300 relative group">
-                    <span className="glow-effect">{link}</span>
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-green-600 dark:bg-green-400 transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
               <CheckSquare className="h-5 w-5" />
               Quick Todos
             </CardTitle>
