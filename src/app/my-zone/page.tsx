@@ -1,4 +1,4 @@
-import { Book, BookOpen, ExternalLink, Lightbulb, Wrench } from "lucide-react"
+import { Book, BookOpen, ExternalLink, Lightbulb, Wrench,Code2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 
@@ -75,6 +75,25 @@ export default function MyZone() {
                 <li key={index}>
                   <Link href={project.url} className="hover:underline">
                     {project.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800/30 dark:to-blue-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="flex items-center text-blue-800 dark:text-blue-100">
+              <Code2 className="mr-2" />
+              Offbeat
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-blue-900 dark:text-blue-100">
+            <ul className="list-disc list-inside">
+              {Offbeat.map((beat, index) => (
+                <li key={index}>
+                  <Link href={beat.url} className="hover:underline">
+                    {beat.name}
                   </Link>
                 </li>
               ))}
