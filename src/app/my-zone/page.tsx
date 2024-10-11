@@ -81,7 +81,7 @@ export default function MyZone() {
             </ul>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800/30 dark:to-blue-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
+        <Card className="bg-gradient-to-br from-blue-300 to-blue-500 dark:from-blue-500/60 dark:to-blue-700/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center text-blue-800 dark:text-blue-100">
               <Code2 className="mr-2" />
@@ -101,7 +101,7 @@ export default function MyZone() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800/30 dark:to-green-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
+        <Card className="bg-gradient-to-br from-green-100 to-green-200 dark:from-green-500/40 dark:to-green-700/70 dark:bg-gradient-to-br dark:backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center text-green-800 dark:text-green-100">
               <BookOpen className="mr-2" />
@@ -121,7 +121,7 @@ export default function MyZone() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-800/30 dark:to-yellow-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
+        <Card className="bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-500/40 dark:to-yellow-800/40 dark:bg-gradient-to-br dark:backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center text-yellow-800 dark:text-yellow-100">
               <Book className="mr-2" />
@@ -141,7 +141,7 @@ export default function MyZone() {
           </CardContent>
         </Card>
 
-        <Card className="col-span-1 md:col-span-2 lg:col-span-1 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-800/30 dark:to-red-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
+        <Card className="col-span-1 md:col-span-2 lg:col-span-1 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-500/40 dark:to-red-800/40 dark:bg-gradient-to-br dark:backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="flex items-center text-red-800 dark:text-red-100">
               <ExternalLink className="mr-2" />
