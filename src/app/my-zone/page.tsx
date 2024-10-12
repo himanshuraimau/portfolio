@@ -39,8 +39,8 @@ const importantLinks = [
 
 export default function MyZone() {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl text-center font-bold mb-6 dark:text-white">My Zone</h1>
+    <div className="min-h-screen  container mx-auto p-4">
+      <h1 className="text-3xl text-center mb-6 dark:text-white">My Zone</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card className="col-span-1 md:col-span-2 lg:col-span-1 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800/30 dark:to-purple-900/30 dark:bg-gradient-to-br dark:backdrop-blur-sm">
           <CardHeader>
