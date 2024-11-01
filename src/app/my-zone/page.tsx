@@ -3,14 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 
 const learningTopics = [
+  { name:"ML", url: "https://youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&si=paz51QiBiwvbZMTJ" },
   { name: "React Native", url: "https://frontendmasters.com/courses/react-native-v3/" },
-  { name: "PyTorch", url: "https://youtu.be/V_xro1bcAuA?si=5uUuqJ7vzrcgH78f" },
-  {name: "Rust", url: "https://youtube.com/playlist?list=PLinedj3B30sA_M0oxCRgFzPzEMX3CSfT5&si=WGwply9Ye_L2A7Wn" },
+
 ]
 
 const workingOnProjects = [
   { name: "College Nexus", url: "https://collegenexus.tech" },
-  { name: "Dropbin", url: "https://github.com/himanshuraimau/dropbin"},
+  {name:"Opal", url: "https://github.com/himanshuraimau/opal-webprodigies" },
 
 ]
 const Offbeat = [
@@ -21,7 +21,8 @@ const Offbeat = [
 
 const academicReading = [
   { name: "Data Structures and Algorithms", url: "https://www.geeksforgeeks.org/data-structures/" },
-  { name: "Design Patterns", url: "https://refactoring.guru/design-patterns" },
+  {name:"Understanding and Using C Pointers", url: "https://www.amazon.in/Understanding-Using-Pointers-Richard-Reese/dp/9351101398/ref=sr_1_3?s=books&sr=1-3" },
+  // { name: "Design Patterns", url: "https://refactoring.guru/design-patterns" },
   {name: "Operating Systems", url: "https://www.amazon.com/Operating-Systems-Three-Easy-Pieces/dp/198508659X" },
   {name: "Computer Organization", url: "https://www.flipkart.com/computer-organization-5th/p/itmfbe3mzyvzbuhr" },
 
@@ -29,7 +30,6 @@ const academicReading = [
 ]
 
 const nonAcademicReading = [
-  { name: "Dont Sweat Small Stuff", url: "https://www.amazon.com/Dont-Sweat-Small-Stuff-Its/dp/0786881852" },
   { name: "The Pragmatic Programmer", url: "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/" },
 ]
 
