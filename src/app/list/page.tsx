@@ -4,7 +4,7 @@ import { Check } from 'lucide-react'
 
 const bucketList = [
   { text: 'Learn to play the guitar', completed: false },
-  { text: 'Travel to different State', completed: true },
+  { text: 'Travel to a different state', completed: true },
   // Add more items here to reach 100
 ]
 
