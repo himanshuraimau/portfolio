@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8 ">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-mono mb-12  text-center">
+        <h1 className="text-3xl font-bold mb-12  text-center">
           Read My Blogs
         </h1>
         <ul className="space-y-8">

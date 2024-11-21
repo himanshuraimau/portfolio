@@ -8,9 +8,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 
 const navLinks = [
-  { href: "/stuff", label: "/stuff" },
-  { href: "/blog", label: "/blog" },
-  {href: "/my-zone", label: "/my-zone" },
+  { href: "/stuff", label: "stuff" },
+  { href: "/blog", label: "blog" },
+  {href: "/my-zone", label: "my-zone" },
+  { href: "/list", label: "list-100" },
 ];
 
 interface NavLinkProps {
@@ -91,7 +92,7 @@ const NavBar: React.FC = () => {
           Himanshu Rai
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-8 lg:space-x-12">
+        <nav className="hidden  md:flex items-center space-x-8 lg:space-x-5">
           {navLinks.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}
