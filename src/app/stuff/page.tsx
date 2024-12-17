@@ -1,87 +1,93 @@
-"use client";
 
-import React, { useEffect, useState } from 'react';
-import { PinContainer } from '@/components/ui/3d-pin';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
+'use client'
 
-const projects = [
-  {
-    title: "True Feedback",
-    href: "https://ama-app-sooty.vercel.app/",
-    description: "An app that allows users to receive and manage anonymous questions or messages.",
-    imageSrc: "/AMA.png",
-    imageAlt: "True Feedback Application"
-  },
-  {
-    title: "Mood",
-    href: "https://mood-nine-omega.vercel.app",
-    description: "A Gen AI-based journaling application",
-    imageSrc: "/mood.png",
-    imageAlt: "Mood Application"
-  },
-  {
-    title: "College Nexus",
-    href: "https://collegenexus.tech",
-    description: "A Web Application for College Students",
-    imageSrc: "/college-nexus.png",
-    imageAlt: "College Nexus Application"
-  },
-  {
-    title: "Music School",
-    href: "https://music-school-nextjs-lime-1.vercel.app",
-    description: "A Nextjs Frontend Application using Aceternity UI",
-    imageSrc: "/music-school.png",
-    imageAlt: "Music School Application"
-  }
-];
+import { useEffect, useState } from "react"
+import { ProjectCard } from "@/components/project-card"
 
-const Page = () => {
-  const [isClient, setIsClient] = useState(false);
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
-    return null;
-  }
-
-  return (
-    <div className="h-full container mx-auto px-4 py-8 ">
-      <div className="flex flex-wrap justify-center gap-4">
-        {projects.map((project, index) => (
-          <div key={index} className="w-full sm:w-auto">
-            <PinContainer
-              title={project.title}
-              href={project.href}
-              className="custom-class-name dark:bg-black"
-              containerClassName="custom-container-class"
-            >
-              <div className="relative flex flex-col p-3 tracking-tight text-slate-100/50 dark:text-slate-300/50 w-[15rem] h-[13rem]">
-                <h2 className="pb-1 m-0 font-bold text-base text-black dark:text-white">
-                  {project.title}
-                </h2>
-                <p className="text-sm m-0 p-0 font-normal text-slate-500 dark:text-slate-400">
-                  {project.description}
-                </p>
-                <div className="relative flex-1 mt-2 w-full h-full">
-                  <Image
-                    src={project.imageSrc}
-                    alt={project.imageAlt}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-lg"
-                  />
-                </div>
-              </div>
-            </PinContainer>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+const projects = {
+  web: [
+    {
+      title: "True Feedback",
+      href: "https://ama-app-sooty.vercel.app/",
+      description: "An app that allows users to receive and manage anonymous questions or messages.",
+      imageSrc: "/AMA.png",
+      imageAlt: "True Feedback Application",
+      tech: ["Next.js", "TypeScript", "Tailwind"],
+    },
+    {
+      title: "Mood",
+      href: "https://mood-nine-omega.vercel.app",
+      description: "A Gen AI-based journaling application",
+      imageSrc: "/mood.png",
+      imageAlt: "Mood Application",
+      tech: ["Next.js", "TypeScript", "Tailwind"],
+    },
+    {
+      title: "College Nexus",
+      href: "https://collegenexus.tech",
+      description: "A Web Application for College Students",
+      imageSrc: "/college-nexus.png",
+      imageAlt: "College Nexus Application",
+      tech: ["Next.js", "TypeScript", "Tailwind"],
+    },
+    {
+      title: "Music School",
+      href: "https://music-school-nextjs-lime-1.vercel.app",
+      description: "A Next.js Frontend Application using Aceternity UI",
+      imageSrc: "/music-school.png",
+      imageAlt: "Music School Application",
+      tech: ["Next.js", "TypeScript", "Tailwind"],
+    },
+  ],
+  core: [
+    {
+      title: "MultiThreaded Proxy Server",
+      href: "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
+      description: "Implemented a robust multi-threaded proxy server and client system in C++. Features include concurrent connection handling, HTTP request forwarding, and efficient thread management.",
+      tech: ["C++", "POSIX Threads", "Socket Programming", "HTTP"],
+      github: true,
+    },
+    {
+      title: "Cache Implementation",
+      href: "https://github.com/himanshuraimau/applied-os/tree/main/cache",
+      description: "Memory cache system with LRU implementation",
+      tech: ["C++", "Data Structures"],
+      github: true,
+    },
+  ],
 }
 
-export default Page;
+export default function Page() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) return null
+
+  return (
+    <div className="container mx-auto p-4 lg:p-8">
+      <div className="space-y-8">
+        <section>
+          <h2 className="text-xl font-medium text-center mb-4">Web Development Projects</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {projects.web.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-medium text-center mb-4">Core Computer Science Projects</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {projects.core.map((project, index) => (
+              <ProjectCard key={index} {...project} />
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}
+
