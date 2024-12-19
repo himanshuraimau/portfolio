@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { HoverEffect } from "@/components/ui/card-hover-effect"
+import { ExpandableCardDemo } from "@/components/ExpandableCardDemo"
 
 const projects = {
   web: [
@@ -40,18 +41,74 @@ const projects = {
   ],
   core: [
     {
-      title: "MultiThreaded Proxy Server",
+      title: "MultiThreadedProxyServerClient with LRU Cache",
       href: "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
-      description: "Implemented a robust multi-threaded proxy server and client system in C++. Features include concurrent connection handling, HTTP request forwarding, and efficient thread management.",
+      description: "Implemented a robust multi-threaded proxy server and client system in C++ with an LRU cache. Features include concurrent connection handling, HTTP request forwarding, and efficient thread management.",
       tech: ["C++", "POSIX Threads", "Socket Programming", "HTTP"],
       github: true,
+      ctaLink: "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the MultiThreaded Proxy Server project...",
     },
     {
-      title: "Cache Implementation",
-      href: "https://github.com/himanshuraimau/applied-os/tree/main/cache",
-      description: "Memory cache system with LRU implementation",
-      tech: ["C++", "Data Structures"],
+      title: "DropBin",
+      href: "https://github.com/himanshuraimau/dropBin",
+      description: "A small implementation of a paste bin application with minimal features.",
+      tech: ["JavaScript", "Node.js", "Express"],
       github: true,
+      ctaLink: "https://github.com/himanshuraimau/dropBin",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the DropBin project...",
+    },
+    {
+      title: "URL Shortener",
+      href: "https://github.com/himanshuraimau/url-shortner-go",
+      description: "A URL shortener application implemented in Go.",
+      tech: ["Go", "Gin", "Redis"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/url-shortner-go",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the URL Shortener project...",
+    },
+    {
+      title: "RFA Docker Proxy",
+      href: "https://github.com/himanshuraimau/rfa-docker-proxy",
+      description: "This project sets up a reverse proxy using Node.js, Express, and Docker. The reverse proxy routes incoming requests based on the subdomain to the appropriate Docker container. Additionally, it includes a management API for handling Docker container operations.",
+      tech: ["Node.js", "Express", "Docker"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/rfa-docker-proxy",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the RFA Docker Proxy project...",
+    },
+    {
+      title: "RSS Aggregator",
+      href: "https://github.com/himanshuraimau/backend_projects/tree/main/rssaggregator",
+      description: "A Go application that serves as a fully functional RSS aggregator, interacting with a PostgreSQL database and providing a REST API to manage RSS feeds and retrieve posts.",
+      tech: ["Go", "PostgreSQL", "REST API"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/backend_projects/tree/main/rssaggregator",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the RSS Aggregator project...",
+    },
+    {
+      title: "YouTube-like Backend Service",
+      href: "https://github.com/himanshuraimau/Backend_Project",
+      description: "This project is a backend service designed to support a YouTube-like application. It provides various functionalities such as managing users, videos, comments, playlists, subscriptions, tweets, and more.",
+      tech: ["Node.js", "Express", "MongoDB"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/Backend_Project",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the YouTube-like Backend Service project...",
+    },
+    {
+      title: "Arcfour Project",
+      href: "https://github.com/himanshuraimau/c-projects/tree/main/arcfour",
+      description: "This project implements the RC4 stream cipher. It includes functions to initialize the cipher, encrypt data, and decrypt data.",
+      tech: ["C", "Cryptography"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/c-projects/tree/main/arcfour",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the Arcfour project...",
     },
   ],
 }
@@ -69,7 +126,7 @@ export default function Page() {
     <div className="container mx-auto p-4 lg:p-8">
       <div className="space-y-8">
         <section>
-          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Web Development Projects</h2>
+          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Web-Based Projects</h2>
           <HoverEffect
             items={projects.web.map(project => ({
               title: project.title,
@@ -82,14 +139,8 @@ export default function Page() {
         </section>
 
         <section>
-          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Core Computer Science Projects</h2>
-          <HoverEffect
-            items={projects.core.map(project => ({
-              title: project.title,
-              description: project.description,
-              link: project.href,
-            }))}
-          />
+          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Fun Projects</h2>
+          <ExpandableCardDemo cards={projects.core} />
         </section>
       </div>
     </div>
