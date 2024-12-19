@@ -110,6 +110,16 @@ const projects = {
       ctaText: "View on GitHub",
       content: "Detailed description of the Arcfour project...",
     },
+    {
+      title: "Proxy Connection Project",
+      href: "https://github.com/himanshuraimau/c-projects/tree/main/toralize",
+      description: "This project establishes a connection to a proxy server, sends a request, and forwards data through the proxy. The code includes functions to create a request structure and connect to the proxy server.",
+      tech: ["C", "Networking"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/c-projects/tree/main/toralize",
+      ctaText: "View on GitHub",
+      content: "Detailed description of the Proxy Connection project...",
+    },
   ],
 }
 
