@@ -1,8 +1,7 @@
-
 'use client'
 
 import { useEffect, useState } from "react"
-import { ProjectCard } from "@/components/project-card"
+import { HoverEffect } from "@/components/ui/card-hover-effect"
 
 const projects = {
   web: [
@@ -70,21 +69,27 @@ export default function Page() {
     <div className="container mx-auto p-4 lg:p-8">
       <div className="space-y-8">
         <section>
-          <h2 className="text-xl font-medium text-center mb-4">Web Development Projects</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.web.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
-          </div>
+          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Web Development Projects</h2>
+          <HoverEffect
+            items={projects.web.map(project => ({
+              title: project.title,
+              description: project.description,
+              link: project.href,
+              imageSrc: project.imageSrc,
+              imageAlt: project.imageAlt,
+            }))}
+          />
         </section>
 
         <section>
-          <h2 className="text-xl font-medium text-center mb-4">Core Computer Science Projects</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {projects.core.map((project, index) => (
-              <ProjectCard key={index} {...project} />
-            ))}
-          </div>
+          <h2 className="text-xl font-medium text-center mb-4 text-title-color">Core Computer Science Projects</h2>
+          <HoverEffect
+            items={projects.core.map(project => ({
+              title: project.title,
+              description: project.description,
+              link: project.href,
+            }))}
+          />
         </section>
       </div>
     </div>
