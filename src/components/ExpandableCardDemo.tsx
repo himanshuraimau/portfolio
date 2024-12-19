@@ -101,7 +101,7 @@ export function ExpandableCardDemo({ cards }: ExpandableCardDemoProps) {
                     layoutId={`button-${active.title}-${id}`}
                     href={active.ctaLink}
                     target="_blank"
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-gray-100 hover:bg-gray-200 text-black"
+                    className="px-4 py-3 text-sm rounded-full font-bold bg-gray-100 hover:bg-gray-200 text-black dark:text-white"
                   >
                     {active.ctaText}
                   </motion.a>
@@ -151,7 +151,7 @@ export function ExpandableCardDemo({ cards }: ExpandableCardDemoProps) {
             </div>
             <motion.button
               layoutId={`button-${card.title}-${id}`}
-              className="px-4 py-2 text-sm rounded-full font-bold hover:bg-green-500 hover:text-white text-black mt-4 md:mt-0 flex items-center gap-2"
+              className="px-4 py-2 text-sm rounded-full font-bold hover:bg-green-500 hover:text-white text-black dark:text-white mt-4 md:mt-0 flex items-center gap-2"
             >
               <Image src="/icons/github.png" alt="GitHub" width={16} height={16} className="h-4 w-4 text-black dark:text-white" />
               {card.ctaText}
