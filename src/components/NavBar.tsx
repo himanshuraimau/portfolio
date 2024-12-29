@@ -11,7 +11,6 @@ const navLinks = [
   { href: "/stuff", label: "stuff" },
   { href: "/blog", label: "blog" },
   {href: "/my-zone", label: "my-zone" },
-  { href: "/list", label: "list-100" },
 ];
 
 interface NavLinkProps {
