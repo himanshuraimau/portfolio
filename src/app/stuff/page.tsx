@@ -41,6 +41,16 @@ const projects = {
   ],
   core: [
     {
+      title: "C-AI Chat Application",
+      href: "https://github.com/himanshuraimau/c-ai",
+      description: "A simple C-based chat application that uses the Gemini Pro API for conversations.",
+      tech: ["C", "libcurl", "json-c", "Python"],
+      github: true,
+      ctaLink: "https://github.com/himanshuraimau/c-ai",
+      ctaText: "View on GitHub",
+      content: "A simple C-based chat application that uses the Gemini Pro API for conversations. ",
+    },
+    {
       title: "MultiThreadedProxyServerClient with LRU Cache",
       href: "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
       description: "Implemented a robust multi-threaded proxy server and client system in C++ with an LRU cache. Features include concurrent connection handling, HTTP request forwarding, and efficient thread management.",
@@ -120,6 +130,7 @@ const projects = {
       ctaText: "View on GitHub",
       content: "Detailed description of the Proxy Connection project...",
     },
+    
   ],
 }
 
