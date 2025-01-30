@@ -68,6 +68,9 @@ const MDXComponents = {
       {children}
     </div>
   ),
+  strong: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <strong className="font-semibold text-black dark:text-white" {...props}>{children}</strong>
+  ),
 }
 
 export default MDXComponents

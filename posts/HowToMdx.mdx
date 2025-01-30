@@ -8,34 +8,22 @@ excerpt: "A detailed guide on creating a custom blog using MDX, Next.js, and Rea
 
 ## Why Start Writing a Blog?
 
-A few months ago, I pondered this question:
-Why should I write a blog? Initially, I hesitated.
-As I faced various coding challenges, I sought solutions.
-I often turned to ChatGPT, Google, and Stack Overflow.
+A few months ago, I pondered this question: Why should I write a blog? Initially, I hesitated. As I faced various coding challenges, I sought solutions. I often turned to ChatGPT, Google, and Stack Overflow.
 
-Reading others' experiences helped me resolve my issues.
-It provided insights into solving similar problems.
-That's when I realized I could share my journey.
-Writing could help others and sharpen my skills.
+Reading others' experiences helped me resolve my issues. It provided insights into solving similar problems. That's when I realized I could share my journey. Writing could help others and sharpen my skills.
 
-Eventually, I decided to add a blog section.
-You may wonder, "Why not use a different platform?"
-There’s something special about your own space.
-It feels personal, rewarding, and fulfilling. 😄
+Eventually, I decided to add a blog section. You may wonder, "Why not use a different platform?" There’s something special about your own space. It feels personal, rewarding, and fulfilling. 😄
 
 ## How I Implemented the Blog Section
 
-When implementing the blog, I noticed diverse styles.
-After researching, I discovered integrating Markdown (MDX) is possible.
-I drew inspiration from several developers and resources.
-Ultimately, I chose to implement MDX using Next.js.
+When implementing the blog, I noticed diverse styles. After researching, I discovered integrating Markdown (MDX) is possible. I drew inspiration from several developers and resources. Ultimately, I chose to implement MDX using Next.js.
 
 ### Tech Stack
 
 The core technologies I used for this blog section were:
-- *Next.js*
-- *React*
-- *MDX (Markdown with JSX)*
+- **Next.js**
+- **React**
+- **MDX (Markdown with JSX)**
 
 Now, let me walk you through the setup process.
 
@@ -145,14 +133,13 @@ Have you ever wondered what happens when you hit "Run" or "Submit" on coding pla
 
 In the post, I can use the `MDXComponents` styles for headings, paragraphs, and more. Plus, since I'm using MDX, I can even embed React components directly into the post!
 
-
-
 ### Step 5: Loading Blog Content Dynamically
 
 In this step, I set up dynamic routing to load each blog post by its slug. Using Next.js' app router, I structured the folder as follows:
 - *Dynamic Route Structure*:
   - `pages/blog/[slug]/page.tsx`: Handles dynamic blog content.
   - `posts/`: Contains individual blog posts in `.mdx` format.
+
 ### Dynamic Blog Post Component
 
 To load the content of each blog post dynamically based on its slug, I created the following code in `pages/blog/[slug]/page.tsx`:
@@ -182,11 +169,8 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 }
 ```
 
-
-- *Static Params Generation*: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each 
-                              post at build time.
-- *Dynamic Component*: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render 
-                       the content with the defined MDX components.
+- *Static Params Generation*: The `generateStaticParams` function fetches all posts and maps their slugs, which allows Next.js to generate static pages for each post at build time.
+- *Dynamic Component*: In the `BlogPost` component, the `params.slug` is used to fetch the specific post's content. The `MDXRemote` component is then used to render the content with the defined MDX components.
 
 ---
 
@@ -226,7 +210,6 @@ export default async function Home() {
   )
 }
 ```
-
 
 - *Post Fetching*: The `getAllPosts()` function retrieves all blog post metadata asynchronously.
 - *Mapping Posts*: Each post is rendered as a list item. The `Link` component creates a navigable link to the corresponding blog post using its slug.
