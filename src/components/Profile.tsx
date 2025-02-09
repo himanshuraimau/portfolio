@@ -25,7 +25,7 @@ const Profile = () => {
               Hey, i'm himanshu.
             </h1>
             <p className="font-mono text-text/80 text-lg sm:text-xl lg:text-2xl">
-              I'm a full-stack developer who loves building cool products.
+              I'm a <span className="wavy-decoration decoration-yellow-400">full-stack developer</span> who loves building cool products.
             </p>
           </div>
 

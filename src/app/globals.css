@@ -48,6 +48,12 @@ h2 {
   }
 }
 
+@layer components {
+  .wavy-decoration {
+    @apply decoration-wavy underline underline-offset-4;
+  }
+}
+
 .gallery-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

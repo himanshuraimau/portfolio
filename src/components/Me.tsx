@@ -9,37 +9,30 @@ const Me = () => {
       </h2>
       <div className="font-mono text-sm sm:text-base text-gray-700 dark:text-slate-300 space-y-6">
         <p>
-          I am a full stack developer based in Bangalore, currently pursuing engineering in artificial intelligence and data science.
-          Currently focused more on learning backend infrastructure, web3, and genai.
+          I am a full stack developer <span className='text-white text-md wavy-decoration decoration-yellow-400'>based in Bangalore</span>, currently pursuing engineering in artificial intelligence and data science. Currently focused more on learning distributed systems, machine learning, and GenAI.
         </p>
         <p>
           Dreaming up ideas and making them come true is where my passion lies. You can find my full{' '}
           <Link href="/stuff" className="text-green-600 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-colors duration-300 relative group">
-            <span className="glow-effect">projects list here</span>
-            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-green-600 dark:bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+            <span className="glow-effect wavy-decoration decoration-green-400">projects list here</span>
           </Link>.
         </p>
         <p>
           I sometimes write blogs on{' '}
           <Link href="/blog" className="text-green-600 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-colors duration-300 relative group">
-            <span className="glow-effect">tech and life here</span>
-            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-green-600 dark:bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+            <span className="glow-effect decoration-wavy decoration-green-400 underline underline-offset-4 ">tech and life here</span>
           </Link>.
         </p>
         <p>
           Outside of programming, I enjoy doing photography, singing, and traveling. Some of my photos and music can be found on{' '}
           <Link href="https://www.instagram.com/enghimanshu" className="text-green-600 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-colors duration-300 relative group">
-            <span className="glow-effect">Instagram</span>
-            <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-green-600 dark:bg-green-400 transition-all duration-300 group-hover:w-full"></span>
+            <span className="glow-effect decoration-wavy decoration-green-400 underline underline-offset-4">Instagram</span>
           </Link>.
         </p>
       </div>
       <style>{`
         .glow-effect {
           text-shadow: 0 0 4px rgba(34, 211, 238, 0.6);
-        }
-        .glow-effect:hover {
-          text-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
         }
       `}</style>
     </div>

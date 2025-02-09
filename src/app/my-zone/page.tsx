@@ -3,13 +3,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 
 const learningTopics = [
-  { name: "ML", url: "https://youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&si=paz51QiBiwvbZMTJ" },
-  { name: "React Native", url: "https://frontendmasters.com/courses/react-native-v3/" },
+  { name: "DL", url: "https://cs231n.stanford.edu/" },
+  { name: "ML", url: "https://mlcourse.ai" },
+  { name: "CMU DATABASE SYSTEMS", url: "https://15445.courses.cs.cmu.edu/fall2024/" },
+  {name: "COMPUTER NETWORKS", url: "https://stevetarzia.com/teaching/" },
 ]
 
 const workingOnProjects = [
   { name: "College Nexus", url: "https://collegenexus.tech" },
-  { name: "Opal", url: "https://github.com/himanshuraimau/opal-webprodigies" },
+  { name: "DoodleVerse", url: "https://github.com/himanshuraimau/DoodleVerse" },
 ]
 
 const offbeat = [
@@ -19,14 +21,15 @@ const offbeat = [
 ]
 
 const academicReading = [
-  { name: "Data Structures and Algorithms", url: "https://www.geeksforgeeks.org/data-structures/" },
-  { name: "Understanding and Using C Pointers", url: "https://www.amazon.in/Understanding-Using-Pointers-Richard-Reese/dp/9351101398/ref=sr_1_3?s=books&sr=1-3" },
+  { name: "Computer Networks", url: "https://a.co/d/d771FVd" },
+  { name: "Database Systems", url: "https://a.co/d/7lzvL5v" },
   { name: "Operating Systems", url: "https://www.amazon.com/Operating-Systems-Three-Easy-Pieces/dp/198508659X" },
-  { name: "Computer Organization", url: "https://www.flipkart.com/computer-organization-5th/p/itmfbe3mzyvzbuhr" },
+
 ]
 
 const nonAcademicReading = [
   { name: "The Pragmatic Programmer", url: "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/" },
+  { name: "AntiFragile", url: "https://www.amazon.in/Antifragile-Things-That-Disorder-Incerto/dp/0141038225" },
 ]
 
 const importantLinks = [

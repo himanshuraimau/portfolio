@@ -71,6 +71,9 @@ const MDXComponents = {
   strong: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <strong className="font-semibold text-black dark:text-white" {...props}>{children}</strong>
   ),
+  em: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <em className="wavy-decoration " {...props}>{children}</em>
+  ),
 }
 
 export default MDXComponents
