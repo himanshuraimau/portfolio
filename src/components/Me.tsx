@@ -9,7 +9,7 @@ const Me = () => {
       </h2>
       <div className="font-mono text-sm sm:text-base text-gray-700 dark:text-slate-300 space-y-6">
         <p>
-          I am a full stack developer <span className='text-white text-md wavy-decoration decoration-yellow-400'>based in Bangalore</span>, currently pursuing engineering in artificial intelligence and data science. Currently focused more on learning distributed systems, machine learning, and GenAI.
+          I am a full stack developer <span className='text-black dark:text-white text-md wavy-decoration decoration-yellow-600 dark:decoration-yellow-400'>based in Bangalore</span>, currently pursuing engineering in artificial intelligence and data science. Currently focused more on learning distributed systems, machine learning, and GenAI.
         </p>
         <p>
           Dreaming up ideas and making them come true is where my passion lies. You can find my full{' '}
