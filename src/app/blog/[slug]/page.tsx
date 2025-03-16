@@ -13,9 +13,6 @@ import { getBlogPost, getRelatedPosts, getBlogPosts, type BlogPost, type Related
 // Import the BlogContent client component
 import { BlogContent } from '@/components/BlogContent'
 
-// Import the blog card component
-import { BlogCard } from '@/components/BlogCard'
-
 interface BlogPostPageProps {
   params: {
     slug: string
@@ -95,22 +92,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const useStaticContent = process.env.NODE_ENV === 'production' && !isDraftMode;
     
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 pt-24 max-w-4xl">
         <article className="mb-12">
           {/* Blog post header */}
           <div className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Link 
-                href="/blog"
-                className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+            <div className="flex items-center gap-4 mb-6">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                asChild
+                className="flex items-center gap-1 font-medium"
               >
-                <ArrowLeft className="h-4 w-4" />
-                Back to Blog
-              </Link>
-              <span className="text-muted-foreground">•</span>
+                <Link href="/blog">
+                  <ArrowLeft className="h-4 w-4 mr-1" />
+                  Back to Blog
+                </Link>
+              </Button>
               <Link 
                 href={`/blog/category/${encodeURIComponent(post.category.toLowerCase())}`}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm px-3 py-1 bg-muted rounded-full hover:bg-muted/80 transition-colors"
               >
                 {post.category}
               </Link>
@@ -167,29 +167,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           )}
           
-          {/* Author info */}
-          <div className="mt-12 p-6 bg-muted/20 rounded-lg">
-            <div className="flex items-center gap-4">
-              {post.authorImage ? (
-                <Image
-                  src={post.authorImage}
-                  alt={post.author}
-                  width={60}
-                  height={60}
-                  className="rounded-full"
-                />
-              ) : (
-                <div className="w-[60px] h-[60px] bg-muted rounded-full flex items-center justify-center">
-                  <User className="h-6 w-6 text-muted-foreground" />
-                </div>
-              )}
-              
-              <div>
-                <h3 className="font-semibold text-lg">{post.author}</h3>
-                <p className="text-muted-foreground text-sm">{post.authorBio || 'Author'}</p>
-              </div>
-            </div>
-          </div>
+        
         </article>
         
         {/* Related posts */}
@@ -198,14 +176,34 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <h2 className="text-2xl font-bold mb-6">Related Posts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedPosts.map((relatedPost) => (
-                <BlogCard
+                <Link
                   key={relatedPost.slug}
-                  title={relatedPost.title}
-                  description={relatedPost.description}
-                  slug={relatedPost.slug}
-                  category={relatedPost.category}
-                  image={relatedPost.image}
-                />
+                  href={`/blog/${relatedPost.slug}`}
+                  className="group block bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
+                >
+                  {relatedPost.image && (
+                    <div className="aspect-video bg-muted overflow-hidden">
+                      <Image
+                        src={relatedPost.image}
+                        alt={relatedPost.title}
+                        width={600}
+                        height={340}
+                        className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="text-sm font-medium text-muted-foreground mb-2">
+                      {relatedPost.category}
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {relatedPost.title}
+                    </h3>
+                    <p className="text-muted-foreground line-clamp-3">
+                      {relatedPost.description}
+                    </p>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -217,15 +215,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     
     // Return a fallback error page
     return (
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8 pt-24 max-w-4xl">
         <div className="mb-8">
-          <Link 
-            href="/blog"
-            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1"
+          <Button 
+            variant="outline" 
+            size="sm" 
+            asChild
+            className="flex items-center gap-1 font-medium"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Blog
-          </Link>
+            <Link href="/blog">
+              <ArrowLeft className="h-4 w-4 mr-1" />
+              Back to Blog
+            </Link>
+          </Button>
         </div>
         
         <div className="p-6 border-l-4 border-destructive bg-destructive/10 rounded-r-lg my-6">
@@ -233,13 +235,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="mb-4">
             We encountered an error while trying to load this blog post. Please try again later or check out our other blog posts.
           </p>
-          <Link 
-            href="/blog"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+          <Button 
+            variant="default"
+            asChild
+            className="mt-2"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Return to Blog
-          </Link>
+            <Link href="/blog">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Return to Blog
+            </Link>
+          </Button>
         </div>
       </div>
     );
