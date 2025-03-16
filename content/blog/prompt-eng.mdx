@@ -26,16 +26,24 @@ This is the simplest way: just ask your question directly.
 - *Example*: "What's the capital of France?"  
 - *What happens*: The model gives you an answer based on its training.
 
-```python
-import openai
+```javascript
+const { OpenAI } = require('openai');
 
-response = openai.Completion.create(
-  model="gpt-3.5-turbo",
-  prompt="What's the capital of France?",
-  max_tokens=10
-)
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
-print(response.choices[0].text.strip())
+async function getCompletion() {
+  const response = await openai.completions.create({
+    model: "gpt-3.5-turbo-instruct",
+    prompt: "What's the capital of France?",
+    max_tokens: 10
+  });
+
+  console.log(response.choices[0].text.trim());
+}
+
+getCompletion();
 ```
 
 ### 2. **Few-Shot Prompting**  
@@ -43,20 +51,19 @@ Give the model a few examples before asking your question. It's like teaching by
 - *Example*: "London is the capital of the UK. Paris is the capital of France. What's the capital of Germany?"  
 - *What happens*: The model uses the examples to understand the pattern and gives you the right answer.
 
-```python
-response = openai.Completion.create(
-  model="gpt-3.5-turbo",
-  prompt="London is the capital of the UK. Paris is the capital of France. What's the capital of Germany?",
-  max_tokens=10
-)
+```javascript
+async function fewShotExample() {
+  const response = await openai.completions.create({
+    model: "gpt-3.5-turbo-instruct",
+    prompt: "London is the capital of the UK. Paris is the capital of France. What's the capital of Germany?",
+    max_tokens: 10
+  });
 
-print(response.choices[0].text.strip())
+  console.log(response.choices[0].text.trim());
+}
+
+fewShotExample();
 ```
-
-### 3. **Chain-of-Thought Prompting**  
-For complex problems, break them down into smaller steps.  
-- *Example*: "Let's solve this math problem step by step…"  
-- *What happens*: The model thinks through each step, making it better at solving tricky questions.
 
 ## How LLMs Choose Their Words
 
@@ -73,16 +80,20 @@ Ever wonder how LLMs decide what to say next? They use different strategies to p
 
 Here's how you can tweak these settings in code:
 
-```python
-response = openai.Completion.create(
-  model="gpt-3.5-turbo",
-  prompt="Write a short story about a robot learning to paint.",
-  temperature=0.7,  # More creative
-  top_p=0.9,        # Focus on high-confidence words
-  max_tokens=100
-)
+```javascript
+async function generateCreativeStory() {
+  const response = await openai.completions.create({
+    model: "gpt-3.5-turbo-instruct",
+    prompt: "Write a short story about a robot learning to paint.",
+    temperature: 0.7,  // More creative
+    top_p: 0.9,        // Focus on high-confidence words
+    max_tokens: 100
+  });
 
-print(response.choices[0].text.strip())
+  console.log(response.choices[0].text.trim());
+}
+
+generateCreativeStory();
 ```
 
 ## Making LLMs Faster and More Efficient
@@ -102,18 +113,29 @@ Developers are working on ways to make LLMs faster and cheaper to run without sa
 
 One clever way to make LLMs faster is through **quantization**. Here's how it works:
 
-```python
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import bitsandbytes as bnb
+```javascript
+const { AutoModelForCausalLM, AutoTokenizer } = require('transformers');
+const bnb = require('bitsandbytes');
 
-# Load a model in 8-bit precision
-model = AutoModelForCausalLM.from_pretrained("gpt2", load_in_8bit=True, device_map="auto")
-tokenizer = AutoTokenizer.from_pretrained("gpt2")
+async function loadQuantizedModel() {
+  // Load a model in 8-bit precision
+  const model = await AutoModelForCausalLM.from_pretrained("gpt2", {
+    load_in_8bit: true,
+    device_map: "auto"
+  });
+  
+  const tokenizer = await AutoTokenizer.from_pretrained("gpt2");
 
-# Generate text
-inputs = tokenizer("Hello, how are you?", return_tensors="pt").to("cuda")
-outputs = model.generate(**inputs)
-print(tokenizer.decode(outputs[0]))
+  // Generate text
+  const inputs = await tokenizer("Hello, how are you?", {
+    return_tensors: "pt"
+  }).to("cuda");
+  
+  const outputs = await model.generate(inputs);
+  console.log(tokenizer.decode(outputs[0]));
+}
+
+loadQuantizedModel();
 ```
 
 ## Output-Preserving Methods: Speed Without Sacrificing Quality
@@ -126,11 +148,11 @@ This method speeds up how LLMs process text by being smarter about memory usage.
 
 Here's how you can use Flash Attention with the `flash-attn` library:
 
-```python
-from flash_attn import flash_attention
+```javascript
+const { flashAttention } = require('flash-attn');
 
-# Example usage in a custom model
-output = flash_attention(query, key, value)
+// Example usage in a custom model
+const output = flashAttention(query, key, value);
 ```
 
 ### 2. **Prefix Caching**  
@@ -139,14 +161,20 @@ Instead of recalculating everything for text it's seen before, the model saves i
 
 Here's a conceptual example:
 
-```python
-# First interaction: Model processes and caches the prefix
-prefix = "This is a long document about AI. It covers topics like machine learning, natural language processing, and computer vision."
-cache = model.process_and_cache(prefix)
+```javascript
+// First interaction: Model processes and caches the prefix
+const prefix = "This is a long document about AI. It covers topics like machine learning, natural language processing, and computer vision.";
+const cache = model.processAndCache(prefix);
 
-# Later interaction: Model uses the cached prefix
-response = model.generate("What does the document say about NLP?", prefix_cache=cache)
-print(response)
+// Later interaction: Model uses the cached prefix
+async function generateWithCache() {
+  const response = await model.generate("What does the document say about NLP?", {
+    prefixCache: cache
+  });
+  console.log(response);
+}
+
+generateWithCache();
 ```
 
 ## Speculative Decoding: A Clever Speed Boost
@@ -156,16 +184,23 @@ This technique uses two models: a small, fast one (the "drafter") and the main m
 
 Here's how it works in practice:
 
-```python
-from vllm import LLM, SamplingParams
+```javascript
+const { LLM, SamplingParams } = require('vllm');
 
-# Load the model
-llm = LLM(model="gpt-3.5-turbo")
-sampling_params = SamplingParams(temperature=0.7, max_tokens=100)
+async function generateWithSpectulativeDecoding() {
+  // Load the model
+  const llm = new LLM("gpt-3.5-turbo");
+  const samplingParams = new SamplingParams({
+    temperature: 0.7,
+    maxTokens: 100
+  });
 
-# Generate text using speculative decoding
-outputs = llm.generate("Write a poem about the ocean.", sampling_params)
-print(outputs[0].text)
+  // Generate text using speculative decoding
+  const outputs = await llm.generate("Write a poem about the ocean.", samplingParams);
+  console.log(outputs[0].text);
+}
+
+generateWithSpectulativeDecoding();
 ```
 
 ## Batching and Parallelization: Doing More at Once
@@ -178,21 +213,26 @@ Process multiple tasks at once, like baking a whole tray of cookies instead of o
 
 Here's how to batch inputs for efficiency:
 
-```python
-inputs = [
-    "What's the capital of France?",
-    "Explain quantum computing in simple terms.",
-    "Write a haiku about winter."
-]
+```javascript
+const inputs = [
+  "What's the capital of France?",
+  "Explain quantum computing in simple terms.",
+  "Write a haiku about winter."
+];
 
-responses = openai.Completion.create(
-  model="gpt-3.5-turbo",
-  prompt=inputs,
-  max_tokens=50
-)
+async function batchProcessing() {
+  const responses = await openai.completions.create({
+    model: "gpt-3.5-turbo-instruct",
+    prompt: inputs,
+    max_tokens: 50
+  });
 
-for response in responses.choices:
-    print(response.text.strip())
+  responses.choices.forEach(response => {
+    console.log(response.text.trim());
+  });
+}
+
+batchProcessing();
 ```
 
 ### 2. **Parallelization**  
@@ -201,29 +241,44 @@ Split the work across multiple computers, like having a team build different par
 
 Here's a conceptual example:
 
-```python
-from multiprocessing import Pool
+```javascript
+const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
 
-def process_input(input_text):
-    response = openai.Completion.create(
-        model="gpt-3.5-turbo",
-        prompt=input_text,
-        max_tokens=50
-    )
-    return response.choices[0].text.strip()
+function processInput(inputText) {
+  return new Promise((resolve, reject) => {
+    const worker = new Worker(__filename, {
+      workerData: inputText
+    });
+    
+    worker.on('message', resolve);
+    worker.on('error', reject);
+  });
+}
 
-inputs = [
+if (isMainThread) {
+  const inputs = [
     "What's the capital of France?",
     "Explain quantum computing in simple terms.",
     "Write a haiku about winter."
-]
+  ];
 
-# Use parallel processing
-with Pool(processes=3) as pool:
-    results = pool.map(process_input, inputs)
-
-for result in results:
-    print(result)
+  // Use parallel processing
+  Promise.all(inputs.map(input => processInput(input)))
+    .then(results => {
+      results.forEach(result => console.log(result));
+    });
+} else {
+  // This code runs in worker threads
+  (async () => {
+    const response = await openai.completions.create({
+      model: "gpt-3.5-turbo-instruct",
+      prompt: workerData,
+      max_tokens: 50
+    });
+    
+    parentPort.postMessage(response.choices[0].text.trim());
+  })();
+}
 ```
 
 ## Wrapping Up
