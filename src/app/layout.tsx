@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Himanshu Rai" }],
   creator: "Himanshu Rai",
   metadataBase: new URL('https://enghimanshu.tech'),
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
   openGraph: {
     type: "website",
     title: "Himanshu Rai - Software Engineer Portfolio",
@@ -57,12 +58,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-screen flex flex-col bg-background text-foreground">
             <Navigation />
             <PageTransition>
-              <main>{children}</main>
+              <main className="flex-grow">{children}</main>
             </PageTransition>
             <Footer />
             <FloatingSocial />

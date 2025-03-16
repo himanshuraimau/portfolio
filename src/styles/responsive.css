@@ -1,0 +1,261 @@
+/* Responsive utilities for the portfolio site */
+
+.responsive-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    max-width: 1200px;
+  }
+}
+
+/* Responsive spacing utilities */
+.responsive-mt {
+  margin-top: 1rem;
+}
+
+.responsive-mb {
+  margin-bottom: 1rem;
+}
+
+.responsive-my {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.responsive-mx {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.responsive-p {
+  padding: 1rem;
+}
+
+.responsive-px {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.responsive-py {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-mt {
+    margin-top: 1.5rem;
+  }
+  
+  .responsive-mb {
+    margin-bottom: 1.5rem;
+  }
+  
+  .responsive-my {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .responsive-mx {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+  
+  .responsive-p {
+    padding: 1.5rem;
+  }
+  
+  .responsive-px {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .responsive-py {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-mt {
+    margin-top: 2rem;
+  }
+  
+  .responsive-mb {
+    margin-bottom: 2rem;
+  }
+  
+  .responsive-my {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .responsive-mx {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  
+  .responsive-p {
+    padding: 2rem;
+  }
+  
+  .responsive-px {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .responsive-py {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-mt {
+    margin-top: 2.5rem;
+  }
+  
+  .responsive-mb {
+    margin-bottom: 2.5rem;
+  }
+  
+  .responsive-my {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .responsive-mx {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+  }
+  
+  .responsive-p {
+    padding: 2.5rem;
+  }
+  
+  .responsive-px {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+  
+  .responsive-py {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* Responsive typography */
+.responsive-text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.responsive-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.responsive-text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.responsive-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.responsive-text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.responsive-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-text-xs {
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+  }
+  
+  .responsive-text-sm {
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+  }
+  
+  .responsive-text-base {
+    font-size: 1.0625rem;
+    line-height: 1.625rem;
+  }
+  
+  .responsive-text-lg {
+    font-size: 1.1875rem;
+    line-height: 1.875rem;
+  }
+  
+  .responsive-text-xl {
+    font-size: 1.375rem;
+    line-height: 1.875rem;
+  }
+  
+  .responsive-text-2xl {
+    font-size: 1.625rem;
+    line-height: 2.125rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-text-xs {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  .responsive-text-sm {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+  
+  .responsive-text-base {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  
+  .responsive-text-lg {
+    font-size: 1.25rem;
+    line-height: 2rem;
+  }
+  
+  .responsive-text-xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .responsive-text-2xl {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+} 

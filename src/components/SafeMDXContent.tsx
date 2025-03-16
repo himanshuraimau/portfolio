@@ -37,14 +37,17 @@ const components = {
   },
   img: ({ src, alt }: { src: string; alt: string }) => (
     <div className="my-6">
-      <Image 
-        src={src} 
-        alt={alt || ''} 
-        width={800} 
-        height={500} 
-        className="rounded-lg mx-auto"
-      />
-      {alt && <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p>}
+      <div className="relative w-full max-w-2xl mx-auto">
+        <Image 
+          src={src} 
+          alt={alt || ''} 
+          width={800} 
+          height={500} 
+          className="rounded-lg mx-auto w-full h-auto object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 800px"
+        />
+        {alt && <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p>}
+      </div>
     </div>
   ),
   // Other components are handled by the default Tailwind prose styling
@@ -61,7 +64,7 @@ export async function SafeMDXContent({ content }: SafeMDXContentProps) {
 
   try {
     // Serialize the MDX content with enhanced options
-    const mdxSource = await serialize(content, {
+    await serialize(content, {
       mdxOptions: {
         rehypePlugins: [
           rehypeSlug,
@@ -75,7 +78,7 @@ export async function SafeMDXContent({ content }: SafeMDXContentProps) {
 
     // Return the MDXRemote component with custom components
     return (
-      <div className="mdx-content">
+      <div className="mdx-content prose prose-lg md:prose-xl dark:prose-invert max-w-none w-full overflow-x-hidden">
         <MDXRemote 
           source={content} 
           components={components} 
@@ -102,7 +105,7 @@ export async function SafeMDXContent({ content }: SafeMDXContentProps) {
         {/* Display the raw content as a fallback */}
         <div className="mt-6 p-4 bg-muted/20 rounded">
           <h4 className="text-lg font-semibold mb-2">Raw Content:</h4>
-          <pre className="whitespace-pre-wrap text-sm">
+          <pre className="whitespace-pre-wrap text-sm overflow-x-auto">
             {content.substring(0, 500)}
             {content.length > 500 ? '...' : ''}
           </pre>
