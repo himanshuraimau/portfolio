@@ -144,7 +144,7 @@ export default async function HomePage() {
         <FadeIn>
           <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 md:gap-16 items-start">
             <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">Skills</h2>
-            <div className="w-full">
+            <div className="w-full overflow-hidden">
               <SkillsToggle />
             </div>
           </div>

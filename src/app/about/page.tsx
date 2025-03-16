@@ -149,9 +149,9 @@ export default function AboutPage() {
         {/* Skills Section */}
         <div className="mb-12 sm:mb-16">
           <FadeIn>
-            <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 sm:gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 sm:gap-10 md:gap-16">
               <h2 className="heading-xl text-center md:text-left">Skills</h2>
-              <div>
+              <div className="w-full overflow-hidden">
                 <SkillsToggle />
               </div>
             </div>
