@@ -32,22 +32,13 @@ export const metadata: Metadata = {
     description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
     siteName: "Himanshu Rai Portfolio",
     locale: 'en_US',
-    url: 'https://enghimanshu.tech', // Replace with your actual domain
-    images: [
-      {
-        url: '/Cover.jpg', // Add your OG image in the public folder
-        width: 1200,
-        height: 630,
-        alt: 'Himanshu Rai - Software Engineer Portfolio',
-      }
-    ],
+    url: 'https://enghimanshu.tech',
   },
   twitter: {
     card: "summary_large_image",
     title: "Himanshu Rai - Software Engineer Portfolio",
     description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
     creator: "@himanshura_i",
-    images: ['/Cover.jpg'],
   },
 }
 
