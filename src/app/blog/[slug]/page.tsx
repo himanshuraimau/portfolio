@@ -24,7 +24,8 @@ interface BlogPostPageProps {
 
 // Generate metadata for the page
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const slug = params.slug;
+  // Ensure params.slug is properly awaited
+  const slug = await Promise.resolve(params.slug);
   const post = await getBlogPost(slug);
   
   if (!post) {
@@ -64,12 +65,12 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  // Check if we're in draft mode (for development)
-  const { isEnabled: isDraftMode } = draftMode();
-  
   try {
     // Ensure params.slug is properly awaited
     const slug = await Promise.resolve(params.slug);
+    
+    // Check if we're in draft mode (for development)
+    const { isEnabled: isDraftMode } = await draftMode();
     
     // Get the blog post data
     const post = await getBlogPost(slug);

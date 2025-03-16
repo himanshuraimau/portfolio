@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { BlogPost } from '@/lib/blog';
 
@@ -50,14 +50,38 @@ interface BlogContentProps {
 }
 
 export function BlogContent({ post, useStaticContent = false }: BlogContentProps) {
-  // Use static content if specified, otherwise use SafeMDXContent
+  // State to track if we're in the browser
+  const [isBrowser, setIsBrowser] = useState(false);
+  
+  // Effect to update isBrowser state once component mounts
+  useEffect(() => {
+    setIsBrowser(true);
+  }, []);
+  
+  // Always use the full content when in the browser, regardless of the useStaticContent prop
+  // This ensures that even in production, once the page loads in the browser, we show the full content
+  if (isBrowser) {
+    return (
+      <div className="prose prose-lg dark:prose-invert max-w-none">
+        <SafeMDXContent content={post.content} />
+      </div>
+    );
+  }
+  
+  // During SSR, respect the useStaticContent prop
   if (useStaticContent) {
     return <StaticContent post={post} />;
   }
   
+  // Fallback for SSR when not using static content
   return (
     <div className="prose prose-lg dark:prose-invert max-w-none">
-      <SafeMDXContent content={post.content} />
+      <div className="animate-pulse space-y-4">
+        <div className="h-4 bg-muted rounded w-3/4"></div>
+        <div className="h-4 bg-muted rounded w-1/2"></div>
+        <div className="h-4 bg-muted rounded w-5/6"></div>
+        <div className="h-4 bg-muted rounded w-2/3"></div>
+      </div>
     </div>
   );
 } 
