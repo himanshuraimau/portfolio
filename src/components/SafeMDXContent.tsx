@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { MDXRemote } from 'next-mdx-remote';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -133,11 +133,33 @@ export function SafeMDXContent({ content }: SafeMDXContentProps) {
     if (content && typeof content === 'object') {
       // Check if it's a fallback content object with compiledSource
       if (content.compiledSource) {
-        return (
-          <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
-            <MDXRemote {...content} components={components} />
-          </div>
-        );
+        try {
+          return (
+            <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+              <MDXRemote {...content} components={components} />
+            </div>
+          );
+        } catch (mdxRenderError: unknown) {
+          console.error('Error rendering MDXRemote with compiledSource:', mdxRenderError);
+          
+          // If there's a React not defined error, provide a simpler fallback
+          if (mdxRenderError instanceof Error && mdxRenderError.message?.includes('React is not defined')) {
+            return (
+              <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+                <h1>{content.scope?.title || 'Blog Post'}</h1>
+                <p>{content.scope?.excerpt || 'No excerpt available.'}</p>
+                <div className="p-4 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-950/20 rounded-r-lg my-6">
+                  <p className="text-amber-700 dark:text-amber-300">
+                    The content couldn't be rendered due to a technical issue. Please try again later.
+                  </p>
+                </div>
+              </div>
+            );
+          }
+          
+          // Re-throw for other errors
+          throw mdxRenderError;
+        }
       }
       
       // For other object types, try to render as MDXRemote
