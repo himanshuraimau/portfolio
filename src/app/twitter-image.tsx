@@ -45,11 +45,24 @@ export default async function Image() {
         <div
           style={{
             fontSize: '32px',
-            marginBottom: '40px',
+            marginBottom: '30px',
             textAlign: 'center',
           }}
         >
           Full Stack • DevOps • AI Engineer
+        </div>
+        <div
+          style={{
+            fontSize: '28px',
+            fontWeight: 'bold',
+            marginTop: '30px',
+            textAlign: 'center',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            background: 'rgba(255, 255, 255, 0.1)',
+          }}
+        >
+          enghimanshu.tech
         </div>
       </div>
     ),

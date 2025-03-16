@@ -9,6 +9,24 @@ import { AnimatedButton } from "@/components/animations/animated-button"
 import { HeroSocialBar } from "@/components/hero-social-bar"
 import { webProjects } from "./projects/page"
 import { getBlogPosts } from '@/lib/blog';
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Himanshu Rai | Full Stack • DevOps • AI Engineer",
+  description: "Portfolio of Himanshu Rai - Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+  openGraph: {
+    type: "website",
+    title: "Himanshu Rai - Software Engineer Portfolio",
+    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+    url: 'https://enghimanshu.tech',
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Himanshu Rai - Software Engineer Portfolio",
+    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+    creator: "@himanshura_i",
+  },
+}
 
 export default async function HomePage() {
   const featuredProjects = webProjects.filter((project) => project.type === "hosted").slice(0, 3)
