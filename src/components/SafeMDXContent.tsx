@@ -1,59 +1,23 @@
-// A comprehensive MDX content renderer with error handling and styling
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import { serialize } from 'next-mdx-remote/serialize';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeSlug from 'rehype-slug';
+'use client';
+
+import { useMemo } from 'react';
+import { MDXRemote } from 'next-mdx-remote';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+// Import custom components
+import Callout from './Callout';
+
+// Dynamically import components that use client-side features
+const PrismCode = dynamic(() => import('./PrismCode'), { ssr: false });
 
 interface SafeMDXContentProps {
-  content: string;
+  content: any; // Support for serialized MDX content
 }
 
-// Define custom components for MDX rendering
-const components = {
-  a: ({ href, children }: { href: string; children: React.ReactNode }) => {
-    const isExternal = href?.startsWith('http');
-    if (isExternal) {
-      return (
-        <a 
-          href={href} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-primary hover:text-primary/80 underline underline-offset-4"
-        >
-          {children}
-        </a>
-      );
-    }
-    return (
-      <Link 
-        href={href} 
-        className="text-primary hover:text-primary/80 underline underline-offset-4"
-      >
-        {children}
-      </Link>
-    );
-  },
-  img: ({ src, alt }: { src: string; alt: string }) => (
-    <div className="my-6">
-      <div className="relative w-full max-w-2xl mx-auto">
-        <Image 
-          src={src} 
-          alt={alt || ''} 
-          width={800} 
-          height={500} 
-          className="rounded-lg mx-auto w-full h-auto object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 800px"
-        />
-        {alt && <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p>}
-      </div>
-    </div>
-  ),
-  // Other components are handled by the default Tailwind prose styling
-};
-
-export async function SafeMDXContent({ content }: SafeMDXContentProps) {
+export function SafeMDXContent({ content }: SafeMDXContentProps) {
+  // Handle empty content
   if (!content) {
     return (
       <div className="p-4 border-l-4 border-muted bg-muted/20 rounded-r-lg my-6">
@@ -62,27 +26,151 @@ export async function SafeMDXContent({ content }: SafeMDXContentProps) {
     );
   }
 
-  try {
-    // Serialize the MDX content with enhanced options
-    await serialize(content, {
-      mdxOptions: {
-        rehypePlugins: [
-          rehypeSlug,
-          [rehypeAutolinkHeadings, { behavior: 'wrap' }]
-        ],
-        format: 'mdx',
-        development: false
-      },
-      parseFrontmatter: true
-    });
+  // Define custom components for MDX rendering
+  const components = useMemo(() => ({
+    // Custom link component
+    a: ({ href, children, ...props }: { href: string; children: React.ReactNode }) => {
+      const isExternal = href?.startsWith('http');
+      if (isExternal) {
+        return (
+          <a 
+            href={href} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-primary hover:text-primary/80 underline underline-offset-4"
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      return (
+        <Link 
+          href={href} 
+          className="text-primary hover:text-primary/80 underline underline-offset-4"
+          {...props}
+        >
+          {children}
+        </Link>
+      );
+    },
+    
+    // Custom image component
+    img: ({ src, alt, ...props }: { src: string; alt: string }) => (
+      <div className="my-6">
+        <div className="relative w-full max-w-2xl mx-auto">
+          <Image 
+            src={src} 
+            alt={alt || ''} 
+            width={800} 
+            height={500} 
+            className="rounded-lg mx-auto w-full h-auto object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 800px"
+            {...props}
+          />
+          {alt && <p className="text-center text-sm text-muted-foreground mt-2">{alt}</p>}
+        </div>
+      </div>
+    ),
+    
+    // Custom code block component
+    pre: ({ children, className, ...props }: any) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const language = match ? match[1] : 'text';
+      const code = children?.props?.children || '';
+      
+      return (
+        <PrismCode code={code} language={language} />
+      );
+    },
+    
+    // Custom inline code component
+    code: ({ className, children, ...props }: any) => {
+      const match = /language-(\w+)/.exec(className || '');
+      
+      // If it has a language class, it's a code block and will be handled by the pre component
+      if (match) {
+        return <code className={className} {...props}>{children}</code>;
+      }
+      
+      // Otherwise it's an inline code element
+      return (
+        <code 
+          className="bg-muted text-primary px-1.5 py-0.5 rounded text-sm font-mono" 
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    },
+    
+    // Custom callout component
+    Callout,
+  }), []);
 
-    // Return the MDXRemote component with custom components
-    return (
-      <div className="mdx-content prose prose-lg md:prose-xl dark:prose-invert max-w-none w-full overflow-x-hidden">
-        <MDXRemote 
-          source={content} 
-          components={components} 
+  try {
+    // Handle different content types
+    if (typeof content === 'string') {
+      // If content is a string, just render it as HTML
+      return (
+        <div 
+          className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden"
+          dangerouslySetInnerHTML={{ __html: content }}
         />
+      );
+    }
+    
+    // If content is a React element, render it directly
+    if (React.isValidElement(content)) {
+      return (
+        <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+          {content}
+        </div>
+      );
+    }
+    
+    // If content is a serialized MDX object from next-mdx-remote
+    if (content && typeof content === 'object') {
+      // Check if it's a fallback content object with compiledSource
+      if (content.compiledSource) {
+        return (
+          <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+            <MDXRemote {...content} components={components} />
+          </div>
+        );
+      }
+      
+      // For other object types, try to render as MDXRemote
+      try {
+        return (
+          <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+            <MDXRemote {...content} components={components} />
+          </div>
+        );
+      } catch (mdxError) {
+        console.error('Error rendering MDXRemote:', mdxError);
+        
+        // Fallback to displaying frontmatter content
+        if (content.frontmatter) {
+          return (
+            <div className="mdx-content prose prose-lg dark:prose-invert max-w-none w-full overflow-x-hidden">
+              <h1>{content.frontmatter.title}</h1>
+              <p>{content.frontmatter.excerpt || 'No excerpt available.'}</p>
+              <div className="p-4 border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-950/20 rounded-r-lg my-6">
+                <p className="text-amber-700 dark:text-amber-300">
+                  The full content couldn't be rendered. Please try again later.
+                </p>
+              </div>
+            </div>
+          );
+        }
+      }
+    }
+    
+    // Fallback for unknown content types
+    return (
+      <div className="p-4 border-l-4 border-muted bg-muted/20 rounded-r-lg my-6">
+        <p className="text-muted-foreground">Content format not supported.</p>
       </div>
     );
   } catch (error) {
@@ -106,8 +194,12 @@ export async function SafeMDXContent({ content }: SafeMDXContentProps) {
         <div className="mt-6 p-4 bg-muted/20 rounded">
           <h4 className="text-lg font-semibold mb-2">Raw Content:</h4>
           <pre className="whitespace-pre-wrap text-sm overflow-x-auto">
-            {content.substring(0, 500)}
-            {content.length > 500 ? '...' : ''}
+            {typeof content === 'string' 
+              ? content.substring(0, 500) 
+              : JSON.stringify(content, null, 2).substring(0, 500)}
+            {(typeof content === 'string' 
+              ? content.length 
+              : JSON.stringify(content, null, 2).length) > 500 ? '...' : ''}
           </pre>
         </div>
       </div>

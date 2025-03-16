@@ -1,0 +1,27 @@
+[install]
+# Use the exact versions specified in package.json
+exact = true
+
+# Cache dependencies for faster installs
+cache = true
+
+# Optimize for production builds
+production = false
+
+# Configure cache directory
+cache-dir = ".bun/cache"
+
+[runtime]
+# Enable JSX runtime for MDX
+jsx = "automatic"
+
+# Optimize for Next.js
+loader = "tsx"
+
+[test]
+# Configure test environment
+coverage = true
+
+[debug]
+# Enable source maps for better debugging
+sourcemap = true 
