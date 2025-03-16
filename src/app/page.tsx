@@ -21,13 +21,13 @@ export default async function HomePage() {
       <section className="container-custom section-spacing flex flex-col justify-center min-h-[80vh] sm:min-h-[90vh]">
         <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <FadeIn direction="left" delay={0.2}>
-            <div className="space-y-4 sm:space-y-8">
+            <div className="space-y-4 sm:space-y-6 md:space-y-8">
               <div>
                 <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I'm</p>
-                <h1 className="heading-lg mb-2 sm:mb-4">Himanshu Rai</h1>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">Himanshu Rai</h1>
                 <h2 className="text-base sm:text-lg text-muted-foreground">Full Stack Developer • DevOps Engineer • AI Engineer</h2>
               </div>
-              <p className="body-lg text-muted-foreground max-w-md">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-md">
                 I specialize in building scalable applications, implementing robust DevOps practices, and developing AI solutions to create innovative tech experiences.
               </p>
               <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -41,7 +41,7 @@ export default async function HomePage() {
             </div>
           </FadeIn>
           <FadeIn direction="right" delay={0.4}>
-            <div className="relative mx-auto max-w-sm sm:max-w-md md:max-w-lg">
+            <div className="relative mx-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div className="absolute -top-6 sm:-top-10 -left-6 sm:-left-10 w-24 sm:w-40 h-24 sm:h-40 bg-muted rounded-full opacity-50"></div>
               <div className="absolute -bottom-6 sm:-bottom-10 -right-6 sm:-right-10 w-32 sm:w-60 h-32 sm:h-60 bg-muted rounded-full opacity-50"></div>
               <div className="relative z-10 aspect-square bg-muted rounded-2xl overflow-hidden border border-border">
@@ -70,11 +70,11 @@ export default async function HomePage() {
       <section id="projects" className="container-custom section-spacing">
         <FadeIn>
           <div className="flex flex-col sm:flex-row justify-between items-baseline mb-8 sm:mb-16">
-            <h2 className="heading-lg relative">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative">
               Featured Projects
-              <span className="absolute -z-10 text-[6rem] sm:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-20 -left-3 sm:-left-6 opacity-80">02</span>
+              <span className="absolute -z-10 text-[6rem] sm:text-[8rem] md:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-16 md:-top-20 -left-3 sm:-left-4 md:-left-6 opacity-80">02</span>
             </h2>
-            <Link href="/projects" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 md:mt-0 no-underline">
+            <Link href="/projects" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 sm:mt-0 no-underline">
               View All Projects
             </Link>
           </div>
@@ -84,15 +84,15 @@ export default async function HomePage() {
           {featuredProjects.map((project, index) => (
             <FadeIn key={project.id} delay={index * 0.1}>
               <div className="group">
-                <div className="grid md:grid-cols-2 gap-6 sm:gap-12 items-center">
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
                   <div>
-                    <span className="text-6xl sm:text-8xl font-bold text-muted/30 group-hover:text-muted/50 transition-colors">
+                    <span className="text-6xl sm:text-7xl md:text-8xl font-bold text-muted/30 group-hover:text-muted/50 transition-colors">
                       0{index + 1}
                     </span>
-                    <h3 className="text-2xl sm:text-4xl font-bold mb-3 sm:mb-6 -mt-4 sm:-mt-8 group-hover:translate-x-2 transition-transform">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 -mt-4 sm:-mt-6 md:-mt-8 group-hover:translate-x-2 transition-transform">
                       {project.title}
                     </h3>
-                    <p className="text-base sm:text-xl text-muted-foreground mb-4 sm:mb-8">
+                    <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 sm:mb-6 md:mb-8">
                       {project.description}
                     </p>
                     <a
@@ -124,8 +124,8 @@ export default async function HomePage() {
       {/* Skills Section */}
       <section id="skills" className="container-custom section-spacing">
         <FadeIn>
-          <div className="flex flex-col sm:flex-row gap-6 sm:gap-16 items-start">
-            <h2 className="heading-xl">Skills</h2>
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 md:gap-16 items-start">
+            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">Skills</h2>
             <div className="w-full">
               <SkillsToggle />
             </div>
@@ -137,11 +137,11 @@ export default async function HomePage() {
       <section className="container-custom section-spacing">
         <FadeIn>
           <div className="flex flex-col sm:flex-row justify-between items-baseline mb-8 sm:mb-16">
-            <h2 className="heading-lg relative">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative">
               Recent Articles
-              <span className="absolute -z-10 text-[6rem] sm:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-20 -left-3 sm:-left-6 opacity-80">04</span>
+              <span className="absolute -z-10 text-[6rem] sm:text-[8rem] md:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-16 md:-top-20 -left-3 sm:-left-4 md:-left-6 opacity-80">04</span>
             </h2>
-            <Link href="/blog" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 md:mt-0">
+            <Link href="/blog" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 sm:mt-0">
               View All Articles
             </Link>
           </div>
@@ -171,10 +171,10 @@ export default async function HomePage() {
                     day: 'numeric'
                   })}
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-sm sm:text-base text-muted-foreground line-clamp-3">
                   {post.excerpt}
                 </p>
               </div>

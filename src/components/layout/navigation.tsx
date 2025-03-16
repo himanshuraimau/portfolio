@@ -92,8 +92,8 @@ export function Navigation() {
         {/* Mobile Navigation */}
         <div 
           className={cn(
-            "md:hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-md z-40 transition-transform duration-300 ease-in-out",
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+            "md:hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-md z-40 transition-all duration-300 ease-in-out",
+            isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"
           )}
         >
           <nav className="flex flex-col space-y-6 p-6 pt-10 text-center h-full">
@@ -120,13 +120,14 @@ export function Navigation() {
       </header>
       
       {/* Overlay for background blur when mobile menu is open */}
-      {isMenuOpen && (
-        <div 
-          className="md:hidden fixed inset-0 z-30 bg-background/30 backdrop-blur-sm"
-          onClick={() => setIsMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      <div 
+        className={cn(
+          "md:hidden fixed inset-0 z-30 bg-background/30 backdrop-blur-sm transition-opacity duration-300",
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setIsMenuOpen(false)}
+        aria-hidden="true"
+      />
     </>
   )
 }
