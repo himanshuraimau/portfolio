@@ -1,0 +1,159 @@
+---
+title: "Building a Dynamic Reverse Proxy for Docker Containers: A Step-by-Step Guide"
+date: "2024-09-29"
+category: "DevOps"
+author: "Himanshu Raimau"
+authorImage: "/images/authors/himanshu.jpg"
+authorBio: "Full Stack Developer specializing in containerization and DevOps practices. Passionate about sharing knowledge about Docker, microservices, and cloud technologies."
+image: "/blog/docker.webp"
+excerpt: "Learn how to set up a dynamic reverse proxy for Docker containers with detailed steps, code examples, and practical insights."
+---
+
+Ever wondered how to manage multiple Docker containers without juggling ports? Let's build a dynamic reverse proxy that makes container access seamless and intuitive.
+
+<Callout type="tip">
+  Using a reverse proxy for Docker containers simplifies access management and improves security by providing a single entry point to your services.
+</Callout>
+
+## Understanding Docker Basics
+
+Docker is a platform that allows you to run different applications inside isolated environments called containers. Think of each container as a virtual box that contains everything needed to run your application, from the operating system to all technical dependencies.
+
+## The Need for a Reverse Proxy
+
+<Callout type="warning">
+  Without a reverse proxy, managing multiple containers can become complex as each requires its own port, making it difficult to remember and maintain access points.
+</Callout>
+
+A reverse proxy acts as a middleware that forwards requests to the appropriate server on your behalf. But why do we need this for Docker containers?
+
+1. **Port Management**: Each container gets a port, and remembering all these ports is tedious
+2. **Dynamic Ports**: Without specific port assignments, containers might run on random ports
+3. **Simplified Access**: Instead of ports, we can use hostnames to access containers
+4. **Centralized Control**: The reverse proxy provides a single point of entry to all services
+
+## System Architecture
+
+Here's how our solution will work:
+
+![System Design](/proxy/system-dark.png)
+
+> "The beauty of this setup is that it automatically detects and configures routing for new containers as they start up."
+
+## Implementation Guide
+
+### Step 1: Setting Up Dependencies
+
+First, let's set up our Node.js environment and install the required packages:
+
+```bash
+npm init -y
+npm install express http dockerode http-proxy
+npm install --save-dev @types/express @types/http-proxy @types/node nodemon
+```
+
+<Callout type="tip">
+  Using TypeScript with proper type definitions helps catch errors early and improves code maintainability.
+</Callout>
+
+### Step 2: Initializing Dockerode
+
+Dockerode is our bridge to the Docker API, allowing us to monitor and manage containers programmatically:
+
+```javascript
+const Docker = require('dockerode');
+const docker = new Docker({
+  socket: "/var/run/docker.sock"
+});
+const db = new Map();
+```
+
+### Step 3: Implementing Container Event Monitoring
+
+Here's how we track container lifecycle events:
+
+```javascript
+docker.getEvents(function (err, stream) {
+  if (err) {
+    console.log("Error getting docker events", err);
+    return;
+  }
+
+  stream.on('data', async (chunk) => {
+    try {
+      if (!chunk) return;
+      const event = JSON.parse(chunk.toString());
+
+      if (event.Type === "container" && event.Action === "start") {
+        const container = docker.getContainer(event.id);
+        const containerInfo = await container.inspect();
+
+        const containerName = containerInfo.Name.substring(1);
+        const containerIP = containerInfo.NetworkSettings.IPAddress;
+        const exposedPorts = Object.keys(containerInfo.Config.ExposedPorts);
+
+        let defaultPort = null;
+
+        if (exposedPorts.length > 0) {
+          const [port, type] = exposedPorts[0].split("/");
+          if (type === "tcp") {
+            defaultPort = port;
+            console.log(`Container ${containerInfo.Name} is running on http://${containerIP}:${port}`);
+          }
+        }
+
+        console.log(`Registering container ${containerName}.localhost ---> http://${containerIP}:${defaultPort}`);
+        db.set(containerName, {
+          containerName,
+          containerIP,
+          defaultPort
+        });
+      }
+    } catch (e) {
+      console.log("Error parsing docker event", e);
+    }
+  });
+});
+```
+
+### Step 4: Building the Reverse Proxy
+
+Now, let's create the Express application that will handle the proxying:
+
+```javascript
+const reverseProxyApp = express();
+
+reverseProxyApp.use((req, res) => {
+  const hostname = req.hostname;
+  const subdomain = hostname.split(".")[0];
+
+  if (!db.has(subdomain)) {
+    return res.status(404).send('Not Found');
+  }
+
+  const { containerIP, defaultPort } = db.get(subdomain);
+  const target = `http://${containerIP}:${defaultPort}`;
+  console.log(`Forwarding ${hostname} to ${target}`);
+
+  return proxy.web(req, res, { target, changeOrigin: true, ws: true });
+});
+```
+
+<Callout type="warning">
+  Always validate the hostname and ensure proper error handling to prevent security vulnerabilities in your proxy setup.
+</Callout>
+
+## Best Practices and Tips
+
+1. **Security**: Always validate incoming requests and implement proper error handling
+2. **Monitoring**: Add logging to track proxy performance and detect issues
+3. **Scalability**: Consider using a load balancer when dealing with multiple instances
+4. **Maintenance**: Regularly clean up stopped containers from the routing table
+
+## Conclusion
+
+Building a dynamic reverse proxy for Docker containers streamlines development and deployment workflows. This solution automatically handles container discovery and routing, making it easier to manage multiple services.
+
+<Callout type="tip">
+  Remember to implement proper error handling and monitoring in production environments to ensure reliable operation of your proxy server.
+</Callout>

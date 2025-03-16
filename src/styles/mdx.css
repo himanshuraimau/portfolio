@@ -1,0 +1,298 @@
+/* MDX Content Styling */
+
+.mdx-content {
+  /* Add some spacing around the MDX content */
+  margin: 1rem 0;
+}
+
+/* Custom styling for code blocks */
+.mdx-content pre,
+.prism-code-wrapper pre {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  background-color: hsl(210, 30%, 12%);
+  color: hsl(210, 20%, 90%);
+  padding: 1.25rem;
+  border: 1px solid hsl(210, 25%, 20%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  position: relative;
+  font-size: 0.9rem;
+}
+
+/* Add a language tag to code blocks */
+.prism-code-wrapper {
+  position: relative;
+}
+
+.prism-code-wrapper::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: hsl(210, 25%, 20%);
+  color: hsl(210, 20%, 90%);
+  border-bottom-right-radius: var(--radius);
+  z-index: 1;
+}
+
+/* Code block line numbers and highlighting */
+.mdx-content pre code,
+.prism-code-wrapper pre code {
+  display: block;
+  line-height: 1.7;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+  counter-reset: line;
+  tab-size: 2;
+  padding-top: 1rem;
+}
+
+/* Override Prism.js default styles for better aesthetics */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: hsl(210, 20%, 60%);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: hsl(210, 20%, 80%);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: hsl(350, 80%, 70%);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: hsl(120, 60%, 70%);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: hsl(40, 90%, 70%);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: hsl(210, 80%, 70%);
+}
+
+.token.function,
+.token.class-name {
+  color: hsl(40, 90%, 70%);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: hsl(30, 80%, 70%);
+}
+
+/* Code syntax highlighting colors - light & dark compatible */
+.mdx-content pre .keyword,
+.mdx-content pre .tag {
+  color: hsl(330, 70%, 70%); /* pink */
+}
+
+.mdx-content pre .string,
+.mdx-content pre .value {
+  color: hsl(120, 60%, 70%); /* green */
+}
+
+.mdx-content pre .comment {
+  color: hsl(210, 20%, 60%); /* grey */
+  font-style: italic;
+}
+
+.mdx-content pre .function,
+.mdx-content pre .method {
+  color: hsl(40, 90%, 70%); /* yellow/gold */
+}
+
+.mdx-content pre .property,
+.mdx-content pre .attribute {
+  color: hsl(200, 80%, 70%); /* blue */
+}
+
+.mdx-content pre .number,
+.mdx-content pre .boolean {
+  color: hsl(20, 90%, 70%); /* orange */
+}
+
+/* Enhance link styling */
+.mdx-content a {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.mdx-content a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: hsl(var(--primary));
+  transition: width 0.3s ease;
+}
+
+.mdx-content a:hover::after {
+  width: 100%;
+}
+
+/* Enhance blockquote styling */
+.mdx-content blockquote {
+  border-left-width: 4px;
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+/* Enhance table styling */
+.mdx-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.mdx-content th {
+  background-color: hsl(var(--muted));
+  font-weight: 600;
+}
+
+.mdx-content th,
+.mdx-content td {
+  padding: 0.75rem;
+  border: 1px solid hsl(var(--border));
+}
+
+/* Enhance image styling */
+.mdx-content img {
+  border-radius: var(--radius);
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Enhance list styling */
+.mdx-content ul,
+.mdx-content ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.mdx-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Enhance heading spacing */
+.mdx-content h1,
+.mdx-content h2,
+.mdx-content h3,
+.mdx-content h4,
+.mdx-content h5,
+.mdx-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-playfair);
+}
+
+/* Custom styling for inline code */
+.mdx-content :not(pre) > code {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--primary));
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid hsl(var(--border));
+}
+
+/* Custom callout component styling */
+.mdx-content .callout {
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid hsl(var(--primary));
+  background-color: hsl(var(--accent));
+}
+
+.mdx-content .callout-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Dark mode adjustments */
+.dark .mdx-content pre,
+.dark .prism-code-wrapper pre {
+  background-color: hsl(210, 30%, 8%);
+  border-color: hsl(210, 25%, 15%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.dark .prism-code-wrapper::before {
+  background-color: hsl(210, 25%, 15%);
+  color: hsl(210, 20%, 90%);
+}
+
+.dark .mdx-content :not(pre) > code {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--primary));
+  border-color: hsl(var(--border));
+}
+
+/* Light mode specific adjustments */
+@media (prefers-color-scheme: light) {
+  .mdx-content pre,
+  .prism-code-wrapper pre {
+    background-color: hsl(210, 25%, 12%);
+    color: hsl(210, 20%, 92%);
+  }
+  
+  /* Keep syntax highlighting colors consistent in light mode */
+}
+
+/* Fix for Prism.js theme conflicts */
+pre[class*="language-"] {
+  background-color: hsl(210, 30%, 12%) !important;
+  margin: 0 !important;
+  padding: 1.25rem !important;
+  border-radius: var(--radius) !important;
+}
+
+.dark pre[class*="language-"] {
+  background-color: hsl(210, 30%, 8%) !important;
+}
+
+code[class*="language-"] {
+  text-shadow: none !important;
+  color: hsl(210, 20%, 90%) !important;
+  background: none !important;
+}
+
+/* Adjust spacing for copy button */
+.prism-code-wrapper pre {
+  padding-top: 2.5rem !important;
+}

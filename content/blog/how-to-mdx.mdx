@@ -1,0 +1,194 @@
+---
+title: "How I Implemented My Blog Section Using MDX, Next.js, and React"
+date: "2024-09-26"
+category: "Development"
+author: "Himanshu Raimau"
+authorImage: "/images/authors/himanshu.jpg"
+authorBio: "Full Stack Developer passionate about modern web development. Sharing insights about React, Next.js, and web development best practices."
+image: "/blog/nextjs.webp"
+excerpt: "A detailed guide on creating a custom blog using MDX, Next.js, and React, with code examples and explanations."
+---
+
+## Why Start Writing a Blog?
+
+A few months ago, I pondered this question: Why should I write a blog? Initially, I hesitated. As I faced various coding challenges, I sought solutions. I often turned to ChatGPT, Google, and Stack Overflow.
+
+<Callout type="tip">
+  Sharing your knowledge and experiences can help others while reinforcing your own understanding.
+</Callout>
+
+Reading others' experiences helped me resolve my issues. It provided insights into solving similar problems. That's when I realized I could share my journey. Writing could help others and sharpen my skills.
+
+Eventually, I decided to add a blog section. You may wonder, "Why not use a different platform?" There's something special about your own space. It feels personal, rewarding, and fulfilling. 😄
+
+## How I Implemented the Blog Section
+
+When implementing the blog, I noticed diverse styles. After researching, I discovered integrating Markdown (MDX) is possible. I drew inspiration from several developers and resources. Ultimately, I chose to implement MDX using Next.js.
+
+### Tech Stack
+
+The core technologies I used for this blog section were:
+- **Next.js**
+- **React**
+- **MDX (Markdown with JSX)**
+
+<Callout type="warning">
+  Make sure you're using compatible versions of Next.js and MDX to avoid any integration issues.
+</Callout>
+
+## Implementation Steps
+
+### Step 1: Install Dependencies
+
+First, I installed the necessary packages to work with MDX in Next.js:
+
+```bash
+npm install next-mdx-remote @next/mdx
+```
+
+### Step 2: Configure MDX with Next.js
+
+Next, I set up MDX in my Next.js configuration:
+
+```javascript
+import createMDX from '@next/mdx';
+
+const withMDX = createMDX({
+  // Add any MDX options here if needed
+});
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+  // Add any other Next.js config options here
+};
+
+export default withMDX(nextConfig);
+```
+
+### Step 3: Define Custom Blog Styles
+
+To style the blog content, I created custom components for various elements:
+
+```javascript
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+const MDXComponents = {
+  h1: ({ children, ...props }) => (
+    <h1 className="text-3xl font-bold mt-8 mb-4" {...props}>{children}</h1>
+  ),
+  p: ({ children, ...props }) => (
+    <p className="text-lg leading-relaxed my-4" {...props}>{children}</p>
+  ),
+  a: ({ href, children, ...props }) => {
+    if (href?.startsWith('/')) {
+      return (
+        <Link href={href} className="text-blue-600 hover:underline" {...props}>
+          {children}
+        </Link>
+      );
+    }
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" {...props}>
+        {children}
+      </a>
+    );
+  },
+  img: ({ src, alt, width, height, ...props }) => (
+    <div className="my-8">
+      <Image
+        src={src || ''}
+        alt={alt || ''}
+        width={width || 800}
+        height={height || 400}
+        className="rounded shadow-lg"
+        {...props}
+      />
+    </div>
+  ),
+  pre: ({ children, ...props }) => (
+    <pre className="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto" {...props}>{children}</pre>
+  ),
+};
+
+export default MDXComponents;
+```
+
+### Step 4: Dynamic Blog Post Component
+
+Here's how I implemented the dynamic blog post component:
+
+```javascript
+import { getPostBySlug, getAllPosts } from '@/lib/mdx'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import MDXComponents from '@/components/MDXComponents'
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug)
+
+  return (
+    <article className="prose prose-lg max-w-none">
+      <MDXRemote source={post.content} components={MDXComponents} />
+    </article>
+  )
+}
+```
+
+### Step 5: Blog Homepage
+
+Finally, I created a homepage to list all blog posts:
+
+```javascript
+import Link from 'next/link'
+import { getAllPosts } from '@/lib/mdx'
+
+export default async function Home() {
+  const posts = await getAllPosts()
+
+  return (
+    <div className="min-h-screen px-4 py-12 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-3xl font-mono mb-12 text-center">Read My Blogs</h1>
+        <ul className="space-y-8">
+          {posts.map((post) => (
+            <li key={post.slug} className="border-l-4 border-green-300 pl-6 transition-all hover:border-green-400 rounded-r-lg shadow-md">
+              <Link href={`/blog/${post.slug}`} className="group block">
+                <article>
+                  <h2 className="text-xl font-semibold group-hover:text-green-400 transition-colors mb-2">
+                    {post.metadata.title}
+                  </h2>
+                  <time dateTime={post.metadata.date} className="text-gray-400 text-sm block mb-2">
+                    {new Date(post.metadata.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <p className="text-gray-600">{post.metadata.excerpt}</p>
+                </article>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+```
+
+## Conclusion
+
+Building a custom blog with MDX and Next.js has been a rewarding experience. It provides the flexibility to write content in Markdown while leveraging the power of React components when needed. The setup might seem complex at first, but it offers great control over your content and styling.
+
+<Callout type="tip">
+  Remember to organize your MDX files well and maintain consistent frontmatter across all blog posts for better maintainability.
+</Callout>

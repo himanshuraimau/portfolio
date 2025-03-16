@@ -1,34 +1,77 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Analytics } from '@vercel/analytics/react';
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
-import { ThemeProvider } from 'next-themes';
-import { DotPatternLinearGradient } from "@/components/DotPattern";
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter, Playfair_Display } from "next/font/google"
+import "./globals.css"
+import { Navigation } from "@/components/layout/navigation"
+import { Footer } from "@/components/layout/footer"
+import { ThemeProvider } from "@/components/theme/theme-provider"
+import { PageTransition } from "@/components/animations/page-transition"
+import { FloatingSocial } from "@/components/floating-social"
+import { Analytics } from '@vercel/analytics/next';
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
 
-const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+})
 
-export const metadata = {
-  title: "Himanshu Rai",
-  description: "Personal website of Himanshu Rai",
-};
+export const metadata: Metadata = {
+  title: "Himanshu Rai | Full Stack • DevOps • AI Engineer",
+  description: "Portfolio of Himanshu Rai - Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions. Specializing in React, Node.js, Cloud Architecture, MLOps, and Deep Learning.",
+  keywords: ["Full Stack Developer", "DevOps Engineer", "AI Engineer", "React", "Node.js", "Python", "Cloud Computing", "Machine Learning", "Software Engineer", "Himanshu Rai"],
+  authors: [{ name: "Himanshu Rai" }],
+  creator: "Himanshu Rai",
+  metadataBase: new URL('https://enghimanshu.tech'),
+  openGraph: {
+    type: "website",
+    title: "Himanshu Rai - Software Engineer Portfolio",
+    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+    siteName: "Himanshu Rai Portfolio",
+    locale: 'en_US',
+    url: 'https://enghimanshu.tech', // Replace with your actual domain
+    images: [
+      {
+        url: '/Cover.jpg', // Add your OG image in the public folder
+        width: 1200,
+        height: 630,
+        alt: 'Himanshu Rai - Software Engineer Portfolio',
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Himanshu Rai - Software Engineer Portfolio",
+    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+    creator: "@himanshura_i",
+    images: ['/Cover.jpg'],
+  },
+}
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="relative min-h-screen flex flex-col items-center bg-background text-foreground dark:bg-dark-background dark:text-dark-foreground">
-            <DotPatternLinearGradient />
-            <div className="relative z-10 w-full max-w-4xl px-3 sm:px-6 md:px-10">
-              <NavBar />
-              {children}
-              <Footer/>
-              <Analytics />
-            </div>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <div className="min-h-screen bg-background text-foreground">
+            <Navigation />
+            <PageTransition>
+              <main>{children}</main>
+            </PageTransition>
+            <Footer />
+            <FloatingSocial />
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
-  );
+  )
 }
+
+import './globals.css'
