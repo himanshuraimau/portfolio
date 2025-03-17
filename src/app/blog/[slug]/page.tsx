@@ -92,11 +92,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     const useStaticContent = process.env.NODE_ENV === 'production' && !isDraftMode;
     
     return (
-      <div className="container mx-auto px-4 py-8 pt-24 max-w-4xl">
-        <article className="mb-12">
+      <div className="container mx-auto px-4 py-8 pt-16 sm:pt-24 max-w-4xl">
+        <article className="mb-8 sm:mb-12">
           {/* Blog post header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-6">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
               <Button 
                 variant="outline" 
                 size="sm" 
@@ -104,42 +104,42 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 className="flex items-center gap-1 font-medium"
               >
                 <Link href="/blog">
-                  <ArrowLeft className="h-4 w-4 mr-1" />
+                  <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                   Back to Blog
                 </Link>
               </Button>
               <Link 
                 href={`/blog/category/${encodeURIComponent(post.category.toLowerCase())}`}
-                className="text-sm px-3 py-1 bg-muted rounded-full hover:bg-muted/80 transition-colors"
+                className="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-muted rounded-full hover:bg-muted/80 transition-colors"
               >
                 {post.category}
               </Link>
             </div>
             
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">{post.title}</h1>
             
-            <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                 <time dateTime={post.date}>
                   {formattedDate}
                 </time>
               </div>
               
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>{post.readingTime} min read</span>
               </div>
             </div>
             
             {post.image && (
-              <div className="relative w-full h-[300px] md:h-[400px] mb-8 rounded-lg overflow-hidden">
+              <div className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] mb-6 sm:mb-8 rounded-lg overflow-hidden">
                 <Image
                   src={post.image}
                   alt={post.title}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                  sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1200px) 80vw, 1200px"
                   priority
                 />
               </div>
@@ -151,14 +151,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-2">Tags</h3>
+            <div className="mt-6 sm:mt-8">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag: string) => (
                   <Link 
                     key={tag}
                     href={`/blog/tag/${encodeURIComponent(tag.toLowerCase())}`}
-                    className="px-3 py-1 bg-muted rounded-full text-sm hover:bg-muted/80 transition-colors"
+                    className="px-2 sm:px-3 py-1 bg-muted rounded-full text-xs sm:text-sm hover:bg-muted/80 transition-colors"
                   >
                     {tag}
                   </Link>
@@ -166,15 +166,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             </div>
           )}
-          
-        
         </article>
         
         {/* Related posts */}
         {relatedPosts.length > 0 && (
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold mb-6">Related Posts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="mt-8 sm:mt-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Related Posts</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {relatedPosts.map((relatedPost) => (
                 <Link
                   key={relatedPost.slug}
@@ -192,14 +190,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       />
                     </div>
                   )}
-                  <div className="p-6">
-                    <div className="text-sm font-medium text-muted-foreground mb-2">
+                  <div className="p-3 sm:p-4 md:p-6">
+                    <div className="text-xs font-medium text-muted-foreground mb-1 sm:mb-2">
                       {relatedPost.category}
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 group-hover:text-primary transition-colors line-clamp-2">
                       {relatedPost.title}
                     </h3>
-                    <p className="text-muted-foreground line-clamp-3">
+                    <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 sm:line-clamp-3">
                       {relatedPost.description}
                     </p>
                   </div>
@@ -215,8 +213,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     
     // Return a fallback error page
     return (
-      <div className="container mx-auto px-4 py-8 pt-24 max-w-4xl">
-        <div className="mb-8">
+      <div className="container mx-auto px-4 py-8 pt-16 sm:pt-24 max-w-4xl">
+        <div className="mb-6 sm:mb-8">
           <Button 
             variant="outline" 
             size="sm" 
@@ -224,15 +222,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className="flex items-center gap-1 font-medium"
           >
             <Link href="/blog">
-              <ArrowLeft className="h-4 w-4 mr-1" />
+              <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
               Back to Blog
             </Link>
           </Button>
         </div>
         
-        <div className="p-6 border-l-4 border-destructive bg-destructive/10 rounded-r-lg my-6">
-          <h1 className="text-2xl font-bold mb-4">Error Loading Blog Post</h1>
-          <p className="mb-4">
+        <div className="p-4 sm:p-6 border-l-4 border-destructive bg-destructive/10 rounded-r-lg my-4 sm:my-6">
+          <h1 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Error Loading Blog Post</h1>
+          <p className="mb-3 sm:mb-4 text-sm sm:text-base">
             We encountered an error while trying to load this blog post. Please try again later or check out our other blog posts.
           </p>
           <Button 
@@ -241,7 +239,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className="mt-2"
           >
             <Link href="/blog">
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <ArrowLeft className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
               Return to Blog
             </Link>
           </Button>

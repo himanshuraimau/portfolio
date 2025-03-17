@@ -43,16 +43,16 @@ export function Callout({
   
   return (
     <div className={cn(
-      'my-6 rounded-lg border-l-4 p-4',
+      'my-4 sm:my-6 rounded-lg border-l-4 p-3 sm:p-4',
       styles[type]
     )}>
       <div className="flex items-start">
-        <div className="mr-3 mt-0.5">
-          <Icon className="h-5 w-5" />
+        <div className="mr-2 sm:mr-3 mt-0.5">
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
         </div>
-        <div>
+        <div className="flex-1 text-sm sm:text-base">
           {title && (
-            <h3 className={cn("font-semibold mb-2", titleStyles[type])}>
+            <h3 className={cn("font-semibold mb-1 sm:mb-2 text-base sm:text-lg", titleStyles[type])}>
               {title}
             </h3>
           )}
