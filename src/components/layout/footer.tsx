@@ -45,14 +45,14 @@ export function Footer() {
             <h3 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a 
-                href="mailto:himanshu@enghimanshu.tech" 
+                href="mailto:himanshuraimau9@gmail.com"
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Email"
               >
                 <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
               </a>
               <a 
-                href="https://linkedin.com/in/himanshurai" 
+                href="https://www.linkedin.com/in/himanshu-rai-246121278/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
@@ -61,7 +61,7 @@ export function Footer() {
                 <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
               </a>
               <a 
-                href="https://github.com/himanshurajora" 
+                href="https://github.com/himanshuraimau" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
