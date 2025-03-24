@@ -2,8 +2,17 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
 
-// Mock projects data
 export const webProjects = [
+  {
+    id: 0,
+    title: "DoodleVerse",
+    description: "A WebSocket Based Drawing Application",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Socket.io", "Node.js", "Turborepo"],
+    image: "/portfolio.png",
+    slug: "portfolio",
+    type: "hosted",
+    link: "https://github.com/himanshuraimau/DoodleVerse",
+  },
   {
     id: 1,
     title: "True Feedback",
