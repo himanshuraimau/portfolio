@@ -126,6 +126,7 @@ export default async function HomePage() {
                         alt={project.title}
                         width={480}
                         height={270}
+                        className="w-full h-full object-cover"
                       />
                     </div>
                   </div>
