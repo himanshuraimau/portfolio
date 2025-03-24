@@ -38,23 +38,20 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="container-custom section-spacing flex flex-col justify-center min-h-[80vh] sm:min-h-[90vh]">
         <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <FadeIn direction="left" delay={0.2}>
+            <FadeIn direction="left" delay={0.2}>
             <div className="space-y-4 sm:space-y-6 md:space-y-8">
               <div>
-                <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I'm</p>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">Himanshu Rai</h1>
-                <h2 className="text-base sm:text-lg text-muted-foreground">Full Stack Developer • DevOps Engineer • AI Engineer</h2>
+              <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I'm</p>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">Himanshu Rai</h1>
+              <h2 className="text-base sm:text-lg text-muted-foreground">AI Engineer</h2>
               </div>
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-md">
-                I specialize in building scalable applications, implementing robust DevOps practices, and developing AI solutions to create innovative tech experiences.
+              I enjoy building intelligent solutions and exploring the possibilities of AI.
               </p>
               <div className="flex flex-wrap gap-3 sm:gap-4">
-                <AnimatedButton asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8">
-                  <Link href="/about" className="no-underline">About Me</Link>
-                </AnimatedButton>
-                <AnimatedButton asChild variant="outline" size="lg" className="text-base sm:text-lg px-6 sm:px-8">
-                  <Link href="/projects" className="no-underline">View Projects</Link>
-                </AnimatedButton>
+              <AnimatedButton asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8">
+                <Link href="/about" className="no-underline">About Me</Link>
+              </AnimatedButton>
               </div>
             </div>
           </FadeIn>

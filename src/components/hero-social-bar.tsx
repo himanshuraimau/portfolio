@@ -19,15 +19,15 @@ export function HeroSocialBar() {
   }, [])
 
   const socialLinks = [
-    { name: "GitHub", icon: <Github size={24} />, url: "https://github.com/johndoe", color: "hover:text-gray-800" },
+    { name: "GitHub", icon: <Github size={24} />, url: "https://github.com/himanshuraimau", color: "hover:text-gray-800" },
     {
       name: "LinkedIn",
       icon: <Linkedin size={24} />,
-      url: "https://linkedin.com/in/johndoe",
+      url: "https://www.linkedin.com/in/himanshu-rai-246121278/",
       color: "hover:text-blue-600",
     },
-    { name: "Twitter", icon: <Twitter size={24} />, url: "https://twitter.com/johndoe", color: "hover:text-sky-500" },
-    { name: "Email", icon: <Mail size={24} />, url: "mailto:john.doe@example.com", color: "hover:text-amber-700" },
+    { name: "Twitter", icon: <Twitter size={24} />, url: "https://x.com/himanshura_i", color: "hover:text-sky-500" },
+    { name: "Email", icon: <Mail size={24} />, url: "mailto:himanshuraimau9@gmail.com", color: "hover:text-amber-700" },
   ]
 
   return (

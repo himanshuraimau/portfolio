@@ -44,25 +44,25 @@ export function SocialIcons({
     {
       name: "GitHub",
       icon: <Github size={iconSize} />,
-      url: "https://github.com/johndoe",
+      url: "https://github.com/himanshuraimau",
       color: "hover:text-gray-800",
     },
     {
       name: "LinkedIn",
       icon: <Linkedin size={iconSize} />,
-      url: "https://linkedin.com/in/johndoe",
+      url: "https://www.linkedin.com/in/himanshu-rai-246121278/",
       color: "hover:text-blue-600",
     },
     {
       name: "Twitter",
       icon: <Twitter size={iconSize} />,
-      url: "https://twitter.com/johndoe",
+      url: "https://x.com/himanshura_i",
       color: "hover:text-sky-500",
     },
     {
       name: "Email",
       icon: <Mail size={iconSize} />,
-      url: "mailto:john.doe@example.com",
+      url: "mailto:.himanshuraimau9@gmail.com",
       color: "hover:text-amber-700",
     },
   ]
