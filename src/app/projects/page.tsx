@@ -5,6 +5,17 @@ import { Github, ExternalLink } from "lucide-react"
 export const webProjects = [
   {
     id: 0,
+    title: "Affiliate Commission System",
+    description: "A comprehensive platform for managing affiliate partnerships, tracking conversions, processing payments, and analyzing performance.",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Node.js", "Prisma", "PostgreSQL"],
+    image: "/affiliate.png",
+    slug: "affiliate-commission-system",
+    type: "hosted",
+    link: "https://affiliate-commission.vercel.app/",
+  },
+  {
+
+    id: 0,
     title: "DoodleVerse",
     description: "A WebSocket Based Drawing Application",
     technologies: ["Next.js", "TypeScript", "Tailwind", "Socket.io", "Node.js", "Turborepo"],
