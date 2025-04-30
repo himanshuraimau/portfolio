@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     title: "Himanshu Rai - Software Engineer Portfolio",
-    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
+    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.654563e9-e565-4bd4-b8f6-1648d4f28a22",
     url: 'https://enghimanshu.tech',
   },
   twitter: {

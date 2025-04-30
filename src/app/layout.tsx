@@ -52,6 +52,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="min-h-screen flex flex-col bg-background text-foreground">
+            
             <Navigation />
             <PageTransition>
               <main className="flex-grow">{children}</main>
