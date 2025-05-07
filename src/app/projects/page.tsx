@@ -4,6 +4,16 @@ import { Github, ExternalLink } from "lucide-react"
 
 export const webProjects = [
   {
+    id:0,
+    title: "Sensai-AI-Powered Learning Platform",
+    description: "A platform that uses AI to provide personalized learning experiences, including quizzes, flashcards, and study plans.",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Node.js", "Prisma", "PostgreSQL","OpenAI"],
+    image: "/sensai.png",
+    slug: "sensai",
+    type: "hosted",
+    link: "https://sensai-v0-archive.vercel.app/",
+  },
+  {
     id: 0,
     title: "Affiliate Commission System",
     description: "A comprehensive platform for managing affiliate partnerships, tracking conversions, processing payments, and analyzing performance.",
