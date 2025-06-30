@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   keywords: ["Full Stack Developer", "DevOps Engineer", "AI Engineer", "React", "Node.js", "Python", "Cloud Computing", "Machine Learning", "Software Engineer", "Himanshu Rai"],
   authors: [{ name: "Himanshu Rai" }],
   creator: "Himanshu Rai",
-  metadataBase: new URL('https://enghimanshu.tech'),
+  metadataBase: new URL('https://enghimanshu.space'),
   viewport: "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
   openGraph: {
     type: "website",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
     siteName: "Himanshu Rai Portfolio",
     locale: 'en_US',
-    url: 'https://enghimanshu.tech',
+    url: 'https://enghimanshu.space',
   },
   twitter: {
     card: "summary_large_image",
