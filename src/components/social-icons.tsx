@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Twitter, Mail } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail, Instagram } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 
@@ -52,6 +52,12 @@ export function SocialIcons({
       icon: <Linkedin size={iconSize} />,
       url: "https://www.linkedin.com/in/himanshu-rai-246121278/",
       color: "hover:text-blue-600",
+    },
+    {
+      name: "Instagram",
+      icon: <Instagram size={iconSize} />,
+      url: "https://instagram.com/enghimanshu",
+      color: "hover:text-pink-600",
     },
     {
       name: "Twitter",

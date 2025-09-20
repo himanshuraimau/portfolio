@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin, Instagram } from "lucide-react"
 import { SkillsToggle } from "@/components/skills-toggle"
 import { ExperienceTimeline } from "@/components/experience-timeline"
 import { FadeIn } from "@/components/animations/fade-in"
@@ -62,6 +62,13 @@ export default function AboutPage() {
                 >
                   <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   <span className="link-underline truncate">linkedin.com/in/himanshu-rai</span>
+                </a>
+                <a
+                  href="https://instagram.com/enghimanshu"
+                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
+                >
+                  <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
+                  <span className="link-underline truncate">instagram.com/enghimanshu</span>
                 </a>
                 <a
                   href="https://github.com/himanshuraimau"
