@@ -79,6 +79,24 @@ const nextConfig = {
       optimizePackageImports: ['next-mdx-remote', 'rehype-slug', 'rehype-autolink-headings', 'rehype-prism-plus'],
     } : {}),
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // Configure webpack to use polling instead of file system events
+      config.watchOptions = {
+        poll: 1000, // Check for changes every second
+        aggregateTimeout: 300, // Delay the rebuild after the first change
+        ignored: [
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/.next/**',
+          '**/build/**',
+          '**/dist/**',
+          '**/public/**',
+        ]
+      }
+    }
+    return config
+  },
 }
 
 export default withMDX(nextConfig)
