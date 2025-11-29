@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { Cpu, Database, Layout, Server, Terminal, Wrench } from "lucide-react"
 
 // Skill data organized by category
 const skillsData = {
@@ -10,102 +11,104 @@ const skillsData = {
   backend: ["Node.js", "Express", "Nginx", "RabbitMQ", "Prisma"],
   tools: ["Git", "Docker", "Kubernetes", "Linux", "AWS (Basic)", "CI/CD"],
   languages: ["Python", "C++", "C", "Go", "Java"],
-  ai_ml: ["LangChain", "OpenAI", "PyTorch (Basic)", "TensorFlow (Basic)", "Scikit-learn"],
+  ai_ml: ["LangChain", "OpenAI", "PyTorch", "TensorFlow", "Scikit-learn"],
   databases: ["MongoDB", "PostgreSQL", "Redis"]
 }
 
 type SkillCategory = "frontend" | "backend" | "tools" | "languages" | "ai_ml" | "databases"
 
+const categoryIcons = {
+  frontend: Layout,
+  backend: Server,
+  tools: Wrench,
+  languages: Terminal,
+  ai_ml: Cpu,
+  databases: Database
+}
+
 export function SkillsToggle() {
   const [activeCategory, setActiveCategory] = useState<SkillCategory>("frontend")
-  const [isMobileView, setIsMobileView] = useState(false)
-
-  // Check for reduced motion preference
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     setPrefersReducedMotion(mediaQuery.matches)
-
     const handleChange = () => setPrefersReducedMotion(mediaQuery.matches)
     mediaQuery.addEventListener("change", handleChange)
-
-    // Check for mobile view
-    const checkMobileView = () => {
-      setIsMobileView(window.innerWidth < 640)
-    }
-    
-    // Initial check
-    checkMobileView()
-    
-    // Add resize listener
-    window.addEventListener("resize", checkMobileView)
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange)
-      window.removeEventListener("resize", checkMobileView)
-    }
+    return () => mediaQuery.removeEventListener("change", handleChange)
   }, [])
 
   return (
-    <div>
-      {/* Category Toggle */}
-      <div className="flex flex-wrap overflow-x-auto border-b border-border mb-6 sm:mb-10">
+    <div className="border border-border rounded-xl bg-card overflow-hidden">
+      
+      {/* Category Toggle Bar */}
+      <div className="flex flex-wrap border-b border-border bg-muted/20">
         {[
           { id: "frontend", label: "Frontend" },
           { id: "backend", label: "Backend" },
-          { id: "tools", label: "Tools" },
-          { id: "languages", label: "Languages" },
-          { id: "ai_ml", label: "AI/ML" },
-          { id: "databases", label: "Databases" },
-        ].map((category) => (
-          <button
-            key={category.id}
-            onClick={() => setActiveCategory(category.id as SkillCategory)}
-            className={cn(
-              "px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg font-medium relative transition-colors whitespace-nowrap",
-              activeCategory === category.id ? "text-primary" : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {category.label}
-            {activeCategory === category.id && (
-              <motion.span
-                className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"
-                layoutId="activeTab"
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              />
-            )}
-          </button>
-        ))}
+          { id: "ai_ml", label: "AI / ML" },
+          { id: "tools", label: "DevOps" },
+          { id: "languages", label: "Langs" },
+          { id: "databases", label: "Data" },
+        ].map((category) => {
+           // @ts-ignore
+           const Icon = categoryIcons[category.id] || Terminal
+           return (
+            <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id as SkillCategory)}
+                className={cn(
+                "flex items-center gap-2 px-4 py-3 text-sm font-mono transition-all border-r border-border last:border-r-0 flex-grow sm:flex-grow-0",
+                activeCategory === category.id 
+                    ? "bg-background text-primary border-b-2 border-b-primary -mb-[1px]" 
+                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                )}
+            >
+                <Icon className="w-4 h-4" />
+                <span className="hidden sm:inline">{category.label}</span>
+                <span className="sm:hidden">{category.label.slice(0, 3)}</span>
+            </button>
+           )
+        })}
       </div>
 
-      {/* Skills Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeCategory}
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-16 gap-y-4 sm:gap-y-8"
-        >
-          {skillsData[activeCategory].map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="group border-b border-border pb-2 sm:pb-4"
-            >
-              <div className="flex items-baseline gap-2 sm:gap-4">
-                <span className="text-xs sm:text-sm text-warm-500 font-mono">{(index + 1).toString().padStart(2, "0")}</span>
-                <span className="text-lg sm:text-xl md:text-2xl font-medium group-hover:text-primary transition-colors">{skill}</span>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      {/* Skills Grid Area */}
+      <div className="p-6 sm:p-8 bg-background/50 min-h-[300px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: 10 }}
+            transition={{ duration: 0.2 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            {skillsData[activeCategory].map((skill, index) => (
+              <motion.div
+                key={skill}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2, delay: index * 0.03 }}
+                className="group relative border border-border bg-card/50 hover:bg-muted/30 p-3 rounded-lg flex items-center justify-between transition-colors overflow-hidden"
+              >
+                 {/* Progress Bar Decoration */}
+                 <div className="absolute bottom-0 left-0 h-0.5 bg-primary/20 w-full group-hover:bg-primary transition-colors">
+                    <div className="h-full bg-primary w-[70%]" /> 
+                 </div>
+
+                 <div className="flex items-center gap-3">
+                    <span className="text-xs font-mono text-muted-foreground/50 group-hover:text-primary transition-colors">
+                        {(index + 1).toString().padStart(2, "0")}
+                    </span>
+                    <span className="font-medium font-mono text-sm">{skill}</span>
+                 </div>
+                 
+                 <div className="w-1.5 h-1.5 rounded-full bg-green-500/50 group-hover:bg-green-500 group-hover:shadow-[0_0_8px_rgba(34,197,94,0.6)] transition-all" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
-

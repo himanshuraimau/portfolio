@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, Terminal, Globe, Server, Database, ArrowUpRight, FolderGit2 } from "lucide-react";
+import { FadeIn } from "@/components/animations/fade-in"; // Assuming you have this from the home page
 
+// --- DATA PRESERVED FROM YOUR FILE ---
 export const webProjects = [
   {
     id: 0,
@@ -24,7 +27,7 @@ export const webProjects = [
   },
   {
     id: 1,
-    title: "Sensai-AI-Powered Learning Platform",
+    title: "Sensai-AI",
     description:
       "A platform that uses AI to provide personalized learning experiences, including quizzes, flashcards, and study plans.",
     technologies: [
@@ -43,7 +46,7 @@ export const webProjects = [
   },
   {
     id: 2,
-    title: "Affiliate Commission System",
+    title: "Affiliate System",
     description:
       "A comprehensive platform for managing affiliate partnerships, tracking conversions, processing payments, and analyzing performance.",
     technologies: [
@@ -131,9 +134,9 @@ export const deepCSProjects = [
   },
   {
     id: 6,
-    title: "MultiThreadedProxyServerClient with LRU Cache",
+    title: "Proxy Server w/ Cache",
     description:
-      "Implemented a robust multi-threaded proxy server and client system in C++ with an LRU cache. Features include concurrent connection handling, HTTP request forwarding, and efficient thread management.",
+      "Multi-threaded proxy server in C++ with LRU cache. Features concurrent connection handling and efficient thread management.",
     technologies: ["C++", "POSIX Threads", "Socket Programming", "HTTP"],
     githubUrl:
       "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
@@ -177,7 +180,7 @@ export const deepCSProjects = [
   },
   {
     id: 11,
-    title: "YouTube-like Backend Service",
+    title: "Video Backend Service",
     description:
       "This project is a backend service designed to support a YouTube-like application.",
     technologies: ["Node.js", "Express", "MongoDB"],
@@ -186,18 +189,18 @@ export const deepCSProjects = [
   },
   {
     id: 12,
-    title: "Arcfour Project",
-    description: "This project implements the RC4 stream cipher.",
-    technologies: ["C", "Cryptography"],
+    title: "RC4 Cipher",
+    description: "This project implements the RC4 stream cipher in C.",
+    technologies: ["C", "Cryptography", "Algorithms"],
     githubUrl: "https://github.com/himanshuraimau/c-projects/tree/main/arcfour",
     type: "github",
   },
   {
     id: 13,
-    title: "Proxy Connection Project",
+    title: "Proxy Connection",
     description:
-      "This project establishes a connection to a proxy server, sends a request, and forwards data through the proxy.",
-    technologies: ["C", "Networking"],
+      "Establishes a connection to a proxy server, sends a request, and forwards data through the proxy.",
+    technologies: ["C", "Networking", "TCP/IP"],
     githubUrl:
       "https://github.com/himanshuraimau/c-projects/tree/main/toralize",
     type: "github",
@@ -205,150 +208,177 @@ export const deepCSProjects = [
 ];
 
 export default function ProjectsPage() {
-  // Separate hosted and GitHub-only projects
-  const hostedProjects = webProjects;
-  const githubProjects = deepCSProjects;
-
   return (
-    <div className="pt-20">
-      <section className="container-custom section-spacing">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="heading-xl mb-6">Projects</h1>
-          <p className="body-lg text-muted-foreground">
-            A showcase of my work, featuring web applications, design projects,
-            and experiments.
-          </p>
-        </div>
+    <div className="min-h-screen pb-20">
+      
+      {/* Header Section */}
+      <section className="relative pt-32 pb-16 overflow-hidden">
+         <div className="container-custom">
+            <div className="max-w-3xl">
+             
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono mb-6">
+            <Terminal className="w-3 h-3" />
+            <span>~/projects</span>
+          </div>
+        
+              <h1 className="text-5xl md:text-7xl font-mono font-bold tracking-tight mb-6">
+                Build <span className="text-muted-foreground">Log</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
+                A collection of deployed applications, system experiments, and engineering challenges.
+              </p>
+            </div>
+         </div>
+         {/* Background decoration
+         <div className="absolute top-0 right-0 -z-10 opacity-10">
+            <Server size={400} strokeWidth={0.5} />
+         </div> */}
+      </section>
 
-        {/* Hosted Projects */}
-        <div className="mb-24">
-          <h2 className="heading-lg mb-10 relative">
-            Web Projects
-            <span className="absolute -z-10 text-[8rem] font-bold text-muted/20 -top-16 -left-6 opacity-80">
-              01
+      <section className="container-custom space-y-32">
+        
+        {/* 01. HOSTED WEB PROJECTS */}
+        <div>
+          <div className="flex items-baseline gap-4 mb-12 border-b border-border pb-4">
+            <h2 className="text-2xl font-mono font-bold flex items-center gap-3">
+              <Globe className="w-5 h-5 text-primary" />
+              Full Stack & AI
+            </h2>
+            <span className="text-sm text-muted-foreground font-mono">
+              {webProjects.length} Deployed
             </span>
-          </h2>
+          </div>
 
-          <div className="grid gap-16 md:gap-24">
-            {hostedProjects.map((project, index) => (
-              <div key={project.id} className="group">
-                <div
-                  className={`grid md:grid-cols-2 gap-12 items-center ${
-                    index % 2 === 1 ? "md:grid-flow-dense" : ""
-                  }`}
-                >
-                  <div className={index % 2 === 1 ? "md:col-start-2" : ""}>
-                    <span className="text-8xl font-bold text-muted/30 group-hover:text-muted/50 transition-colors">
-                      {(index + 1).toString().padStart(2, "0")}
+          <div className="grid gap-12">
+            {webProjects.map((project, index) => (
+              <div key={project.id} className="group relative grid md:grid-cols-12 gap-6 md:gap-12 items-center">
+                
+                {/* Visual Line Connector (Mobile hidden) */}
+                <div className="hidden md:block absolute left-0 top-0 bottom-0 w-px bg-border -z-10 md:left-1/2" />
+
+                {/* Content Side */}
+                <div className={`md:col-span-6 relative z-10 ${index % 2 === 1 ? 'md:order-last md:pl-12' : 'md:pr-12'}`}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="font-mono text-xs text-primary bg-primary/10 px-2 py-1 rounded">
+                      v1.0.{index}
                     </span>
-                    <h2 className="text-4xl font-bold mb-6 -mt-8 group-hover:translate-x-2 transition-transform">
-                      {project.title}
-                    </h2>
-                    <p className="text-xl text-muted-foreground mb-6">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={
-                        project.link ||
-                        `https://project-${project.slug}.example.com`
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
-                    >
-                      Visit Project <ExternalLink className="h-4 w-4" />
-                    </a>
+                    <div className="h-px bg-border flex-grow" />
                   </div>
-                  <div
-                    className={`overflow-hidden rounded-lg ${
-                      index % 2 === 1 ? "md:col-start-1" : ""
-                    }`}
-                  >
-                    <div className="aspect-video bg-muted rounded-lg overflow-hidden transition-transform group-hover:scale-105 duration-500">
+                  
+                  <h3 className="text-3xl font-bold mb-4 font-mono group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="px-2 py-1 text-xs font-mono border border-border rounded bg-muted/30">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                     <Button asChild size="sm" className="gap-2">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          Live Demo <ExternalLink className="w-3 h-3" />
+                        </a>
+                     </Button>
+                     {/* Assuming you might have github links for these later */}
+                     {/* <Button variant="ghost" size="sm" asChild>
+                        <a href="#" className="gap-2"><Github className="w-4 h-4" /> Code</a>
+                     </Button> */}
+                  </div>
+                </div>
+
+                {/* Image Side */}
+                <div className={`md:col-span-6 ${index % 2 === 1 ? 'md:order-first' : ''}`}>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="block relative">
+                    <div className="relative aspect-video rounded-xl overflow-hidden border border-border bg-muted shadow-2xl group-hover:shadow-primary/20 transition-all duration-500">
                       <Image
                         src={project.image || "/placeholder.svg"}
                         alt={project.title}
                         width={800}
                         height={600}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
+                      {/* Scanline overlay effect */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     </div>
-                  </div>
+                    
+                    {/* Floating Badge */}
+                    <div className="absolute -bottom-4 -right-4 bg-background border border-border p-3 rounded-lg shadow-xl hidden md:block group-hover:-translate-y-2 transition-transform duration-300">
+                      <ArrowUpRight className="w-6 h-6 text-primary" />
+                    </div>
+                  </a>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* GitHub-only Projects */}
+        {/* 02. DEEP CS PROJECTS */}
         <div>
-          <h2 className="heading-lg mb-10 relative">
-            Deep CS Projects
-            <span className="absolute -z-10 text-[8rem] font-bold text-muted/20 -top-16 -left-6 opacity-80">
-              02
+          <div className="flex items-baseline gap-4 mb-12 border-b border-border pb-4">
+            <h2 className="text-2xl font-mono font-bold flex items-center gap-3">
+              <Terminal className="w-5 h-5 text-primary" />
+              Systems & Engineering
+            </h2>
+            <span className="text-sm text-muted-foreground font-mono">
+              {deepCSProjects.length} Repositories
             </span>
-          </h2>
+          </div>
 
-          <p className="text-xl text-muted-foreground mb-10 max-w-3xl">
-            These projects focus on computer science fundamentals and systems
-            programming. They&apos;re available on GitHub for code review and
-            educational purposes.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {githubProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-[16rem]"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {deepCSProjects.map((project) => (
+              <a 
+                key={project.id} 
+                href={project.githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group block"
               >
-                <div className="p-4 flex flex-col flex-grow">
-                  <div className="flex-grow">
-                    <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-3 line-clamp-3 text-sm">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 bg-muted text-muted-foreground rounded-full text-xs"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                <div className="h-full bg-card hover:bg-muted/50 border border-border hover:border-primary/50 rounded-lg p-5 transition-all duration-300 flex flex-col">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="p-2 bg-muted rounded-md group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                      {/* Dynamic Icon based on tech hint */}
+                      {project.technologies.includes('C') || project.technologies.includes('C++') 
+                        ? <Server className="w-5 h-5" /> 
+                        : <Database className="w-5 h-5" />
+                      }
                     </div>
+                    <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
                   </div>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-colors mt-auto"
-                  >
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="h-4 w-4" />
-                      <span>View on GitHub</span>
-                    </a>
-                  </Button>
+
+                  <h3 className="font-mono font-bold text-lg mb-2 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-3 leading-relaxed flex-grow">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span key={tech} className="text-[10px] font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded border border-border/50">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="text-[10px] font-mono text-muted-foreground px-1.5 py-0.5">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
+
       </section>
     </div>
   );

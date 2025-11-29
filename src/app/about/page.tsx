@@ -1,168 +1,114 @@
-import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin} from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, Terminal, ArrowRight, Download } from "lucide-react"
 import { SkillsToggle } from "@/components/features/skills-toggle"
 import { FadeIn } from "@/components/animations/fade-in"
-import { StaggerChildren } from "@/components/animations/stagger-children"
-import { AnimatedButton } from "@/components/animations/animated-button"
 
 export default function AboutPage() {
   return (
-    <div className="pt-12 sm:pt-20">
-      <section className="container-custom section-spacing">
+    <div className="pt-24 pb-20 min-h-screen">
+      <section className="container-custom">
+        
+        {/* Minimal Header */}
         <FadeIn>
-          <h1 className="heading-xl mb-8 sm:mb-16 text-center">About Me</h1>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono mb-6">
+            <Terminal className="w-3 h-3" />
+            <span>~/about</span>
+          </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 gap-8 sm:gap-16 mb-12 sm:mb-16">
-          <FadeIn direction="left">
-            <div>
-              <p className="body-lg mb-4 sm:mb-6">
-                Hi, I&apos;m a Full Stack Developer who enjoys building web applications and exploring new technologies.
-                I work with modern frameworks and have an interest in DevOps and AI development.
-              </p>
-              <p className="body-lg mb-6 sm:mb-10">
-                Besides coding, I enjoy sharing knowledge through college workshops and helping others learn about
-                web development and technology.
-              </p>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+            
+          {/* LEFT COL: Bio & Socials */}
+          <div className="lg:col-span-7 space-y-12">
+            <FadeIn direction="up" delay={0.1}>
+                {/* Terminal Window Style Bio */}
+                <div className="border border-border rounded-lg bg-card/50 overflow-hidden">
+                    <div className="flex items-center justify-between px-4 py-2 bg-muted/20 border-b border-border">
+                        <div className="flex gap-2">
+                            <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                        </div>
+                        <div className="text-xs font-mono text-muted-foreground">README.md</div>
+                    </div>
+                    
+                    <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-muted-foreground space-y-4">
+                        <p>
+                            <span className="text-primary mr-2">{`>`}</span>
+                            Hello. I am <span className="text-foreground font-bold">Himanshu Rai</span>, a Full Stack Developer architecting solutions at the intersection of web technologies and artificial intelligence.
+                        </p>
+                        <p>
+                            I specialize in building scalable applications using modern frameworks like <span className="text-foreground">Next.js</span> and <span className="text-foreground">React</span>, while exploring the capabilities of AI to enhance user experiences. My approach blends disciplined DevOps practices with creative frontend engineering.
+                        </p>
+                        <p>
+                           Beyond the terminal, I am passionate about knowledge sharing—conducting workshops and mentoring peers to foster a collaborative developer community.
+                        </p>
+                        <div className="pt-4 flex flex-wrap gap-4">
+                             <a href="/resume.pdf" target="_blank" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
+                                <Download className="w-4 h-4" /> Download CV
+                             </a>
+                             <a href="mailto:himanshuraimau9@gmail.com" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
+                                <Mail className="w-4 h-4" /> Contact Me
+                             </a>
+                        </div>
+                    </div>
+                </div>
+            </FadeIn>
 
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">My Interests</h2>
-              <StaggerChildren className="grid grid-cols-1 xs:grid-cols-2 gap-4 mb-6 sm:mb-10">
-                <div className="flex items-center gap-3">
-                  <Code className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  <span className="text-base sm:text-lg">Programming</span>
+            <FadeIn direction="up" delay={0.2}>
+                <h3 className="text-sm font-mono font-bold uppercase text-muted-foreground mb-6 flex items-center gap-2">
+                    <Terminal className="w-4 h-4" /> Connect_Nodes
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {[
+                      { icon: Github, label: "GitHub", href: "https://github.com/himanshuraimau" },
+                      { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/himanshu-rai-246121278/" },
+                      { icon: Twitter, label: "X / Twitter", href: "https://twitter.com/himanshura_i" },
+                      { icon: Mail, label: "Email", href: "mailto:himanshuraimau9@gmail.com" }
+                    ].map((item) => (
+                       <a 
+                         key={item.label}
+                         href={item.href}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="flex flex-col items-center justify-center p-4 border border-border rounded bg-muted/10 hover:bg-muted/30 hover:border-primary/50 transition-all group"
+                       >
+                          <item.icon className="w-6 h-6 text-muted-foreground group-hover:text-foreground mb-3 transition-colors" />
+                          <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">{item.label}</span>
+                       </a>
+                    ))}
                 </div>
-                <div className="flex items-center gap-3">
-                  <Music className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  <span className="text-base sm:text-lg">Singing</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  <span className="text-base sm:text-lg">Teaching</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  <span className="text-base sm:text-lg">Traveling</span>
-                </div>
-              </StaggerChildren>
+            </FadeIn>
+          </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Get In Touch</h2>
-              <StaggerChildren className="flex flex-col gap-3 sm:gap-4">
-                <a
-                  href="mailto:himanshuraimau9@gmail.com"
-                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
-                >
-                  <Mail className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="link-underline truncate">himanshuraimau9@gmail.com</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/himanshu-rai-246121278/"
-                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
-                >
-                  <Linkedin className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="link-underline truncate">linkedin.com/in/himanshu-rai</span>
-                </a>
-                <a
-                  href="https://github.com/himanshuraimau"
-                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
-                >
-                  <Github className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="link-underline truncate">github.com/himanshuraimau</span>
-                </a>
-                <a
-                  href="https://twitter.com/himanshura_i"
-                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
-                >
-                  <Twitter className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="link-underline truncate">x.com/himanshura_i</span>
-                </a>
-              </StaggerChildren>
-            </div>
-          </FadeIn>
+          {/* RIGHT COL: Tech Stack */}
+          <div className="lg:col-span-5">
+            <FadeIn direction="left" delay={0.3}>
+                <div className="sticky top-24">
+                    <div className="flex items-center justify-between mb-6">
+                        <h2 className="text-xl font-mono font-bold">Stack_Trace</h2>
+                        <span className="text-xs font-mono text-muted-foreground px-2 py-1 bg-muted rounded">v1.0</span>
+                    </div>
+                    
+                    {/* Reusing your existing Skills Component */}
+                    <SkillsToggle />
+                    
+                    <div className="mt-8 p-4 border border-dashed border-border rounded bg-muted/5">
+                        <div className="text-xs font-mono text-muted-foreground mb-2">CURRENT_FOCUS</div>
+                        <ul className="space-y-2 text-sm font-mono">
+                            <li className="flex items-center gap-2">
+                                <ArrowRight className="w-3 h-3 text-primary" />
+                                Agentic AI Workflows
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <ArrowRight className="w-3 h-3 text-primary" />
+                                System Architecture
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </FadeIn>
+          </div>
 
-          <FadeIn direction="right" delay={0.2}>
-            <div className="space-y-6">
-              {/* Personal images removed */}
-              <div className="p-6 bg-muted/30 rounded-lg border border-border">
-                <h2 className="text-xl font-bold mb-4">About My Work</h2>
-                <p className="mb-4">I enjoy working on various projects that challenge me to learn and grow:</p>
-                <StaggerChildren as="ul" className="space-y-2 mb-4">
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>Full Stack Web Development</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>DevOps and Cloud Technologies</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>AI and Machine Learning</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <span>Teaching and Knowledge Sharing</span>
-                  </li>
-                </StaggerChildren>
-                <p>If you&apos;re interested in collaborating or have any questions, please get in touch!</p>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-
-        {/* Skills Section */}
-        <div className="mb-12 sm:mb-16">
-          <FadeIn>
-            <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 sm:gap-10 md:gap-16">
-              <h2 className="heading-xl text-center md:text-left">Skills</h2>
-              <div className="w-full overflow-hidden">
-                <SkillsToggle />
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-
-        <div className="mt-8 sm:mt-10 px-4 sm:px-0">
-          <FadeIn direction="up">
-            <form className="max-w-2xl mx-auto bg-card p-6 sm:p-8 rounded-lg border border-border">
-              <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Send Me a Message</h2>
-              <div className="grid gap-4 sm:gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-base sm:text-lg mb-2 font-medium">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    className="w-full border-b-2 border-input py-2 sm:py-3 text-base sm:text-lg bg-transparent focus:outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-base sm:text-lg mb-2 font-medium">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="w-full border-b-2 border-input py-2 sm:py-3 text-base sm:text-lg bg-transparent focus:outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-base sm:text-lg mb-2 font-medium">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full border-b-2 border-input py-2 sm:py-3 text-base sm:text-lg bg-transparent focus:outline-none focus:border-primary transition-colors"
-                  ></textarea>
-                </div>
-                <div className="mt-2">
-                  <AnimatedButton size="lg" className="text-base sm:text-lg px-6 sm:px-8 w-full">
-                    Send Message
-                  </AnimatedButton>
-                </div>
-              </div>
-            </form>
-          </FadeIn>
         </div>
       </section>
     </div>

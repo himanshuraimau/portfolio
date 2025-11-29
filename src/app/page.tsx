@@ -1,184 +1,301 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight, ExternalLink } from "lucide-react"
-import { SkillsToggle } from "@/components/features/skills-toggle"
-import { FadeIn } from "@/components/animations/fade-in"
-import { AnimatedButton } from "@/components/animations/animated-button"
-import { HeroSocialBar } from "@/components/social/hero-social-bar"
-import { webProjects } from "./projects/page"
-import { getBlogPosts } from '@/lib/blog';
-import { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "Himanshu Rai | Full Stack • DevOps • AI Engineer",
-  description: "Portfolio of Himanshu Rai - Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
-  openGraph: {
-    type: "website",
-    title: "Himanshu Rai - Software Engineer Portfolio",
-    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.654563e9-e565-4bd4-b8f6-1648d4f28a22",
-    url: 'https://enghimanshu.space',
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Himanshu Rai - Software Engineer Portfolio",
-    description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
-    creator: "@himanshura_i",
-  },
-}
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowRight,
+  ExternalLink,
+  Terminal,
+  Cpu,
+  Layers,
+  ChevronRight,
+  Zap,
+} from "lucide-react";
+import { SkillsToggle } from "@/components/features/skills-toggle";
+import { FadeIn } from "@/components/animations/fade-in";
+import { AnimatedButton } from "@/components/animations/animated-button";
+import { HeroSocialBar } from "@/components/social/hero-social-bar";
+import { webProjects } from "./projects/page";
+import { getBlogPosts } from "@/lib/blog";
 
 export default async function HomePage() {
-  const featuredProjects = webProjects.filter((project) => project.type === "hosted").slice(0, 3)
+  const featuredProjects = webProjects
+    .filter((project) => project.type === "hosted")
+    .slice(0, 3);
   const posts = await getBlogPosts();
   const recentPosts = posts.slice(0, 3);
 
   return (
-    <div className="pt-16 sm:pt-20">
-      {/* Hero Section */}
-      <section className="container-custom section-spacing flex flex-col justify-center min-h-[80vh] sm:min-h-[90vh]">
-        <div className="flex justify-center items-center">
-            <FadeIn direction="up" delay={0.2}>
-            <div className="space-y-4 sm:space-y-6 md:space-y-8 text-center">
-              <div>
-              <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I&apos;m</p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">Himanshu Rai</h1>
-              <h2 className="text-base sm:text-lg text-muted-foreground">AI Engineer</h2>
-              </div>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              I enjoy building intelligent solutions and exploring the possibilities of AI.
-              </p>
-              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-              <AnimatedButton asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8">
-                <Link href="/about" className="no-underline">About Me</Link>
-              </AnimatedButton>
-              </div>
+    <div className="overflow-hidden bg-background">
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative min-h-[92vh] flex flex-col justify-center items-center border-b border-border/50">
+        {/* --- Background Pattern Start --- */}
+        <div className="absolute inset-0 -z-10 h-full w-full bg-background">
+          {/* Cartesian Grid Pattern */}
+          <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+          {/* Radial Gradient for Focus (The Glow) */}
+          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+
+          {/* Vignette Mask to fade grid at edges */}
+          <div className="absolute inset-0 bg-background/0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] pointer-events-none"></div>
+        </div>
+        {/* --- Background Pattern End --- */}
+
+        <FadeIn direction="up" delay={0.1}>
+          <div className="container-custom max-w-5xl mx-auto text-center relative z-10 px-4">
+            {/* System Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-border/60 bg-muted/20 backdrop-blur-md text-xs font-mono text-muted-foreground mb-8">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="tracking-wide uppercase">
+                System Status: Available to hire
+              </span>
             </div>
-          </FadeIn>
-        </div>
+            {/* Main Headline */}
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 text-foreground">
+              Architecting <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/80 to-muted-foreground">
+                Intelligent Systems.
+              </span>
+            </h1>
 
-        <HeroSocialBar />
+            {/* Subtext */}
+            <p className="text-lg sm:text-xl text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+              I am{" "}
+              <span className="text-foreground font-medium">Himanshu Rai</span>.
+              I build{" "}
+              <span className="text-foreground font-medium">
+                scalable web applications
+              </span>{" "}
+              and{" "}
+              <span className="text-foreground font-medium">
+                intelligent AI systems
+              </span>
+              .
+            </p>
 
-        <div className="flex justify-center mt-8 sm:mt-16">
-          <a href="#projects" className="animate-bounce no-underline">
-            <ArrowRight className="h-8 w-8 sm:h-10 sm:w-10 rotate-90 text-muted-foreground" />
-          </a>
-        </div>
-      </section>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <AnimatedButton
+                asChild
+                size="lg"
+                className="h-12 px-8 text-base shadow-xl shadow-primary/10"
+              >
+                <Link
+                  href="/projects"
+                  className="no-underline flex items-center gap-2"
+                >
+                  View Projects <ChevronRight className="w-4 h-4" />
+                </Link>
+              </AnimatedButton>
+            </div>
 
-      {/* Featured Projects Section */}
-      <section id="projects" className="container-custom section-spacing">
-        <FadeIn>
-          <div className="flex flex-col sm:flex-row justify-between items-baseline mb-8 sm:mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative">
-              Featured Projects
-              <span className="absolute -z-10 text-[6rem] sm:text-[8rem] md:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-16 md:-top-20 -left-3 sm:-left-4 md:-left-6 opacity-80">02</span>
-            </h2>
-            <Link href="/projects" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 sm:mt-0 no-underline">
-              View All Projects
-            </Link>
+            {/* Social Links */}
+            <div className="pt-10 opacity-90">
+              <HeroSocialBar />
+            </div>
           </div>
         </FadeIn>
+      </section>
 
-        <div className="grid gap-16 sm:gap-24">
+      {/* Expertise Marquee / Badges */}
+      <div className="w-full border-b border-border bg-muted/10 py-6">
+        <div className="container-custom flex flex-wrap justify-center gap-6 md:gap-16 text-muted-foreground font-mono text-xs sm:text-sm tracking-wider">
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background border border-border/50 shadow-sm">
+            <Terminal className="w-4 h-4 text-primary" /> FULL STACK
+          </span>
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background border border-border/50 shadow-sm">
+            <Cpu className="w-4 h-4 text-primary" /> AI ENGINEERING
+          </span>
+          <span className="flex items-center gap-2 px-4 py-2 rounded-lg bg-background border border-border/50 shadow-sm">
+            <Layers className="w-4 h-4 text-primary" /> SYSTEM ARCHITECTURE
+          </span>
+        </div>
+      </div>
+
+      {/* ================= PROJECTS SECTION ================= */}
+      <section id="projects" className="container-custom section-spacing">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-border pb-6">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Zap className="w-5 h-5 text-primary" />
+              <span className="font-mono text-sm text-primary uppercase tracking-wider">
+                Deployments
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold">Featured Work</h2>
+          </div>
+          <Link
+            href="/projects"
+            className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-mono text-sm"
+          >
+            /view_all_projects <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.map((project, index) => (
             <FadeIn key={project.id} delay={index * 0.1}>
-              <div className="group">
-                <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-                  <div className={index % 2 === 1 ? "md:order-2" : ""}>
-                    <span className="text-6xl sm:text-7xl md:text-8xl font-bold text-muted/30 group-hover:text-muted/50 transition-colors">
-                      0{index + 1}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 md:mb-6 -mt-4 sm:-mt-6 md:-mt-8 group-hover:translate-x-2 transition-transform">
+              <div className="group relative h-full bg-card border border-border rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
+                {/* Image Window */}
+                <div className="aspect-[16/10] w-full bg-muted relative overflow-hidden border-b border-border">
+                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-20 transition-opacity z-10" />
+                  <Image
+                    src={project.image || "/icons/placeholder.svg"}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+
+                {/* Card Content */}
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-lg font-bold font-mono group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 sm:mb-6 md:mb-8">
-                      {project.description}
-                    </p>
                     <a
-                      href={project.link || `https://project-${project.slug}.example.com`}
+                      href={project.link}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium text-base sm:text-lg"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      Visit Project <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
-                  <div className={`overflow-hidden rounded-lg ${index % 2 === 1 ? "md:order-1" : ""}`}>
-                    <div className="aspect-video bg-muted rounded-lg overflow-hidden transition-transform group-hover:scale-105 duration-500">
-                      <Image
-                        src={project.image || "/icons/placeholder.svg"}
-                        alt={project.title}
-                        width={800}
-                        height={600}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
+                    {project.technologies?.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono text-muted-foreground bg-muted/50 px-2 py-1 rounded border border-border/50"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                    {(project.technologies?.length || 0) > 3 && (
+                      <span className="text-[10px] font-mono text-muted-foreground px-1 py-1">
+                        +{project.technologies!.length - 3}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
             </FadeIn>
           ))}
         </div>
+
+        <div className="mt-10 text-center md:hidden">
+          <AnimatedButton asChild variant="outline" className="w-full">
+            <Link href="/projects">View All Projects</Link>
+          </AnimatedButton>
+        </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="container-custom section-spacing">
-        <FadeIn>
-          <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 md:gap-16 items-start">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold">Skills</h2>
-            <div className="w-full overflow-hidden">
-              <SkillsToggle />
-            </div>
-          </div>
-        </FadeIn>
-      </section>
+      {/* ================= TECH STACK SECTION ================= */}
+      <section className="border-y border-border bg-muted/20 py-24 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute left-0 top-0 opacity-[0.03] pointer-events-none">
+          <Terminal size={400} />
+        </div>
 
-      {/* Recent Blog Posts */}
-      <section className="container-custom section-spacing">
-        <FadeIn>
-          <div className="flex flex-col sm:flex-row justify-between items-baseline mb-8 sm:mb-16">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold relative">
-              Recent Articles
-              <span className="absolute -z-10 text-[6rem] sm:text-[8rem] md:text-[10rem] font-bold text-muted/20 -top-10 sm:-top-16 md:-top-20 -left-3 sm:-left-4 md:-left-6 opacity-80">04</span>
-            </h2>
-            <Link href="/blog" className="link-underline text-base sm:text-lg text-muted-foreground mt-4 sm:mt-0">
-              View All Articles
-            </Link>
-          </div>
-        </FadeIn>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {recentPosts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group block bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
-            >
-              <div className="aspect-video bg-muted overflow-hidden">
-                <Image
-                  src={post.image || `/icons/placeholder.svg?height=200&width=400`}
-                  alt={post.title}
-                  width={400}
-                  height={200}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
-                />
-              </div>
-              <div className="p-4 sm:p-6">
-                <div className="text-xs sm:text-sm font-medium text-muted-foreground mb-1 sm:mb-2">
-                  {post.category} • {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+        <div className="container-custom relative z-10">
+          <FadeIn>
+            <div className="grid lg:grid-cols-12 gap-12 items-start">
+              <div className="lg:col-span-4">
+                <div className="sticky top-24">
+                  <div className="inline-block p-2 rounded-lg bg-primary/10 mb-4">
+                    <Layers className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                    Technical
+                    <br />
+                    Arsenal
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-6">
+                    I constantly explore new technologies to find the best tools
+                    for solving complex problems. My current stack focuses on
+                    scalable web architecture and machine learning pipelines.
+                  </p>
+                  <Link
+                    href="/about"
+                    className="inline-flex items-center text-primary font-mono text-sm hover:underline underline-offset-4"
+                  >
+                    View Full System Profile{" "}
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-sm sm:text-base text-muted-foreground line-clamp-3">
-                  {post.excerpt}
-                </p>
               </div>
-            </Link>
+              <div className="lg:col-span-8 w-full">
+                <SkillsToggle />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ================= BLOG SECTION ================= */}
+      <section className="container-custom section-spacing">
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="text-3xl font-bold mb-2">Engineering Logs</h2>
+            <p className="text-muted-foreground">
+              Thoughts on development, systems, and AI.
+            </p>
+          </div>
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex text-sm font-mono border border-border px-4 py-2 rounded hover:bg-muted transition-colors"
+          >
+            ~/read_all_logs
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6">
+          {recentPosts.map((post) => (
+            <FadeIn key={post.slug} direction="up">
+              <Link href={`/blog/${post.slug}`} className="block group">
+                <div className="flex flex-col md:flex-row gap-6 p-6 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  <div className="md:w-[200px] shrink-0">
+                    <span className="text-xs font-mono text-muted-foreground block mb-2">
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <div className="inline-block px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-mono uppercase tracking-wider font-bold">
+                      {post.category}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors font-mono">
+                      {post.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-end md:w-[50px]">
+                    <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all">
+                      <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </FadeIn>
           ))}
+        </div>
+
+        <div className="mt-8 text-center sm:hidden">
+          <Link href="/blog" className="text-primary font-medium">
+            Read All Logs
+          </Link>
         </div>
       </section>
     </div>

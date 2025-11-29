@@ -8,7 +8,7 @@ export default function CategoryNotFound() {
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="heading-xl mb-6">Category Not Found</h1>
           <p className="body-lg text-muted-foreground mb-8">
-            Sorry, the category you're looking for doesn't exist or has no posts.
+            Sorry, the category you&apos;re looking for doesn&apos;t exist or has no posts.
           </p>
           <Button size="lg" asChild>
             <Link href="/blog">

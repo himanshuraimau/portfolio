@@ -1,139 +1,66 @@
+// app/blog/tag/[tag]/page.tsx (Unified design for Tags/Categories)
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { getPostsByTag, getAllTags } from "@/lib/blog"
-import { Metadata } from "next"
+import { getPostsByTag} from "@/lib/blog"
 import { notFound } from "next/navigation"
+import { ArrowLeft, Calendar } from "lucide-react"
 
-interface TagPageProps {
-  params: {
-    tag: string
-  }
-}
-
-export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
+export default async function TagPage({ params }: { params: { tag: string } }) {
   const { tag } = params
   const decodedTag = decodeURIComponent(tag)
+  const posts = await getPostsByTag(decodedTag);
   
-  return {
-    title: `${decodedTag} Posts | Blog`,
-    description: `Articles tagged with ${decodedTag}`,
-    openGraph: {
-      title: `${decodedTag} Posts | Blog`,
-      description: `Articles tagged with ${decodedTag}`,
-      type: "website",
-    },
-  }
-}
-
-export async function generateStaticParams() {
-  const tags = await getAllTags()
-  
-  return tags.map((tag) => ({
-    tag,
-  }))
-}
-
-export default async function TagPage({ params }: TagPageProps) {
-  const { tag } = params
-  const decodedTag = decodeURIComponent(tag)
-  const posts = await getPostsByTag(decodedTag)
-  const allTags = await getAllTags()
-  
-  if (!posts.length) {
-    notFound()
-  }
+  if (!posts.length) notFound()
   
   return (
-    <div className="pt-20">
-      <section className="container-custom section-spacing">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="heading-xl mb-6">#{decodedTag}</h1>
-          <p className="body-lg text-muted-foreground">
-            Articles tagged with "{decodedTag}"
-          </p>
-        </div>
-        
-        {/* Tags Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/blog">
-              All
-            </Link>
-          </Button>
-          {allTags.map((t) => (
-            <Button 
-              key={t} 
-              variant="outline" 
-              size="sm" 
-              asChild
-              className={t === decodedTag ? "bg-primary text-primary-foreground" : ""}
-            >
-              <Link href={`/blog/tag/${t}`}>
-                {t}
-              </Link>
-            </Button>
-          ))}
-        </div>
+    <div className="min-h-screen pt-24 pb-20">
+      <section className="container-custom mb-16">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 text-sm font-mono transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          ../back
+        </Link>
+        <h1 className="text-4xl md:text-5xl font-mono font-bold mb-4">
+          <span className="text-primary">#</span>{decodedTag}
+        </h1>
+        <p className="text-muted-foreground font-mono">
+          Found {posts.length} entries tagged with &quot;{decodedTag}&quot;
+        </p>
+      </section>
 
-        {/* Posts Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="container-custom">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
-            <Link
+             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
+              className="group flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-all"
             >
-              <div className="aspect-video bg-muted overflow-hidden">
-                {post.image ? (
+              <div className="aspect-video bg-muted relative overflow-hidden">
+                {post.image && (
                   <Image
                     src={post.image}
                     alt={post.title}
-                    width={600}
-                    height={340}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-muted-foreground">No image</span>
-                  </div>
                 )}
               </div>
-              <div className="p-6">
-                <div className="text-xs sm:text-sm font-medium text-muted-foreground mb-2">
-                  {post.category} • {new Date(post.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+              <div className="p-5 flex flex-col flex-grow">
+                <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground mb-3">
+                  <Calendar className="w-3 h-3" />
+                  {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-xl font-bold font-mono mb-2 group-hover:text-primary transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-sm sm:text-base text-muted-foreground line-clamp-3">
+                <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-grow">
                   {post.excerpt}
                 </p>
-                {post.tags && post.tags.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {post.tags.slice(0, 3).map((t) => (
-                      <span 
-                        key={t} 
-                        className={`text-xs px-2 py-1 rounded-full ${
-                          t === decodedTag 
-                            ? "bg-primary/20 text-primary" 
-                            : "bg-muted text-muted-foreground"
-                        }`}
-                      >
-                        #{t}
-                      </span>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <span className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground">
-                        +{post.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
-                )}
+                <div className="flex flex-wrap gap-2 mt-auto">
+                   {post.tags?.slice(0, 3).map(t => (
+                     <span key={t} className="text-[10px] font-mono bg-muted px-2 py-1 rounded">#{t}</span>
+                   ))}
+                </div>
               </div>
             </Link>
           ))}
@@ -141,4 +68,4 @@ export default async function TagPage({ params }: TagPageProps) {
       </section>
     </div>
   )
-} 
+}

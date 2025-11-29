@@ -1,25 +1,28 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Inter, JetBrains_Mono } from "next/font/google" // Changed Font
 import "./globals.css"
 import { Navigation } from "@/components/layout/navigation"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { PageTransition } from "@/components/animations/page-transition"
 import { FloatingSocial } from "@/components/social/floating-social"
 import { Analytics } from '@vercel/analytics/next';
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 })
 
-const playfair = Playfair_Display({
+// Tech/Code font
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-mono",
 })
 
+
 export const metadata: Metadata = {
-  title: "Himanshu Rai | Full Stack • DevOps • AI Engineer",
-  description: "Portfolio of Himanshu Rai - Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions. Specializing in React, Node.js, Cloud Architecture, MLOps, and Deep Learning.",
+  title: "Himanshu Rai | Engineer",
+  description: "Full Stack • DevOps • AI Engineer",
   keywords: ["Full Stack Developer", "DevOps Engineer", "AI Engineer", "React", "Node.js", "Python", "Cloud Computing", "Machine Learning", "Software Engineer", "Himanshu Rai"],
   authors: [{ name: "Himanshu Rai" }],
   creator: "Himanshu Rai",
@@ -48,13 +51,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased overflow-x-hidden`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="min-h-screen flex flex-col bg-background text-foreground">
-            
+      <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased bg-background text-foreground`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {/* Background Grid Mesh */}
+          <div className="fixed inset-0 z-[-1] bg-grid-pattern pointer-events-none" />
+          <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
+          
+          <div className="min-h-screen flex flex-col relative">
             <Navigation />
             <PageTransition>
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow pt-24">{children}</main>
             </PageTransition>
             <FloatingSocial />
           </div>

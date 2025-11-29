@@ -1,45 +1,35 @@
-export default function BlogLoading() {
+export default function BlogPostLoading() {
   return (
-    <div className="pt-20">
-      <section className="container-custom section-spacing">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <div className="h-12 w-48 bg-muted/50 animate-pulse rounded-lg mx-auto mb-6"></div>
-          <div className="h-6 w-96 max-w-full bg-muted/50 animate-pulse rounded-lg mx-auto"></div>
-        </div>
+    <div className="min-h-screen pt-24 pb-20 container-custom max-w-4xl">
+      
+      {/* Terminal Header Loading */}
+      <div className="mb-12 space-y-4">
+         <div className="h-4 w-48 bg-muted/50 rounded animate-pulse" />
+         <div className="h-12 w-3/4 bg-muted/50 rounded animate-pulse" />
+         <div className="h-12 w-1/2 bg-muted/50 rounded animate-pulse" />
+      </div>
 
-        {/* Featured Post Skeleton */}
-        <div className="mb-20">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <div className="h-4 w-32 bg-muted/50 animate-pulse rounded-lg mb-2"></div>
-              <div className="h-10 w-full bg-muted/50 animate-pulse rounded-lg mb-4"></div>
-              <div className="h-10 w-3/4 bg-muted/50 animate-pulse rounded-lg mb-4"></div>
-              <div className="h-6 w-full bg-muted/50 animate-pulse rounded-lg mb-6"></div>
-              <div className="h-6 w-5/6 bg-muted/50 animate-pulse rounded-lg mb-6"></div>
-              <div className="h-10 w-32 bg-muted/50 animate-pulse rounded-lg"></div>
-            </div>
-            <div className="order-1 md:order-2">
-              <div className="aspect-video bg-muted/50 animate-pulse rounded-lg"></div>
-            </div>
-          </div>
-        </div>
+      {/* Metadata Bar Loading */}
+      <div className="flex gap-8 py-4 border-y border-border/50 mb-12">
+        <div className="h-4 w-24 bg-muted/50 rounded animate-pulse" />
+        <div className="h-4 w-24 bg-muted/50 rounded animate-pulse" />
+        <div className="h-4 w-24 bg-muted/50 rounded animate-pulse" />
+      </div>
 
-        {/* Posts Grid Skeleton */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="bg-card rounded-lg overflow-hidden border border-border">
-              <div className="aspect-video bg-muted/50 animate-pulse"></div>
-              <div className="p-6">
-                <div className="h-4 w-32 bg-muted/50 animate-pulse rounded-lg mb-2"></div>
-                <div className="h-8 w-full bg-muted/50 animate-pulse rounded-lg mb-2"></div>
-                <div className="h-4 w-full bg-muted/50 animate-pulse rounded-lg mb-2"></div>
-                <div className="h-4 w-5/6 bg-muted/50 animate-pulse rounded-lg mb-2"></div>
-                <div className="h-4 w-4/6 bg-muted/50 animate-pulse rounded-lg"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Content Loading */}
+      <div className="space-y-6">
+         {Array.from({ length: 6 }).map((_, i) => (
+           <div 
+             key={i} 
+             className="h-4 bg-muted/30 rounded animate-pulse" 
+             style={{ width: `${Math.random() * 40 + 60}%` }} 
+           />
+         ))}
+      </div>
+      
+      <div className="mt-12 p-4 border border-dashed border-border rounded flex items-center justify-center text-muted-foreground font-mono text-sm animate-pulse">
+        Fetching data stream...
+      </div>
     </div>
   )
-} 
+}
