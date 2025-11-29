@@ -6,7 +6,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrism from 'rehype-prism-plus'
 import remarkGfm from 'remark-gfm'
-import { loadMDXContent, loadAllMDXFiles, getMDXFileBySlug } from './mdx-loader'
+import {  loadAllMDXFiles, getMDXFileBySlug } from './mdx-loader'
 
 // Check if we're using Bun
 const isBun = process.env.BUN_RUNTIME === '1';
