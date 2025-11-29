@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail, Twitter, Instagram } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 export function Footer() {
   return (
@@ -59,15 +59,6 @@ export function Footer() {
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
-              </a>
-              <a 
-                href="https://instagram.com/enghimanshu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5 sm:h-6 sm:w-6" />
               </a>
               <a 
                 href="https://github.com/himanshuraimau" 

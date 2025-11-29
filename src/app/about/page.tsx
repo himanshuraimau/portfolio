@@ -1,11 +1,8 @@
-import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin, Instagram } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin} from "lucide-react"
 import { SkillsToggle } from "@/components/skills-toggle"
-import { ExperienceTimeline } from "@/components/experience-timeline"
 import { FadeIn } from "@/components/animations/fade-in"
 import { StaggerChildren } from "@/components/animations/stagger-children"
-import { ImageReveal } from "@/components/animations/image-reveal"
 import { AnimatedButton } from "@/components/animations/animated-button"
-import { PhotographyGallery } from "@/components/photography-gallery"
 
 export default function AboutPage() {
   return (
@@ -19,7 +16,7 @@ export default function AboutPage() {
           <FadeIn direction="left">
             <div>
               <p className="body-lg mb-4 sm:mb-6">
-                Hi, I'm a Full Stack Developer who enjoys building web applications and exploring new technologies.
+                Hi, I&apos;m a Full Stack Developer who enjoys building web applications and exploring new technologies.
                 I work with modern frameworks and have an interest in DevOps and AI development.
               </p>
               <p className="body-lg mb-6 sm:mb-10">
@@ -64,13 +61,6 @@ export default function AboutPage() {
                   <span className="link-underline truncate">linkedin.com/in/himanshu-rai</span>
                 </a>
                 <a
-                  href="https://instagram.com/enghimanshu"
-                  className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
-                >
-                  <Instagram className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="link-underline truncate">instagram.com/enghimanshu</span>
-                </a>
-                <a
                   href="https://github.com/himanshuraimau"
                   className="flex items-center gap-3 sm:gap-4 text-base sm:text-lg text-muted-foreground hover:text-foreground group"
                 >
@@ -90,68 +80,33 @@ export default function AboutPage() {
 
           <FadeIn direction="right" delay={0.2}>
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                {[1, 2, 3, 4].map((index) => (
-                  <div key={index} className="aspect-square bg-muted rounded-lg overflow-hidden relative">
-                    <ImageReveal
-                      src={`/images/image${index}.jpeg?height=300&width=300`}
-                      alt={`Image ${index}`}
-                      width={300}
-                      height={300}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-
-            {/* <div className="p-6 bg-muted/30 rounded-lg border border-border">
-                <h2 className="text-xl font-bold mb-4">Workshop Experience</h2>
-                <p className="mb-4">I've conducted over 20 workshops on various topics including:</p>
+              {/* Personal images removed */}
+              <div className="p-6 bg-muted/30 rounded-lg border border-border">
+                <h2 className="text-xl font-bold mb-4">About My Work</h2>
+                <p className="mb-4">I enjoy working on various projects that challenge me to learn and grow:</p>
                 <StaggerChildren as="ul" className="space-y-2 mb-4">
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <span>Advanced React Patterns</span>
+                    <span>Full Stack Web Development</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <span>TypeScript for JavaScript Developers</span>
+                    <span>DevOps and Cloud Technologies</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <span>Building with Next.js</span>
+                    <span>AI and Machine Learning</span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <span>Responsive Web Design</span>
+                    <span>Teaching and Knowledge Sharing</span>
                   </li>
                 </StaggerChildren>
-                <p>If you're interested in having me conduct a workshop for your team or event, please get in touch!</p>
-              </div> */}
+                <p>If you&apos;re interested in collaborating or have any questions, please get in touch!</p>
+              </div>
             </div>
           </FadeIn>
         </div>
-
-        {/* Photography Section */}
-        <div className="mb-12 sm:mb-20">
-          <FadeIn>
-            <h2 className="heading-lg mb-6 sm:mb-8 text-center">Photography</h2>
-            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-6 sm:mb-10 px-4">
-              Photography is one of my passions. I enjoy capturing moments and perspectives through my lens, focusing
-              primarily on landscapes, architecture, and street photography.
-            </p>
-            <PhotographyGallery />
-          </FadeIn>
-        </div>
-
-        {/* Professional Experience Section
-        <div id="experience" className="mb-16">
-          <FadeIn>
-            <h2 className="heading-lg mb-12 text-center">Professional Experience</h2>
-          </FadeIn>
-          <StaggerChildren staggerTime={0.15}>
-            <ExperienceTimeline />
-          </StaggerChildren>
-        </div> */}
 
         {/* Skills Section */}
         <div className="mb-12 sm:mb-16">

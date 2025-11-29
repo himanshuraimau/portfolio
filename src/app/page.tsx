@@ -1,9 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, ExternalLink } from "lucide-react"
 import { SkillsToggle } from "@/components/skills-toggle"
-import { ExperienceTimeline } from "@/components/experience-timeline"
 import { FadeIn } from "@/components/animations/fade-in"
-import { StaggerChildren } from "@/components/animations/stagger-children"
 import { ImageReveal } from "@/components/animations/image-reveal"
 import { AnimatedButton } from "@/components/animations/animated-button"
 import { HeroSocialBar } from "@/components/hero-social-bar"
@@ -37,36 +35,21 @@ export default async function HomePage() {
     <div className="pt-16 sm:pt-20">
       {/* Hero Section */}
       <section className="container-custom section-spacing flex flex-col justify-center min-h-[80vh] sm:min-h-[90vh]">
-        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-            <FadeIn direction="left" delay={0.2}>
-            <div className="space-y-4 sm:space-y-6 md:space-y-8">
+        <div className="flex justify-center items-center">
+            <FadeIn direction="up" delay={0.2}>
+            <div className="space-y-4 sm:space-y-6 md:space-y-8 text-center">
               <div>
-              <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I'm</p>
+              <p className="text-muted-foreground text-base sm:text-lg mb-1 sm:mb-2 font-medium">Hello, I&apos;m</p>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 sm:mb-4">Himanshu Rai</h1>
               <h2 className="text-base sm:text-lg text-muted-foreground">AI Engineer</h2>
               </div>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-md">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               I enjoy building intelligent solutions and exploring the possibilities of AI.
               </p>
-              <div className="flex flex-wrap gap-3 sm:gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
               <AnimatedButton asChild size="lg" className="text-base sm:text-lg px-6 sm:px-8">
                 <Link href="/about" className="no-underline">About Me</Link>
               </AnimatedButton>
-              </div>
-            </div>
-          </FadeIn>
-          <FadeIn direction="right" delay={0.4}>
-            <div className="relative mx-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-              <div className="absolute -top-6 sm:-top-10 -left-6 sm:-left-10 w-24 sm:w-40 h-24 sm:h-40 bg-muted rounded-full opacity-50"></div>
-              <div className="absolute -bottom-6 sm:-bottom-10 -right-6 sm:-right-10 w-32 sm:w-60 h-32 sm:h-60 bg-muted rounded-full opacity-50"></div>
-              <div className="relative z-10 aspect-square bg-muted rounded-2xl overflow-hidden border border-border">
-                <ImageReveal
-                  src="/Cover.jpg?height=600&width=600"
-                  alt="Himanshu Rai"
-                  width={600}
-                  height={600}
-                  priority
-                />
               </div>
             </div>
           </FadeIn>

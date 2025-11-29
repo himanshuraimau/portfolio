@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Twitter, Mail, Instagram } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export function HeroSocialBar() {
@@ -26,7 +26,6 @@ export function HeroSocialBar() {
       url: "https://www.linkedin.com/in/himanshu-rai-246121278/",
       color: "hover:text-blue-600",
     },
-    { name: "Instagram", icon: <Instagram size={24} />, url: "https://instagram.com/enghimanshu", color: "hover:text-pink-600" },
     { name: "Twitter", icon: <Twitter size={24} />, url: "https://x.com/himanshura_i", color: "hover:text-sky-500" },
     { name: "Email", icon: <Mail size={24} />, url: "mailto:himanshuraimau9@gmail.com", color: "hover:text-amber-700" },
   ]
