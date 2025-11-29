@@ -5,7 +5,7 @@ import "./globals.css"
 import { Navigation } from "@/components/layout/navigation"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { PageTransition } from "@/components/animations/page-transition"
-import { FloatingSocial } from "@/components/floating-social"
+import { FloatingSocial } from "@/components/social/floating-social"
 import { Analytics } from '@vercel/analytics/next';
 const inter = Inter({
   subsets: ["latin"],

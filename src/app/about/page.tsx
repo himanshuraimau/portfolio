@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail, Twitter, Music, Code, BookOpen, MapPin} from "lucide-react"
-import { SkillsToggle } from "@/components/skills-toggle"
+import { SkillsToggle } from "@/components/features/skills-toggle"
 import { FadeIn } from "@/components/animations/fade-in"
 import { StaggerChildren } from "@/components/animations/stagger-children"
 import { AnimatedButton } from "@/components/animations/animated-button"

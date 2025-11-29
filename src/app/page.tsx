@@ -1,10 +1,10 @@
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ExternalLink } from "lucide-react"
-import { SkillsToggle } from "@/components/skills-toggle"
+import { SkillsToggle } from "@/components/features/skills-toggle"
 import { FadeIn } from "@/components/animations/fade-in"
-import { ImageReveal } from "@/components/animations/image-reveal"
 import { AnimatedButton } from "@/components/animations/animated-button"
-import { HeroSocialBar } from "@/components/hero-social-bar"
+import { HeroSocialBar } from "@/components/social/hero-social-bar"
 import { webProjects } from "./projects/page"
 import { getBlogPosts } from '@/lib/blog';
 import { Metadata } from "next"
@@ -83,7 +83,7 @@ export default async function HomePage() {
             <FadeIn key={project.id} delay={index * 0.1}>
               <div className="group">
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-                  <div>
+                  <div className={index % 2 === 1 ? "md:order-2" : ""}>
                     <span className="text-6xl sm:text-7xl md:text-8xl font-bold text-muted/30 group-hover:text-muted/50 transition-colors">
                       0{index + 1}
                     </span>
@@ -102,13 +102,13 @@ export default async function HomePage() {
                       Visit Project <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
                     </a>
                   </div>
-                  <div className="overflow-hidden rounded-lg">
+                  <div className={`overflow-hidden rounded-lg ${index % 2 === 1 ? "md:order-1" : ""}`}>
                     <div className="aspect-video bg-muted rounded-lg overflow-hidden transition-transform group-hover:scale-105 duration-500">
-                      <ImageReveal
-                        src={project.image || `/placeholder.svg?height=270&width=480`}
+                      <Image
+                        src={project.image || "/icons/placeholder.svg"}
                         alt={project.title}
-                        width={480}
-                        height={270}
+                        width={800}
+                        height={600}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -154,8 +154,8 @@ export default async function HomePage() {
               className="group block bg-card rounded-lg overflow-hidden border border-border hover:shadow-lg transition-shadow"
             >
               <div className="aspect-video bg-muted overflow-hidden">
-                <img
-                  src={post.image || `/placeholder.svg?height=200&width=400`}
+                <Image
+                  src={post.image || `/icons/placeholder.svg?height=200&width=400`}
                   alt={post.title}
                   width={400}
                   height={200}

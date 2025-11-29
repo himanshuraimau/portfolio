@@ -7,26 +7,17 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 // Import custom components
-import Callout from './Callout';
+import Callout from '@/components/common/Callout';
 
 // Dynamically import components that use client-side features
-const PrismCode = dynamic(() => import('./PrismCode'), { ssr: false });
+const PrismCode = dynamic(() => import('@/components/common/PrismCode'), { ssr: false });
 
 interface SafeMDXContentProps {
   content: any; // Support for serialized MDX content
 }
 
 export function SafeMDXContent({ content }: SafeMDXContentProps) {
-  // Handle empty content
-  if (!content) {
-    return (
-      <div className="p-4 border-l-4 border-muted bg-muted/20 rounded-r-lg my-6">
-        <p className="text-muted-foreground">No content available.</p>
-      </div>
-    );
-  }
-
-  // Define custom components for MDX rendering
+  // Define custom components for MDX rendering - MUST be called before any conditional returns
   const components = useMemo(() => ({
     // Custom link component
     a: ({ href, children, ...props }: { href: string; children: React.ReactNode }) => {
@@ -161,6 +152,15 @@ export function SafeMDXContent({ content }: SafeMDXContentProps) {
     // Custom callout component
     Callout,
   }), []);
+
+  // Handle empty content - Now called after hooks
+  if (!content) {
+    return (
+      <div className="p-4 border-l-4 border-muted bg-muted/20 rounded-r-lg my-6">
+        <p className="text-muted-foreground">No content available.</p>
+      </div>
+    );
+  }
 
   try {
     // Handle different content types

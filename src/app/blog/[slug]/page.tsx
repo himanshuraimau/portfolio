@@ -1,17 +1,16 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, Calendar, Clock, User } from "lucide-react"
+import { ArrowLeft, Calendar, Clock} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 
 // Import the blog utilities
-import { getBlogPost, getRelatedPosts, getBlogPosts, type BlogPost, type RelatedPost } from '@/lib/blog'
+import { getBlogPost, getRelatedPosts, getBlogPosts } from '@/lib/blog'
 
 // Import the BlogContent client component
-import { BlogContent } from '@/components/BlogContent'
+import { BlogContent } from '@/components/blog/BlogContent'
 
 interface BlogPostPageProps {
   params: {
