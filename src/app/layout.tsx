@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/layout/navigation"
-import { Footer } from "@/components/layout/footer"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { PageTransition } from "@/components/animations/page-transition"
 import { FloatingSocial } from "@/components/floating-social"
@@ -57,7 +56,6 @@ export default function RootLayout({
             <PageTransition>
               <main className="flex-grow">{children}</main>
             </PageTransition>
-            <Footer />
             <FloatingSocial />
           </div>
         </ThemeProvider>
