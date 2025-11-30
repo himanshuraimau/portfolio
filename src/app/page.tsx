@@ -49,7 +49,7 @@ export default async function HomePage() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
               <span className="tracking-wide uppercase">
-                System Status: Available to hire
+                Open to internship opportunities (Remote)
               </span>
             </div>
             {/* Main Headline */}

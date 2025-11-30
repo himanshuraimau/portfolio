@@ -34,13 +34,19 @@ export default function AboutPage() {
                     <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-muted-foreground space-y-4">
                         <p>
                             <span className="text-primary mr-2">{`>`}</span>
-                            Hello. I am <span className="text-foreground font-bold">Himanshu Rai</span>, a Full Stack Developer architecting solutions at the intersection of web technologies and artificial intelligence.
+                            Hey, I'm <span className="text-foreground font-bold">Himanshu Rai</span>—a third-year student at Siddaganga Institute of Technology studying AI & Data Science (CGPA: 8.76).
                         </p>
                         <p>
-                            I specialize in building scalable applications using modern frameworks like <span className="text-foreground">Next.js</span> and <span className="text-foreground">React</span>, while exploring the capabilities of AI to enhance user experiences. My approach blends disciplined DevOps practices with creative frontend engineering.
+                            I build full-stack web applications and AI-powered systems from the ground up. My work includes <span className="text-foreground">Voltstream</span>, a live-streaming platform with WebRTC and AWS, and <span className="text-foreground">Project0</span>, an AI study platform that converts PDFs and videos into notes, flashcards, and courses using Gemini + OpenAI.
                         </p>
                         <p>
-                           Beyond the terminal, I am passionate about knowledge sharing—conducting workshops and mentoring peers to foster a collaborative developer community.
+                            I also built <span className="text-foreground">Sonex</span> (self-hosted TTS/VC with PyTorch models), <span className="text-foreground">Uply</span> (distributed monitoring with Redis + Docker), and <span className="text-foreground">Drift</span> (a P2P file system in Go with AES-256 encryption). On the side, I mentor 50+ students as a Technical Workshop Lead and led workshops on GenAI for 40+ participants.
+                        </p>
+                        <p>
+                            Ranked <span className="text-foreground">288/10,000+</span> in Amazon ML Challenge 2025. Won multiple hackathons including WrapSpeed AWS Startup Track and Browse Hyperthon. Actively write technical content at <a href="https://enghimanshu.space" target="_blank" className="text-foreground underline hover:text-primary">enghimanshu.space</a>.
+                        </p>
+                        <p className="text-foreground">
+                           Currently open to remote internship opportunities in full-stack development or AI engineering.
                         </p>
                         <div className="pt-4 flex flex-wrap gap-4">
                              <a href="/resume.pdf" target="_blank" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
