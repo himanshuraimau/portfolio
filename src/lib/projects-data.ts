@@ -1,0 +1,232 @@
+export const webProjects = [
+    {
+        id: 102,
+        title: "JelliNote AI",
+        description:
+            "An all-in-one AI study companion that generates quizzes, flashcards, and mindmaps from your notes, PDFs, and videos.",
+        technologies: ["Next.js", "TypeScript", "Tailwind", "OpenAI", "Stripe"],
+        image: "/projects/jellinote.png",
+        slug: "jellinote-ai",
+        type: "hosted",
+        link: "https://project0-nu.vercel.app/",
+    },
+    {
+        id: 101,
+        title: "StreamIt",
+        description:
+            "A full-stack live streaming platform enabling creators to broadcast content, featuring real-time streaming, social interactions, and monetization.",
+        technologies: [
+            "React",
+            "TypeScript",
+            "Tailwind",
+            "Bun",
+            "Express",
+            "LiveKit",
+            "Docker",
+            "AWS S3",
+        ],
+        image: "/projects/voltstream.png",
+        slug: "streamit",
+        type: "hosted",
+        link: "https://voltstream.space/",
+    },
+    {
+        id: 0,
+        title: "Prompt Portrait",
+        description:
+            "A beautiful AI prompt sharing platform with glassmorphic design, built with Next.js, Drizzle ORM, and AWS integration. Features real-time search, filtering, and social interactions.",
+        technologies: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind",
+            "Drizzle ORM",
+            "PostgreSQL",
+            "AWS S3",
+            "CloudFront",
+        ],
+        image: "/projects/prompt-portrait.png",
+        slug: "prompt-portrait",
+        type: "hosted",
+        link: "https://potraitprompt.vercel.app/",
+    },
+    {
+        id: 1,
+        title: "Sensai-AI",
+        description:
+            "A platform that uses AI to provide personalized learning experiences, including quizzes, flashcards, and study plans.",
+        technologies: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind",
+            "Node.js",
+            "Prisma",
+            "PostgreSQL",
+            "OpenAI",
+        ],
+        image: "/projects/sensai.png",
+        slug: "sensai",
+        type: "hosted",
+        link: "https://sensai-v0-archive.vercel.app/",
+    },
+    {
+        id: 2,
+        title: "Affiliate System",
+        description:
+            "A comprehensive platform for managing affiliate partnerships, tracking conversions, processing payments, and analyzing performance.",
+        technologies: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind",
+            "Node.js",
+            "Prisma",
+            "PostgreSQL",
+        ],
+        image: "/projects/affiliate.png",
+        slug: "affiliate-commission-system",
+        type: "hosted",
+        link: "https://affiliate-commission.vercel.app/",
+    },
+    {
+        id: 3,
+        title: "DoodleVerse",
+        description: "A WebSocket Based Drawing Application",
+        technologies: [
+            "Next.js",
+            "TypeScript",
+            "Tailwind",
+            "Socket.io",
+            "Node.js",
+            "Turborepo",
+        ],
+        image: "/projects/doodle-verse.png",
+        slug: "doodle-verse",
+        type: "hosted",
+        link: "https://github.com/himanshuraimau/DoodleVerse",
+    },
+    {
+        id: 4,
+        title: "True Feedback",
+        description:
+            "An app that allows users to receive and manage anonymous questions or messages.",
+        technologies: ["Next.js", "TypeScript", "Tailwind"],
+        image: "/projects/AMA.png",
+        slug: "true-feedback",
+        type: "hosted",
+        link: "https://ama-app-sooty.vercel.app/",
+    },
+    {
+        id: 5,
+        title: "Mood",
+        description: "A Gen AI-based journaling application",
+        technologies: ["Next.js", "TypeScript", "Tailwind"],
+        image: "/projects/mood.png",
+        slug: "mood",
+        type: "hosted",
+        link: "https://mood-nine-omega.vercel.app",
+    },
+    {
+        id: 6,
+        title: "College Nexus",
+        description: "A Web Application for College Students",
+        technologies: ["Next.js", "TypeScript", "Tailwind"],
+        image: "/projects/college-nexus.png",
+        slug: "college-nexus",
+        type: "hosted",
+        link: "https://collegenexus.tech",
+    },
+    {
+        id: 7,
+        title: "Music School",
+        description: "A Next.js Frontend Application using Aceternity UI",
+        technologies: ["Next.js", "TypeScript", "Tailwind"],
+        image: "/projects/music-school.png",
+        slug: "music-school",
+        type: "hosted",
+        link: "https://music-school-nextjs-lime-1.vercel.app",
+    },
+];
+
+export const deepCSProjects = [
+    {
+        id: 5,
+        title: "C-AI Chat Application",
+        description:
+            "A simple C-based chat application that uses the Gemini Pro API for conversations.",
+        technologies: ["C", "libcurl", "json-c", "Python"],
+        githubUrl: "https://github.com/himanshuraimau/c-ai",
+        type: "github",
+    },
+    {
+        id: 6,
+        title: "Proxy Server w/ Cache",
+        description:
+            "Multi-threaded proxy server in C++ with LRU cache. Features concurrent connection handling and efficient thread management.",
+        technologies: ["C++", "POSIX Threads", "Socket Programming", "HTTP"],
+        githubUrl:
+            "https://github.com/himanshuraimau/applied-os/tree/main/MultiThreadedProxyServerClient",
+        type: "github",
+    },
+    {
+        id: 7,
+        title: "DropBin",
+        description:
+            "A small implementation of a paste bin application with minimal features.",
+        technologies: ["JavaScript", "Node.js", "Express"],
+        githubUrl: "https://github.com/himanshuraimau/dropBin",
+        type: "github",
+    },
+    {
+        id: 8,
+        title: "URL Shortener",
+        description: "A URL shortener application implemented in Go.",
+        technologies: ["Go", "Gin", "Redis"],
+        githubUrl: "https://github.com/himanshuraimau/url-shortner-go",
+        type: "github",
+    },
+    {
+        id: 9,
+        title: "RFA Docker Proxy",
+        description:
+            "This project sets up a reverse proxy using Node.js, Express, and Docker.",
+        technologies: ["Node.js", "Express", "Docker"],
+        githubUrl: "https://github.com/himanshuraimau/rfa-docker-proxy",
+        type: "github",
+    },
+    {
+        id: 10,
+        title: "RSS Aggregator",
+        description:
+            "A Go application that serves as a fully functional RSS aggregator.",
+        technologies: ["Go", "PostgreSQL", "REST API"],
+        githubUrl:
+            "https://github.com/himanshuraimau/backend_projects/tree/main/rssaggregator",
+        type: "github",
+    },
+    {
+        id: 11,
+        title: "Video Backend Service",
+        description:
+            "This project is a backend service designed to support a YouTube-like application.",
+        technologies: ["Node.js", "Express", "MongoDB"],
+        githubUrl: "https://github.com/himanshuraimau/Backend_Project",
+        type: "github",
+    },
+    {
+        id: 12,
+        title: "RC4 Cipher",
+        description: "This project implements the RC4 stream cipher in C.",
+        technologies: ["C", "Cryptography", "Algorithms"],
+        githubUrl: "https://github.com/himanshuraimau/c-projects/tree/main/arcfour",
+        type: "github",
+    },
+    {
+        id: 13,
+        title: "Proxy Connection",
+        description:
+            "Establishes a connection to a proxy server, sends a request, and forwards data through the proxy.",
+        technologies: ["C", "Networking", "TCP/IP"],
+        githubUrl:
+            "https://github.com/himanshuraimau/c-projects/tree/main/toralize",
+        type: "github",
+    },
+];

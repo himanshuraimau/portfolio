@@ -13,13 +13,11 @@ import { SkillsToggle } from "@/components/features/skills-toggle";
 import { FadeIn } from "@/components/animations/fade-in";
 import { AnimatedButton } from "@/components/animations/animated-button";
 import { HeroSocialBar } from "@/components/social/hero-social-bar";
-import { webProjects } from "./projects/page";
+import { webProjects, deepCSProjects } from "@/lib/projects-data";
+import { FeaturedProjects } from "@/components/features/featured-projects";
 import { getBlogPosts } from "@/lib/blog";
 
 export default async function HomePage() {
-  const featuredProjects = webProjects
-    .filter((project) => project.type === "hosted")
-    .slice(0, 3);
   const posts = await getBlogPosts();
   const recentPosts = posts.slice(0, 3);
 
@@ -115,87 +113,10 @@ export default async function HomePage() {
       </div>
 
       {/* ================= PROJECTS SECTION ================= */}
-      <section id="projects" className="container-custom section-spacing">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-border pb-6">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-5 h-5 text-primary" />
-              <span className="font-mono text-sm text-primary uppercase tracking-wider">
-                Deployments
-              </span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold">Featured Work</h2>
-          </div>
-          <Link
-            href="/projects"
-            className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors font-mono text-sm"
-          >
-            /view_all_projects <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <FadeIn key={project.id} delay={index * 0.1}>
-              <div className="group relative h-full bg-card border border-border rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col">
-                {/* Image Window */}
-                <div className="aspect-[16/10] w-full bg-muted relative overflow-hidden border-b border-border">
-                  <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-20 transition-opacity z-10" />
-                  <Image
-                    src={project.image || "/icons/placeholder.svg"}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-
-                {/* Card Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-lg font-bold font-mono group-hover:text-primary transition-colors">
-                      {project.title}
-                    </h3>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
-                    {project.description}
-                  </p>
-
-                  {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border/50">
-                    {project.technologies?.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-mono text-muted-foreground bg-muted/50 px-2 py-1 rounded border border-border/50"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {(project.technologies?.length || 0) > 3 && (
-                      <span className="text-[10px] font-mono text-muted-foreground px-1 py-1">
-                        +{project.technologies!.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        <div className="mt-10 text-center md:hidden">
-          <AnimatedButton asChild variant="outline" className="w-full">
-            <Link href="/projects">View All Projects</Link>
-          </AnimatedButton>
-        </div>
-      </section>
+      <FeaturedProjects
+        webProjects={webProjects}
+        deepCSProjects={deepCSProjects}
+      />
 
       {/* ================= TECH STACK SECTION ================= */}
       <section className="border-y border-border bg-muted/20 py-24 relative overflow-hidden">
