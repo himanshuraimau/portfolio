@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Himanshu Rai – Portfolio
 
-## Getting Started
+> **Full-Stack Developer & AI Engineer**  
+> Third-year • AI & Data Science • Siddaganga Institute of Technology • 8.76 CGPA
 
-First, run the development server:
+Personal portfolio website showcasing my projects, technical skills, and engineering blog. Built with modern web technologies and optimized for performance.
+
+## 🚀 About Me
+
+I build full-stack web applications and AI-powered systems. My work spans distributed systems, real-time applications, machine learning pipelines, and scalable infrastructure.
+
+### Featured Projects
+
+- **[Voltstream](https://voltstream.vercel.app)** – Live-streaming platform with WebRTC for real-time video streaming and AWS infrastructure
+- **[Project0](https://project0-ai.vercel.app)** – AI study tool that converts PDFs/videos into auto-generated notes, flashcards, and courses using Gemini + OpenAI APIs
+- **[Sonex](https://github.com/himanshuraimau/sonex)** – Self-hosted text-to-speech and voice conversion system using PyTorch models with local deployment
+- **[Uply](https://github.com/himanshuraimau/uply)** – Distributed system monitoring platform with Redis caching and Docker orchestration
+- **[Drift](https://github.com/himanshuraimau/drift)** – P2P file-sharing system built in Go with AES-256 encryption and decentralized architecture
+
+### Achievements
+
+- 🏆 Ranked **288/10,000+** in Amazon ML Challenge 2025
+- 🥇 Winner – WrapSpeed (AWS Startup Track) + Browse Hyperthon
+- 🎓 Technical Workshop Lead – Mentored 50+ students, conducted GenAI workshops (40+ attendees)
+- ✍️ Technical writer at [enghimanshu.space](https://enghimanshu.space)
+
+### Tech Stack
+
+**Frontend:** React, Next.js, TypeScript, Tailwind CSS, React Native, Expo  
+**Backend:** Node.js, Express, Nginx, RabbitMQ, Prisma  
+**Languages:** Python, Go, C++, Java, JavaScript/TypeScript  
+**AI/ML:** LangChain, OpenAI, PyTorch, TensorFlow, Scikit-learn  
+**Databases:** MongoDB, PostgreSQL, Redis  
+**DevOps:** Docker, Kubernetes, AWS, Linux, CI/CD, Git
+
+---
+
+## 🛠️ Development Setup
+
+This portfolio is built with [Next.js 15](https://nextjs.org) and uses modern React patterns.
+
+### Prerequisites
+
+- Node.js 18+ or Bun runtime
+- Package manager: npm, yarn, pnpm, or bun
+
+### Installation
 
 ```bash
-npm run dev
+# Clone the repository
+git clone https://github.com/himanshuraimau/portfolio.git
+cd portfolio
+
+# Install dependencies
+bun install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Running Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Start development server
+bun dev
+# or
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-## Learn More
+### Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Create optimized production build
+bun run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Start production server
+bun start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+/workspace
+├── src/
+│   ├── app/              # Next.js App Router pages
+│   │   ├── about/        # About page
+│   │   ├── blog/         # Blog posts with MDX
+│   │   ├── projects/     # Projects showcase
+│   │   └── photography/  # Photography portfolio
+│   ├── components/       # React components
+│   │   ├── animations/   # Framer Motion animations
+│   │   ├── blog/         # Blog-specific components
+│   │   ├── features/     # Feature components
+│   │   └── ui/           # shadcn/ui components
+│   └── lib/              # Utilities and data
+├── content/blog/         # MDX blog posts
+└── public/               # Static assets
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🎨 Features
+
+- ✨ Modern, responsive UI with dark/light mode
+- 📝 MDX-powered blog with syntax highlighting
+- 🎭 Smooth animations with Framer Motion
+- 🖼️ Photography gallery with ImageKit integration
+- 🎯 SEO optimized with Next.js metadata API
+- ⚡ Fast performance with static generation
+- 📱 Mobile-first responsive design
+
+---
+
+## 🤝 Open to Opportunities
+
+Currently seeking **remote internship opportunities** in:
+- Full-Stack Development
+- AI/ML Engineering
+- System Architecture
+
+📧 Email: [himanshuraimau9@gmail.com](mailto:himanshuraimau9@gmail.com)  
+🔗 LinkedIn: [himanshu-rai-246121278](https://www.linkedin.com/in/himanshu-rai-246121278/)  
+💻 GitHub: [himanshuraimau](https://github.com/himanshuraimau)  
+🐦 Twitter: [@himanshura_i](https://twitter.com/himanshura_i)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS**
