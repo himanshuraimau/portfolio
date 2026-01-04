@@ -34,22 +34,44 @@ export default function AboutPage() {
                     <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-muted-foreground space-y-4">
                         <p>
                             <span className="text-primary mr-2">{`>`}</span>
-                            Hey, I'm <span className="text-foreground font-bold">Himanshu Rai</span>—a third-year student at Siddaganga Institute of Technology studying AI & Data Science (CGPA: 8.76).
+                            Hey, I'm <span className="text-foreground font-bold">Himanshu Rai</span>—a third-year student at <span className="text-foreground">Siddaganga Institute of Technology</span> studying AI & Data Science with a <span className="text-foreground">CGPA of 8.76</span>.
                         </p>
                         <p>
-                            I build full-stack web applications and AI-powered systems from the ground up. My work includes <span className="text-foreground">Voltstream</span>, a live-streaming platform with WebRTC and AWS, and <span className="text-foreground">Project0</span>, an AI study platform that converts PDFs and videos into notes, flashcards, and courses using Gemini + OpenAI.
+                            I build full-stack web apps and AI systems. Here's what I've shipped:
                         </p>
+                        <div className="pl-4 space-y-3 border-l-2 border-primary/30">
+                            <p>
+                                <span className="text-foreground font-semibold">Voltstream</span> – Live-streaming platform. WebRTC for real-time video, AWS for infrastructure.
+                            </p>
+                            <p>
+                                <span className="text-foreground font-semibold">Project0</span> – AI study tool. Takes PDFs/videos → auto-generates notes, flashcards, courses. Gemini + OpenAI APIs.
+                            </p>
+                            <p>
+                                <span className="text-foreground font-semibold">Sonex</span> – Self-hosted text-to-speech and voice conversion. PyTorch models, local deployment.
+                            </p>
+                            <p>
+                                <span className="text-foreground font-semibold">Uply</span> – Distributed system monitoring. Redis for caching, Docker for orchestration.
+                            </p>
+                            <p>
+                                <span className="text-foreground font-semibold">Drift</span> – P2P file-sharing system in Go. AES-256 encryption, decentralized architecture.
+                            </p>
+                        </div>
                         <p>
-                            I also built <span className="text-foreground">Sonex</span> (self-hosted TTS/VC with PyTorch models), <span className="text-foreground">Uply</span> (distributed monitoring with Redis + Docker), and <span className="text-foreground">Drift</span> (a P2P file system in Go with AES-256 encryption). On the side, I mentor 50+ students as a Technical Workshop Lead and led workshops on GenAI for 40+ participants.
+                            <span className="text-primary mr-2">{`>`}</span>
+                            Other achievements:
                         </p>
-                        <p>
-                            Ranked <span className="text-foreground">288/10,000+</span> in Amazon ML Challenge 2025. Won multiple hackathons including WrapSpeed AWS Startup Track and Browse Hyperthon. Actively write technical content at <a href="https://enghimanshu.space" target="_blank" className="text-foreground underline hover:text-primary">enghimanshu.space</a>.
-                        </p>
-                        <p className="text-foreground">
-                           Currently open to remote internship opportunities in full-stack development or AI engineering.
+                        <ul className="pl-4 space-y-2 list-disc list-inside">
+                            <li>Ranked <span className="text-foreground font-semibold">288/10,000+</span> in Amazon ML Challenge 2025</li>
+                            <li>Won <span className="text-foreground">WrapSpeed (AWS Startup Track)</span> + <span className="text-foreground">Browse Hyperthon</span></li>
+                            <li><span className="text-foreground">Technical Workshop Lead</span> – mentor 50+ students, ran GenAI workshops (40+ attendees)</li>
+                            <li>Write at <a href="https://enghimanshu.space" target="_blank" rel="noopener noreferrer" className="text-foreground underline hover:text-primary transition-colors">enghimanshu.space</a></li>
+                        </ul>
+                        <p className="text-foreground pt-2">
+                            <span className="text-primary mr-2">{`>`}</span>
+                            Open to: <span className="font-semibold">Remote internships in full-stack dev or AI engineering.</span>
                         </p>
                         <div className="pt-4 flex flex-wrap gap-4">
-                             <a href="/resume.pdf" target="_blank" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
+                             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
                                 <Download className="w-4 h-4" /> Download CV
                              </a>
                              <a href="mailto:himanshuraimau9@gmail.com" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
