@@ -322,18 +322,18 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
         const formattedDate = dateObj.toISOString();
         
         return {
-          title: file.frontmatter.title,
+          title: file?.frontmatter.title,
           date: formattedDate,
-          category: file.frontmatter.category,
-          author: file.frontmatter.author || 'Anonymous',
-          authorImage: file.frontmatter.authorImage,
-          authorBio: file.frontmatter.authorBio,
-          excerpt: file.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
-          image: file.frontmatter.image,
+          category: file?.frontmatter.category,
+          author: file?.frontmatter.author || 'Anonymous',
+          authorImage: file?.frontmatter.authorImage,
+          authorBio: file?.frontmatter.authorBio,
+          excerpt: file?.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
+          image: file?.frontmatter.image,
           content: '', // Don't load full content for listing
-          slug: file.slug,
+          slug: file?.slug,
           readingTime,
-          description: file.frontmatter.description || file.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
+          description: file?.frontmatter.description || file?.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
           tags
         };
       });

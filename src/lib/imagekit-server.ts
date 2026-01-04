@@ -113,6 +113,7 @@ async function fetchPhotosDirectly(): Promise<ProcessedPhoto[]> {
       
       // Extract potential dimensions from filename or use defaults
       const dimensions = extractDimensionsFromName(name);
+      const date = extractDateFromName(name);
       
       return processPhoto({
         fileId: `photo-${index}`,
@@ -124,7 +125,7 @@ async function fetchPhotosDirectly(): Promise<ProcessedPhoto[]> {
         height: dimensions.height,
         size: 0,
         fileType: 'image/jpeg',
-        createdAt: new Date(2023, index, 15).toISOString(),
+        createdAt: date,
       }, index);
     });
 
@@ -167,6 +168,30 @@ async function isImageAccessible(url: string): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+/**
+ * Try to extract date from filename
+ * Formats supported: 
+ * - photo_001_2024-12-25_landscape.jpg
+ * - photo_2024-01-15.jpg
+ * - 20240115_photo.jpg
+ */
+function extractDateFromName(filename: string): string {
+  // Try YYYY-MM-DD format (most readable)
+  const dateMatch1 = filename.match(/(\d{4})-(\d{2})-(\d{2})/);
+  if (dateMatch1) {
+    return new Date(dateMatch1[0]).toISOString();
+  }
+
+  // Try YYYYMMDD format
+  const dateMatch2 = filename.match(/(\d{4})(\d{2})(\d{2})/);
+  if (dateMatch2) {
+    return new Date(`${dateMatch2[1]}-${dateMatch2[2]}-${dateMatch2[3]}`).toISOString();
+  }
+
+  // Default to current date
+  return new Date().toISOString();
 }
 
 /**

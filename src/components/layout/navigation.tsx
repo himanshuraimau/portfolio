@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Terminal, Slash, ChevronRight } from "lucide-react"
+import { Menu, X, Terminal, ChevronRight } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"

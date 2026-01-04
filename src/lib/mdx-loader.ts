@@ -7,8 +7,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrism from 'rehype-prism-plus';
 import remarkGfm from 'remark-gfm';
 
-// Check if we're using Bun
-const isBun = process.env.BUN_RUNTIME === '1';
 
 // Custom remark plugin to fix the inTable issue
 function remarkInitializeData() {
