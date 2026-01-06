@@ -15,7 +15,7 @@ interface BlogPostPageProps {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const slug = await Promise.resolve(params.slug);
+  const { slug } = await params;
   const post = await getBlogPost(slug);
   
   if (!post) return { title: '404 - Not Found' }
@@ -40,7 +40,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const slug = await Promise.resolve(params.slug);
+  const { slug } = await params;
   const { isEnabled: isDraftMode } = await draftMode();
   const post = await getBlogPost(slug);
   

@@ -93,7 +93,7 @@ export function FeaturedProjects({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[500px]">
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                     {displayedProjects.map((project, index) => (
                         <FadeIn key={`${activeTab}-${project.id}`} delay={index * 0.1}>
                             {activeTab === "hosted" ? (

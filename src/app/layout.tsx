@@ -27,7 +27,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Himanshu Rai" }],
   creator: "Himanshu Rai",
   metadataBase: new URL('https://enghimanshu.space'),
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover",
   openGraph: {
     type: "website",
     title: "Himanshu Rai - Software Engineer Portfolio",
@@ -42,6 +41,13 @@ export const metadata: Metadata = {
     description: "Combining expertise in Full Stack Development, DevOps practices, and Artificial Intelligence to build innovative solutions.",
     creator: "@himanshura_i",
   },
+}
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({
