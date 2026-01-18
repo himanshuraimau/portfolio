@@ -14,7 +14,7 @@ export default async function PhotographyPage() {
     }));
 
     return (
-        <div className="min-h-screen bg-[#060010]">
+        <div className="min-h-screen bg-background">
             {/* Technical Header */}
             <section className="container-custom pt-24 pb-6">
                 <FadeIn>
@@ -25,7 +25,7 @@ export default async function PhotographyPage() {
 
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 border-b border-border pb-6">
                         <div>
-                            <h1 className="text-4xl md:text-5xl font-mono font-bold mb-4 text-white">
+                            <h1 className="text-4xl md:text-5xl font-mono font-bold mb-4 text-foreground">
                                 Visual_Log<span className="animate-pulse">_</span>
                             </h1>
                             <p className="text-lg text-muted-foreground font-mono max-w-xl">
@@ -44,7 +44,7 @@ export default async function PhotographyPage() {
             <section className="relative w-full h-[70vh] min-h-[500px]">
                 <DomeGallery
                     images={galleryImages}
-                    overlayBlurColor="#060010"
+                    overlayBlurColor="hsl(var(--background))"
                     grayscale={false}
                     fit={0.6}
                     minRadius={400}
