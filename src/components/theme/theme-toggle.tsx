@@ -6,9 +6,25 @@ import { useTheme } from "next-themes"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
+  }
+
+  if (!mounted) {
+    return (
+      <button
+        className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono rounded-lg border border-border/50 bg-muted/30 opacity-50 cursor-wait"
+        aria-label="Toggle theme"
+      >
+        <div className="h-3.5 w-3.5" />
+      </button>
+    )
   }
 
   return (

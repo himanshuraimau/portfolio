@@ -26,6 +26,7 @@ export interface ProcessedPhoto {
   className: string;
   width: number;
   height: number;
+  thumbnailSrc: string;
 }
 
 /**
@@ -41,22 +42,22 @@ export function getImageKitUrl(
   }
 ): string {
   const baseUrl = `${IMAGEKIT_URL}${filePath}`;
-  
+
   if (!transformations) {
     return baseUrl;
   }
 
   const params: string[] = [];
-  
+
   if (transformations.width) params.push(`w-${transformations.width}`);
   if (transformations.height) params.push(`h-${transformations.height}`);
   if (transformations.quality) params.push(`q-${transformations.quality}`);
   if (transformations.format) params.push(`f-${transformations.format}`);
-  
+
   if (params.length === 0) {
     return baseUrl;
   }
-  
+
   const transformation = `tr:${params.join(',')}`;
   return `${baseUrl}?${transformation}`;
 }
@@ -70,39 +71,39 @@ export function determineGridClass(
   index: number
 ): string {
   const aspectRatio = width / height;
-  
+
   // Calculate if image is landscape, portrait, or square
   const isLandscape = aspectRatio > 1.3;
   const isPortrait = aspectRatio < 0.75;
   const isSquare = aspectRatio >= 0.75 && aspectRatio <= 1.3;
-  
+
   // Create a pattern for variety
   // Every 5th image could be big, distribute others intelligently
   const isBigSpot = (index % 5) === 4;
   const isWideSpot = (index % 3) === 0 && !isBigSpot;
   const isTallSpot = (index % 4) === 2 && !isBigSpot;
-  
+
   // Smart sizing logic
   if (isBigSpot && (isSquare || isLandscape)) {
     return 'md:col-span-2 md:row-span-2'; // Big
   }
-  
+
   if (isLandscape && isWideSpot) {
     return 'md:col-span-2'; // Wide
   }
-  
+
   if (isPortrait && isTallSpot) {
     return 'md:row-span-2'; // Tall
   }
-  
+
   if (isPortrait) {
     return 'md:row-span-2'; // Tall portraits
   }
-  
+
   if (isLandscape) {
     return 'md:col-span-2'; // Wide landscapes
   }
-  
+
   return ''; // Square - single cell
 }
 
@@ -145,5 +146,6 @@ export function processPhoto(
     className: determineGridClass(photo.width, photo.height, index),
     width: photo.width,
     height: photo.height,
+    thumbnailSrc: photo.thumbnailUrl || getImageKitUrl(photo.filePath, { width: 400 }),
   };
 }

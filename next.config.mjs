@@ -13,20 +13,20 @@ function remarkInitializeData() {
     // Initialize the data object to prevent "this.data.inTable" error
     file.data = file.data || {};
     file.data.inTable = false;
-    
+
     // Visit all nodes to ensure data is properly initialized
     function visit(node) {
       if (node.type === 'table') {
         file.data.inTable = true;
       }
-      
+
       if (node.children) {
         node.children.forEach(visit);
       }
     }
-    
+
     visit(tree);
-    
+
     return tree;
   };
 }
@@ -49,9 +49,6 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },

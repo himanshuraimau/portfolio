@@ -59,28 +59,35 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
   }
-  
+
   /* Use Mono font for headings for a "Dev" feel */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-mono font-bold tracking-tight;
   }
 }
 
 @layer utilities {
+
   /* Tech Background Pattern */
   .bg-grid-pattern {
     background-size: 40px 40px;
     background-image: linear-gradient(to right, rgba(128, 128, 128, 0.05) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(128, 128, 128, 0.05) 1px, transparent 1px);
   }
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-cyan-500;
   }
-  
+
   /* Glow effect */
   .glow {
     box-shadow: 0 0 20px -5px rgba(var(--primary), 0.3);
@@ -102,9 +109,17 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
   @apply bg-background;
 }
+
 ::-webkit-scrollbar-thumb {
   @apply bg-muted-foreground/20 rounded-full hover:bg-muted-foreground/40 transition-colors;
+}
+
+/* DomeGallery Scroll Lock */
+body.dg-scroll-lock {
+  overflow: hidden;
+  touch-action: none;
 }

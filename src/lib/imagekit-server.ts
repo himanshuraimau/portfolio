@@ -59,10 +59,10 @@ export async function fetchPhotosFromImageKit(): Promise<ProcessedPhoto[]> {
 
     // Process files manually to avoid TypeScript issues
     const processedPhotos: ProcessedPhoto[] = [];
-    
+
     for (let i = 0; i < files.length; i++) {
       const file = files[i] as unknown as Record<string, unknown>;
-      
+
       // Only process actual files (not folders)
       if (file.type === 'file' && file.fileId) {
         const photo: ImageKitPhoto = {
@@ -77,15 +77,20 @@ export async function fetchPhotosFromImageKit(): Promise<ProcessedPhoto[]> {
           fileType: String(file.fileType || 'image/jpeg'),
           createdAt: String(file.createdAt || new Date().toISOString()),
         };
-        
+
         processedPhotos.push(processPhoto(photo, i));
       }
     }
 
     return processedPhotos;
 
-  } catch (error) {
-    console.error('Error fetching from ImageKit:', error);
+  } catch (error: any) {
+    // Only log full error if it's not an authentication error
+    if (error?.message?.includes('authenticated') || error?.statusCode === 403) {
+      console.warn('[ImageKit] Authentication failed (expected if keys are missing). Using fallback mode.');
+    } else {
+      console.error('Error fetching from ImageKit:', error);
+    }
     // Fallback to direct URLs
     return fetchPhotosDirectly();
   }
@@ -98,23 +103,23 @@ export async function fetchPhotosFromImageKit(): Promise<ProcessedPhoto[]> {
 async function fetchPhotosDirectly(): Promise<ProcessedPhoto[]> {
   try {
     const imageNames = await getImageNamesFromFolder();
-    
+
     // Validate each image URL in parallel
     const validationPromises = imageNames.map(async (name, index) => {
       const filePath = `/${PHOTOGRAPHY_FOLDER}/${name}`;
       const url = `${IMAGEKIT_URL}${filePath}`;
-      
+
       // Check if image exists
       const isValid = await isImageAccessible(url);
-      
+
       if (!isValid) {
         return null; // Skip invalid images
       }
-      
+
       // Extract potential dimensions from filename or use defaults
       const dimensions = extractDimensionsFromName(name);
       const date = extractDateFromName(name);
-      
+
       return processPhoto({
         fileId: `photo-${index}`,
         name,
@@ -130,7 +135,7 @@ async function fetchPhotosDirectly(): Promise<ProcessedPhoto[]> {
     });
 
     const photos = await Promise.all(validationPromises);
-    
+
     // Filter out null values (invalid images) and return only valid photos
     return photos.filter((photo): photo is ProcessedPhoto => photo !== null);
 
@@ -148,13 +153,13 @@ async function fetchPhotosDirectly(): Promise<ProcessedPhoto[]> {
 async function getImageNamesFromFolder(): Promise<string[]> {
   // Generate photo names based on your ImageKit naming pattern
   const photoCount = 50; // Total number to try
-  
+
   const photos: string[] = [];
   for (let i = 1; i <= photoCount; i++) {
     const photoNumber = i.toString().padStart(3, '0');
     photos.push(`photo_${photoNumber}.jpg`);
   }
-  
+
   return photos;
 }
 
