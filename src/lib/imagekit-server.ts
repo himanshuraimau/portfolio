@@ -15,6 +15,13 @@ import { IMAGEKIT_URL, PHOTOGRAPHY_FOLDER, processPhoto, type ImageKitPhoto, typ
  * - IMAGEKIT_PRIVATE_KEY
  * - IMAGEKIT_URL_ENDPOINT
  */
+
+// Manual list of files provided by user (since we can't list them via API without keys)
+// Add your custom filenames here to make them appear in fallback mode
+const MANUAL_FILE_LIST: string[] = [
+  // 'photo_031_2025-01-06_potrait.jpg',
+];
+
 function getImageKitInstance() {
   // For now, we'll work without authentication (public folder)
   // In production, add these to your .env.local:
@@ -214,7 +221,8 @@ function extractDimensionsFromName(filename: string): { width: number; height: n
   }
 
   // Check for orientation hints
-  if (filename.includes('portrait') || filename.includes('tall')) {
+  // Handle 'potrait' typo as well
+  if (filename.includes('portrait') || filename.includes('potrait') || filename.includes('tall')) {
     return { width: 1920, height: 2880 }; // 2:3 portrait
   }
 
