@@ -34,10 +34,13 @@ export default function AboutPage() {
                     <div className="p-6 md:p-8 font-mono text-sm leading-relaxed text-muted-foreground space-y-4">
                         <p>
                             <span className="text-primary mr-2">{`>`}</span>
-                            Hey, I'm <span className="text-foreground font-bold">Himanshu Rai</span>—a third-year student at <span className="text-foreground">Siddaganga Institute of Technology</span> studying AI & Data Science with a <span className="text-foreground">CGPA of 8.76</span>.
+                            Hey, I&apos;m <span className="text-foreground font-bold">Himanshu Rai</span>—a third-year student at <span className="text-foreground">Siddaganga Institute of Technology</span> studying AI & Data Science with a <span className="text-foreground">CGPA of 8.76</span>.
                         </p>
                         <p>
-                            I build full-stack web apps and AI systems. Here's what I've shipped:
+                            I build full-stack web apps and AI systems. I also do <span className="text-foreground font-semibold">freelancing</span>, where I&apos;ve delivered projects like a streaming platform and an AI notes platform (both web and mobile versions).
+                        </p>
+                        <p>
+                            Here&apos;s what I&apos;ve shipped:
                         </p>
                         <div className="pl-4 space-y-3 border-l-2 border-primary/30">
                             <p>
@@ -68,10 +71,10 @@ export default function AboutPage() {
                         </ul>
                         <p className="text-foreground pt-2">
                             <span className="text-primary mr-2">{`>`}</span>
-                            Open to: <span className="font-semibold">Remote internships in full-stack dev or AI engineering.</span>
+                            Open to: <span className="font-semibold">Remote internships in full-stack dev or AI engineering. Available for freelance projects.</span>
                         </p>
                         <div className="pt-4 flex flex-wrap gap-4">
-                             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
+                             <a href="/himansu_resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
                                 <Download className="w-4 h-4" /> Download CV
                              </a>
                              <a href="mailto:himanshuraimau9@gmail.com" className="inline-flex items-center gap-2 text-foreground border-b border-primary pb-0.5 hover:opacity-80 transition-opacity">
