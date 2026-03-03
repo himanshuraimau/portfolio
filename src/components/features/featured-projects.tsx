@@ -17,6 +17,7 @@ import {
 import { FadeIn } from "@/components/animations/fade-in";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useHaptics } from "@/hooks/use-haptics";
 
 interface Project {
     id: number;
@@ -40,6 +41,7 @@ export function FeaturedProjects({
     deepCSProjects,
 }: FeaturedProjectsProps) {
     const [activeTab, setActiveTab] = useState<"hosted" | "system">("hosted");
+    const { triggerSelection, triggerLight } = useHaptics();
 
     const displayedProjects =
         activeTab === "hosted" ? webProjects.slice(0, 3) : deepCSProjects.slice(0, 3);
@@ -60,7 +62,10 @@ export function FeaturedProjects({
                 <div className="flex items-center gap-4 mt-4 md:mt-0">
                     <div className="flex p-1 bg-muted/30 rounded-lg border border-border">
                         <button
-                            onClick={() => setActiveTab("hosted")}
+                            onClick={() => {
+                                triggerSelection()
+                                setActiveTab("hosted")
+                            }}
                             className={cn(
                                 "px-4 py-2 rounded-md text-sm font-mono transition-all",
                                 activeTab === "hosted"
@@ -71,7 +76,10 @@ export function FeaturedProjects({
                             Deployed
                         </button>
                         <button
-                            onClick={() => setActiveTab("system")}
+                            onClick={() => {
+                                triggerSelection()
+                                setActiveTab("system")
+                            }}
                             className={cn(
                                 "px-4 py-2 rounded-md text-sm font-mono transition-all",
                                 activeTab === "system"
@@ -119,6 +127,7 @@ export function FeaturedProjects({
                                             <a
                                                 href={project.link}
                                                 target="_blank"
+                                                onClick={() => triggerLight()}
                                                 className="text-muted-foreground hover:text-primary transition-colors"
                                             >
                                                 <ExternalLink className="w-4 h-4" />
@@ -151,6 +160,7 @@ export function FeaturedProjects({
                                     href={project.githubUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    onClick={() => triggerLight()}
                                     className="group block h-full"
                                 >
                                     <div className="h-full bg-card hover:bg-muted/50 border border-border hover:border-primary/50 rounded-lg p-5 transition-all duration-300 flex flex-col">

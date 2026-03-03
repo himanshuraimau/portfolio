@@ -5,10 +5,12 @@ import { SocialIcons } from "./social-icons"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { MoreHorizontal, X } from "lucide-react"
+import { useHaptics } from "@/hooks/use-haptics"
 
 export function FloatingSocial() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const { triggerLight } = useHaptics()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +51,10 @@ export function FloatingSocial() {
 
             {/* Toggle Button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                triggerLight()
+                setIsOpen(!isOpen)
+              }}
               className={cn(
                 "flex items-center justify-center w-12 h-12 rounded-xl border transition-all duration-300",
                 isOpen 

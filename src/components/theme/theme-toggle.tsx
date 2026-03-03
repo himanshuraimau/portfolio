@@ -3,16 +3,19 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
+import { useHaptics } from "@/hooks/use-haptics"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
+  const { triggerSelection } = useHaptics()
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
 
   const toggleTheme = () => {
+    triggerSelection()
     setTheme(theme === "dark" ? "light" : "dark")
   }
 

@@ -4,17 +4,21 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useHaptics } from "@/hooks/use-haptics"
 
 type AnimatedButtonProps = React.ComponentProps<typeof Button> & {
   className?: string
 }
 
 export function AnimatedButton({ children, className, ...props }: AnimatedButtonProps) {
+  const { triggerMedium } = useHaptics()
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "tween", duration: 0.1 }}
+      onClick={() => triggerMedium()}
     >
       <Button 
         className={cn(

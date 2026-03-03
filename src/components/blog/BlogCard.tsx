@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, ArrowRight, FileText, Terminal } from "lucide-react"
+import { useHaptics } from "@/hooks/use-haptics"
 
 interface BlogCardProps {
   title: string;
@@ -24,9 +27,12 @@ export function BlogCard({
   tags,
   index 
 }: BlogCardProps) {
+  const { triggerLight } = useHaptics()
+
   return (
     <Link 
       href={`/blog/${slug}`}
+      onClick={() => triggerLight()}
       className="group block h-full"
     >
       <article className="relative h-full flex flex-col p-5 rounded-xl border border-border bg-card hover:border-primary/50 transition-all duration-300 overflow-hidden">

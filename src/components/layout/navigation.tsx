@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme/theme-toggle"
+import { useHaptics } from "@/hooks/use-haptics"
 
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const { triggerSelection, triggerMedium, triggerLight } = useHaptics()
 
   // Handle scroll effect
   useEffect(() => {
@@ -64,6 +66,7 @@ export function Navigation() {
                 <Link
                   key={route.path}
                   href={route.path}
+                  onClick={() => triggerSelection()}
                   className={cn(
                     "relative px-4 py-1.5 text-sm font-mono transition-all duration-200 rounded-md flex items-center gap-2",
                     isActive ? "text-foreground font-semibold" : "text-muted-foreground hover:text-foreground"
@@ -96,7 +99,14 @@ export function Navigation() {
                 variant="ghost" 
                 size="icon" 
                 className="md:hidden rounded-md border border-border/50 hover:bg-muted" 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                onClick={() => {
+                  if (isMenuOpen) {
+                    triggerLight()
+                  } else {
+                    triggerMedium()
+                  }
+                  setIsMenuOpen(!isMenuOpen)
+                }}
             >
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -127,7 +137,10 @@ export function Navigation() {
                     <Link
                         key={route.path}
                         href={route.path}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => {
+                          triggerLight()
+                          setIsMenuOpen(false)
+                        }}
                         className={cn(
                         "group flex items-center justify-between px-4 py-3 rounded-lg font-mono text-sm transition-colors",
                         isActive 

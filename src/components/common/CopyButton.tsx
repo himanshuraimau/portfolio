@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useHaptics } from '@/hooks/use-haptics';
 
 interface CopyButtonProps {
   code: string;
@@ -8,6 +9,7 @@ interface CopyButtonProps {
 
 export default function CopyButton({ code }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
+  const { triggerSuccess, triggerError } = useHaptics();
   
   useEffect(() => {
     if (copied) {
@@ -22,8 +24,10 @@ export default function CopyButton({ code }: CopyButtonProps) {
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
+      triggerSuccess();
     } catch (error) {
       console.error('Failed to copy code:', error);
+      triggerError();
     }
   };
 

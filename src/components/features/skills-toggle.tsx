@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Cpu, Database, Layout, Server, Terminal, Wrench } from "lucide-react"
+import { useHaptics } from "@/hooks/use-haptics"
 
 // Skill data organized by category
 const skillsData = {
@@ -29,6 +30,7 @@ const categoryIcons = {
 export function SkillsToggle() {
   const [activeCategory, setActiveCategory] = useState<SkillCategory>("frontend")
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const { triggerSelection } = useHaptics()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -56,7 +58,10 @@ export function SkillsToggle() {
             return (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id as SkillCategory)}
+                onClick={() => {
+                  triggerSelection()
+                  setActiveCategory(category.id as SkillCategory)
+                }}
                 className={cn(
                   "flex items-center justify-center gap-1.5 px-2 sm:px-3 lg:flex-1 py-2.5 text-xs font-mono transition-all border-r border-border last:border-r-0 whitespace-nowrap",
                   activeCategory === category.id
