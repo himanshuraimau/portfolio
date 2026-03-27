@@ -15,7 +15,7 @@ import { AnimatedButton } from "@/components/animations/animated-button";
 import { HeroSocialBar } from "@/components/social/hero-social-bar";
 import { webProjects, deepCSProjects } from "@/lib/projects-data";
 import { FeaturedProjects } from "@/components/features/featured-projects";
-import { getBlogPosts } from "@/lib/blog";
+import { getBlogPosts, postPathFromSlug } from "@/lib/blog";
 
 export default async function HomePage() {
   const posts = await getBlogPosts();
@@ -180,7 +180,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 gap-6">
           {recentPosts.map((post) => (
             <FadeIn key={post.slug} direction="up">
-              <Link href={`/blog/${post.slug}`} className="block group">
+              <Link href={postPathFromSlug(post.slug)} className="block group">
                 <div className="flex flex-col md:flex-row gap-6 p-6 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                   <div className="md:w-[200px] shrink-0">
                     <span className="text-xs font-mono text-muted-foreground block mb-2">

@@ -113,17 +113,39 @@ export async function loadMDXContent(filePath: string) {
 }
 
 /**
- * Load all MDX files from a directory
+ * Recursively list all MDX file paths under a directory.
+ * Skips files whose basename starts with `_` (templates, drafts).
+ */
+export function getAllMDXFilePathsFromDir(directory: string): string[] {
+  if (!fs.existsSync(directory)) return [];
+  const entries = fs.readdirSync(directory, { withFileTypes: true });
+  const paths: string[] = [];
+  for (const entry of entries) {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      paths.push(...getAllMDXFilePathsFromDir(fullPath));
+    } else if (
+      entry.isFile() &&
+      entry.name.endsWith('.mdx') &&
+      !path.basename(entry.name).startsWith('_')
+    ) {
+      paths.push(fullPath);
+    }
+  }
+  return paths;
+}
+
+/**
+ * Load all MDX files from a directory (including subfolders).
  */
 export async function loadAllMDXFiles(directory: string) {
-  const files = fs.readdirSync(directory);
-  const mdxFiles = files.filter(file => file.endsWith('.mdx'));
-  
+  const mdxFilePaths = getAllMDXFilePathsFromDir(directory);
+
   return Promise.all(
-    mdxFiles.map(async (file) => {
-      const filePath = path.join(directory, file);
-      const slug = file.replace(/\.mdx$/, '');
-      
+    mdxFilePaths.map(async (filePath) => {
+      const relativePath = path.relative(directory, filePath);
+      const slug = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/');
+
       try {
         const { frontmatter, content } = await loadMDXContent(filePath);
         return {
@@ -136,7 +158,7 @@ export async function loadAllMDXFiles(directory: string) {
         return null;
       }
     })
-  ).then(results => results.filter(Boolean));
+  ).then((results) => results.filter(Boolean));
 }
 
 /**

@@ -1,7 +1,7 @@
 // app/blog/tag/[tag]/page.tsx (Unified design for Tags/Categories)
 import Link from "next/link"
 import Image from "next/image"
-import { getPostsByTag} from "@/lib/blog"
+import { getPostsByTag, postPathFromSlug } from "@/lib/blog"
 import { notFound } from "next/navigation"
 import { ArrowLeft, Calendar } from "lucide-react"
 
@@ -32,7 +32,7 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
           {posts.map((post) => (
              <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={postPathFromSlug(post.slug)}
               className="group flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-all"
             >
               <div className="aspect-video bg-muted relative overflow-hidden">

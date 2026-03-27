@@ -6,7 +6,11 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrism from 'rehype-prism-plus'
 import remarkGfm from 'remark-gfm'
-import {  loadAllMDXFiles, getMDXFileBySlug } from './mdx-loader'
+import {
+  loadAllMDXFiles,
+  getMDXFileBySlug,
+  getAllMDXFilePathsFromDir,
+} from './mdx-loader'
 
 // Check if we're using Bun
 const isBun = process.env.BUN_RUNTIME === '1';
@@ -60,6 +64,8 @@ export interface BlogPost {
   image?: string
   content: any // Changed from string to any to support serialized MDX
   slug: string
+  /** First path segment when slug is nested, e.g. `backend` for `backend/intro` */
+  section?: string
   excerpt?: string
   readingTime?: number
   description: string
@@ -72,6 +78,45 @@ export interface RelatedPost {
   image?: string
   slug: string
   description: string
+}
+
+function parseFrontmatterDateISO(date: unknown): string | null {
+  if (date == null || date === '') return null
+  const d = new Date(String(date))
+  if (Number.isNaN(d.getTime())) return null
+  return d.toISOString()
+}
+
+export function normalizePostImage(image: unknown): string | undefined {
+  if (typeof image !== 'string') return undefined
+  const t = image.trim()
+  if (t.length === 0) return undefined
+  // next/image requires an absolute path (leading /) or a full URL
+  if (t.startsWith('/') || t.startsWith('http://') || t.startsWith('https://')) {
+    return t
+  }
+  return undefined
+}
+
+export function sectionFromSlug(slug: string): string | undefined {
+  const i = slug.indexOf('/')
+  return i === -1 ? undefined : slug.slice(0, i)
+}
+
+export function postPathFromSlug(slug: string): string {
+  return `/blog/${slug}`
+}
+
+export function getBlogFolders(posts: BlogPost[]): string[] {
+  const s = new Set<string>()
+  posts.forEach((p) => {
+    if (p.section) s.add(p.section)
+  })
+  return Array.from(s).sort()
+}
+
+export function getPostsInFolder(posts: BlogPost[], folder: string): BlogPost[] {
+  return posts.filter((p) => p.section === folder)
 }
 
 // Add caching for blog posts
@@ -98,6 +143,12 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         }
         
         const { frontmatter, content } = mdxFile;
+
+        const formattedDate = parseFrontmatterDateISO(frontmatter.date)
+        if (!formattedDate) {
+          console.warn(`Blog post ${slug} has invalid or missing date`)
+          return null
+        }
         
         // Calculate reading time (average reading speed: 200 words per minute)
         const wordCount = content.toString().trim().split(/\s+/).length;
@@ -108,9 +159,6 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
           (Array.isArray(frontmatter.tags) ? frontmatter.tags : frontmatter.tags.split(',').map((tag: string) => tag.trim())) : 
           [];
         
-        // Format the date
-        const formattedDate = new Date(frontmatter.date).toISOString();
-        
         // Create the blog post object
         const post: BlogPost = {
           title: frontmatter.title,
@@ -119,9 +167,10 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
           author: frontmatter.author || 'Anonymous',
           authorImage: frontmatter.authorImage,
           authorBio: frontmatter.authorBio,
-          image: frontmatter.image,
+          image: normalizePostImage(frontmatter.image),
           content: content,
           slug,
+          section: sectionFromSlug(slug),
           excerpt: frontmatter.excerpt || content.toString().substring(0, 150) + '...',
           readingTime,
           description: frontmatter.description || frontmatter.excerpt || content.toString().substring(0, 150) + '...',
@@ -149,6 +198,12 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     
     const fileContent = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContent)
+
+    const formattedDate = parseFrontmatterDateISO(data.date)
+    if (!formattedDate) {
+      console.warn(`Blog post ${slug} has invalid or missing date`)
+      return null
+    }
     
     // Calculate reading time (average reading speed: 200 words per minute)
     const wordCount = content.trim().split(/\s+/).length;
@@ -177,9 +232,6 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         scope: data,
       });
       
-      // Format the date
-      const formattedDate = new Date(data.date).toISOString();
-      
       const post: BlogPost = {
         title: data.title,
         date: formattedDate,
@@ -187,9 +239,10 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         author: data.author || 'Anonymous',
         authorImage: data.authorImage,
         authorBio: data.authorBio,
-        image: data.image,
+        image: normalizePostImage(data.image),
         content: mdxSource,
         slug,
+        section: sectionFromSlug(slug),
         excerpt: data.excerpt || content.substring(0, 150) + '...',
         readingTime,
         description: data.description || data.excerpt || content.substring(0, 150) + '...',
@@ -204,8 +257,6 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       console.error(`Error serializing MDX for ${slug}:`, mdxError);
       
       // Create a fallback post with HTML content
-      const formattedDate = new Date(data.date).toISOString();
-      
       // Convert markdown to simple HTML as a fallback
       const htmlContent = markdownToHtml(content);
       
@@ -216,9 +267,10 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         author: data.author || 'Anonymous',
         authorImage: data.authorImage,
         authorBio: data.authorBio,
-        image: data.image,
+        image: normalizePostImage(data.image),
         content: htmlContent, // Use HTML content as fallback
         slug,
+        section: sectionFromSlug(slug),
         excerpt: data.excerpt || content.substring(0, 150) + '...',
         readingTime,
         description: data.description || data.excerpt || content.substring(0, 150) + '...',
@@ -239,53 +291,17 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 // Function to get related posts
 export async function getRelatedPosts(currentSlug: string, currentCategory: string): Promise<RelatedPost[]> {
   try {
-    const postsDirectory = path.join(process.cwd(), 'content/blog')
-    
-    // Use optimized MDX loader if Bun is available
-    if (isBun) {
-      const allMdxFiles = await loadAllMDXFiles(postsDirectory);
-      
-      const relatedPosts = allMdxFiles
-        .filter(file => file.slug !== currentSlug)
-        .map(file => ({
-          title: file.frontmatter.title,
-          category: file.frontmatter.category,
-          image: file.frontmatter.image,
-          slug: file.slug,
-          description: file.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...'
-        }))
-        .filter(post => post.category === currentCategory)
-        .slice(0, 2);
-      
-      return relatedPosts;
-    }
-    
-    // Fallback to standard implementation
-    const filenames = fs.readdirSync(postsDirectory)
-    
-    const relatedPosts = filenames
-      .filter(filename => {
-        const slug = filename.replace(/\.mdx$/, '')
-        return slug !== currentSlug
-      })
-      .map(filename => {
-        const filePath = path.join(postsDirectory, filename)
-        const fileContent = fs.readFileSync(filePath, 'utf8')
-        const { data, content } = matter(fileContent)
-        const slug = filename.replace(/\.mdx$/, '')
-        
-        return {
-          title: data.title,
-          category: data.category,
-          image: data.image,
-          slug,
-          description: data.excerpt || content.substring(0, 150) + '...'
-        }
-      })
-      .filter(post => post.category === currentCategory)
+    const allPosts = await getBlogPosts()
+    return allPosts
+      .filter((p) => p.slug !== currentSlug && p.category === currentCategory)
       .slice(0, 2)
-    
-    return relatedPosts
+      .map((p) => ({
+        title: p.title,
+        category: p.category,
+        image: p.image,
+        slug: p.slug,
+        description: p.description,
+      }))
   } catch (error) {
     console.error(`Error getting related posts for ${currentSlug}:`, error)
     return []
@@ -306,107 +322,116 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
     // Use optimized MDX loader if Bun is available
     if (isBun) {
       const allMdxFiles = await loadAllMDXFiles(postsDirectory);
-      
-      const posts = allMdxFiles.map(file => {
-        // Calculate reading time
-        const wordCount = file.content.toString().trim().split(/\s+/).length;
-        const readingTime = Math.ceil(wordCount / 200);
-        
-        // Process tags if they exist
-        const tags = file.frontmatter.tags ? 
-          (Array.isArray(file.frontmatter.tags) ? file.frontmatter.tags : file.frontmatter.tags.split(',').map((tag: string) => tag.trim())) : 
-          [];
-        
-        // Format the date
-        const dateObj = new Date(file.frontmatter.date);
-        const formattedDate = dateObj.toISOString();
-        
-        return {
-          title: file?.frontmatter.title,
-          date: formattedDate,
-          category: file?.frontmatter.category,
-          author: file?.frontmatter.author || 'Anonymous',
-          authorImage: file?.frontmatter.authorImage,
-          authorBio: file?.frontmatter.authorBio,
-          excerpt: file?.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
-          image: file?.frontmatter.image,
-          content: '', // Don't load full content for listing
-          slug: file?.slug,
-          readingTime,
-          description: file?.frontmatter.description || file?.frontmatter.excerpt || file.content.toString().substring(0, 150) + '...',
-          tags
-        };
-      });
-      
-      // Sort posts by date (newest first)
+
+      const posts = allMdxFiles
+        .map((file) => {
+          const formattedDate = parseFrontmatterDateISO(file.frontmatter.date)
+          if (!formattedDate) {
+            console.warn(
+              `Skipping blog listing for ${file.slug}: invalid or missing date`
+            )
+            return null
+          }
+
+          const wordCount = file.content.toString().trim().split(/\s+/).length
+          const readingTime = Math.ceil(wordCount / 200)
+
+          const tags = file.frontmatter.tags
+            ? Array.isArray(file.frontmatter.tags)
+              ? file.frontmatter.tags
+              : file.frontmatter.tags
+                  .split(',')
+                  .map((tag: string) => tag.trim())
+            : []
+
+          return {
+            title: file.frontmatter.title,
+            date: formattedDate,
+            category: file.frontmatter.category,
+            author: file.frontmatter.author || 'Anonymous',
+            authorImage: file.frontmatter.authorImage,
+            authorBio: file.frontmatter.authorBio,
+            excerpt:
+              file.frontmatter.excerpt ||
+              file.content.toString().substring(0, 150) + '...',
+            image: normalizePostImage(file.frontmatter.image),
+            content: '',
+            slug: file.slug,
+            section: sectionFromSlug(file.slug),
+            readingTime,
+            description:
+              file.frontmatter.description ||
+              file.frontmatter.excerpt ||
+              file.content.toString().substring(0, 150) + '...',
+            tags,
+          } satisfies BlogPost
+        })
+        .filter((p): p is BlogPost => p !== null)
+
       const sortedPosts = posts.sort((a, b) => {
         const dateA = new Date(a.date).getTime()
         const dateB = new Date(b.date).getTime()
         return dateB - dateA
-      });
-      
-      // Cache the result before returning
-      allPostsCache.set(cacheKey, sortedPosts);
-      
-      return sortedPosts;
-    }
-    
-    // Fallback to standard implementation
-    const filenames = fs.readdirSync(postsDirectory)
-    
-    const posts = await Promise.all(filenames.map(async (filename) => {
-      // Read file content
-      const filePath = path.join(postsDirectory, filename)
-      const fileContent = fs.readFileSync(filePath, 'utf8')
-      
-      // Parse frontmatter
-      const { data, content } = matter(fileContent)
-      
-      // Get slug from filename (remove .mdx extension)
-      const slug = filename.replace(/\.mdx$/, '')
-      
-      // Process tags if they exist
-      const tags = data.tags ? 
-        (Array.isArray(data.tags) ? data.tags : data.tags.split(',').map((tag: string) => tag.trim())) : 
-        [];
+      })
 
-      // Format the date for sorting
-      const dateObj = new Date(data.date);
-      const formattedDate = dateObj.toISOString();
-      const displayDate = dateObj.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      
-      return {
-        title: data.title,
-        date: formattedDate,
-        displayDate,
-        category: data.category,
-        author: data.author || 'Anonymous',
-        authorImage: data.authorImage,
-        authorBio: data.authorBio,
-        excerpt: data.excerpt || content.substring(0, 150) + '...',
-        image: data.image,
-        content: '', // Don't load full content for listing
-        slug,
-        readingTime: Math.ceil(content.trim().split(/\s+/).length / 200),
-        description: data.description || data.excerpt || content.substring(0, 150) + '...',
-        tags
-      }
-    }))
-    
-    // Sort posts by date (newest first)
-    const sortedPosts = posts.sort((a, b) => {
+      allPostsCache.set(cacheKey, sortedPosts)
+
+      return sortedPosts
+    }
+
+    const filePaths = getAllMDXFilePathsFromDir(postsDirectory)
+
+    const posts = await Promise.all(
+      filePaths.map(async (filePath) => {
+        const fileContent = fs.readFileSync(filePath, 'utf8')
+        const { data, content } = matter(fileContent)
+        const relativePath = path.relative(postsDirectory, filePath)
+        const slug = relativePath.replace(/\.mdx$/, '').replace(/\\/g, '/')
+
+        const formattedDate = parseFrontmatterDateISO(data.date)
+        if (!formattedDate) {
+          console.warn(
+            `Skipping blog listing for ${slug}: invalid or missing date`
+          )
+          return null
+        }
+
+        const tags = data.tags
+          ? Array.isArray(data.tags)
+            ? data.tags
+            : data.tags.split(',').map((tag: string) => tag.trim())
+          : []
+
+        return {
+          title: data.title,
+          date: formattedDate,
+          category: data.category,
+          author: data.author || 'Anonymous',
+          authorImage: data.authorImage,
+          authorBio: data.authorBio,
+          excerpt: data.excerpt || content.substring(0, 150) + '...',
+          image: normalizePostImage(data.image),
+          content: '',
+          slug,
+          section: sectionFromSlug(slug),
+          readingTime: Math.ceil(content.trim().split(/\s+/).length / 200),
+          description:
+            data.description || data.excerpt || content.substring(0, 150) + '...',
+          tags,
+        } satisfies BlogPost
+      })
+    )
+
+    const validPosts = posts.filter((p): p is BlogPost => p !== null)
+
+    const sortedPosts = validPosts.sort((a, b) => {
       const dateA = new Date(a.date).getTime()
       const dateB = new Date(b.date).getTime()
       return dateB - dateA
-    });
+    })
 
-    // Cache the result before returning
-    allPostsCache.set(cacheKey, sortedPosts);
-    
+    allPostsCache.set(cacheKey, sortedPosts)
+
     return sortedPosts
   } catch (error) {
     console.error('Error getting blog posts:', error)

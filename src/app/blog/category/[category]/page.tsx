@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { getBlogPosts } from "@/lib/blog"
+import { getBlogPosts, postPathFromSlug } from "@/lib/blog"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { FolderOpen, ArrowLeft, Terminal, Calendar, FileText, Hash } from "lucide-react"
@@ -133,7 +133,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 {posts.map((post) => (
                     <Link
                         key={post.slug}
-                        href={`/blog/${post.slug}`}
+                        href={postPathFromSlug(post.slug)}
                         className="group flex flex-col h-full bg-card border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-all"
                     >
                     <div className="aspect-video bg-muted relative overflow-hidden border-b border-border">

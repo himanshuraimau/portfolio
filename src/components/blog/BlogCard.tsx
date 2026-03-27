@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Calendar, ArrowRight, FileText, Terminal } from "lucide-react"
 import { useHaptics } from "@/hooks/use-haptics"
+import { postPathFromSlug } from "@/lib/blog"
 
 interface BlogCardProps {
   title: string;
@@ -31,7 +32,7 @@ export function BlogCard({
 
   return (
     <Link 
-      href={`/blog/${slug}`}
+      href={postPathFromSlug(slug)}
       onClick={() => triggerLight()}
       className="group block h-full"
     >
