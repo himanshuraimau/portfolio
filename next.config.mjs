@@ -79,6 +79,22 @@ const nextConfig = {
       optimizePackageImports: ['next-mdx-remote', 'rehype-slug', 'rehype-autolink-headings', 'rehype-prism-plus'],
     } : {}),
   },
+  async rewrites() {
+    return {
+      // beforeFiles runs ahead of the app's own pages, so the blog index and
+      // every post are served from Pagemule even if a local /blogg route exists.
+      beforeFiles: [
+        {
+          source: '/blogg',
+          destination: 'https://cdn.pagemule.com/cmqkv02mr0001l7048aq7qjyy/blog',
+        },
+        {
+          source: '/blogg/:path*',
+          destination: 'https://cdn.pagemule.com/cmqkv02mr0001l7048aq7qjyy/blog/:path*',
+        },
+      ],
+    };
+  },
   webpack: (config, { dev }) => {
     if (dev) {
       // Configure webpack to use polling instead of file system events
