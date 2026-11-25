@@ -1,0 +1,38 @@
+---
+import { NAV } from '../consts';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="container">
+	<nav aria-label="Primary">
+		{
+			NAV.map((item) => (
+				<a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+					{item.label}
+				</a>
+			))
+		}
+	</nav>
+</header>
+
+<style>
+	header {
+		margin-bottom: clamp(32px, 8vh, 72px);
+	}
+	nav {
+		display: flex;
+		gap: 22px;
+	}
+	a {
+		color: var(--muted);
+		text-decoration: none;
+	}
+	a:hover,
+	a[aria-current='page'] {
+		color: var(--text);
+		text-decoration: underline;
+	}
+</style>

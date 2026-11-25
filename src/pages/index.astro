@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { SITE, LINKS } from '../consts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 5);
+---
+
+<BaseLayout>
+	<h1>{SITE.name}</h1>
+	<p>
+		I'm a software engineer currently interning at Morgan Stanley. I'm interested in AI
+		infrastructure and performance engineering.
+	</p>
+	<p>I like building reliable systems and making them faster.</p>
+
+	<nav class="links" aria-label="Find me online">
+		{
+			LINKS.map((link) => (
+				<a
+					href={link.href}
+					target={link.href.startsWith('http') ? '_blank' : undefined}
+					rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+				>
+					{link.label}
+				</a>
+			))
+		}
+	</nav>
+
+	{
+		posts.length > 0 && (
+			<section>
+				<h2>Latest writing</h2>
+				<PostList posts={posts} />
+				<p><a href="/blog">All posts →</a></p>
+			</section>
+		)
+	}
+</BaseLayout>
