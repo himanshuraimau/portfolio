@@ -8,6 +8,8 @@ const blog = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		date: z.coerce.date(),
+		// Position inside a category (1 = first). Posts without one sort by date.
+		order: z.number().optional(),
 		draft: z.boolean().default(false),
 	}),
 });

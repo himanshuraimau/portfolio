@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import LinkList from '../../../components/LinkList.astro';
+import { getPosts, sectionInfo, categoryInfo, unique } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+	const posts = await getPosts();
+	return unique(posts.map((p) => p.section)).map((section) => ({
+		params: { section },
+		props: {
+			categories: unique(posts.filter((p) => p.section === section).map((p) => p.category)).map(
+				(category) => {
+					const count = posts.filter(
+						(p) => p.section === section && p.category === category,
+					).length;
+					const info = categoryInfo(section, category);
+					return {
+						href: `/blog/${section}/${category}`,
+						title: info.title,
+						description: info.description,
+						meta: `${count} ${count === 1 ? 'post' : 'posts'}`,
+					};
+				},
+			),
+		},
+	}));
+}
+
+const { section } = Astro.params;
+const { categories } = Astro.props;
+const info = sectionInfo(section);
+---
+
+<BaseLayout title={info.title} description={info.description || undefined}>
+	<Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: info.title }]} />
+	<h1>{info.title}</h1>
+	{info.description && <p class="muted">{info.description}</p>}
+	<LinkList items={categories} />
+</BaseLayout>

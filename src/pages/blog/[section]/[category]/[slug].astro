@@ -1,0 +1,67 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Lightbox from '../../../../components/Lightbox.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import { getPosts, bySeries, sectionInfo, categoryInfo } from '../../../../lib/blog';
+
+export async function getStaticPaths() {
+	const posts = await getPosts();
+	return posts.map((post) => {
+		const siblings = posts
+			.filter((p) => p.section === post.section && p.category === post.category)
+			.sort(bySeries);
+		const i = siblings.findIndex((p) => p.id === post.id);
+		return {
+			params: { section: post.section, category: post.category, slug: post.slug },
+			props: { post, prev: siblings[i - 1], next: siblings[i + 1] },
+		};
+	});
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+const sec = sectionInfo(post.section);
+const cat = categoryInfo(post.section, post.category);
+const date = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' }).format(
+	post.data.date,
+);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+	<Breadcrumbs
+		items={[
+			{ label: 'Blog', href: '/blog' },
+			{ label: sec.title, href: `/blog/${post.section}` },
+			{ label: cat.title, href: `/blog/${post.section}/${post.category}` },
+		]}
+	/>
+	<article>
+		<h1>{post.data.title}</h1>
+		<p class="muted"><time datetime={post.data.date.toISOString()}>{date}</time></p>
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+
+	{
+		(prev || next) && (
+			<nav class="pager" aria-label="Series navigation">
+				<span>{prev && <a href={`/blog/${prev.id}`}>← {prev.data.title}</a>}</span>
+				<span>{next && <a href={`/blog/${next.id}`}>{next.data.title} →</a>}</span>
+			</nav>
+		)
+	}
+	<Lightbox />
+</BaseLayout>
+
+<style>
+	.pager {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		margin-top: 64px;
+		padding-top: 16px;
+		border-top: 1px solid var(--rule);
+	}
+</style>

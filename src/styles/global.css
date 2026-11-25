@@ -6,6 +6,19 @@
 	--link: #1a4b8c;
 	--link-hover: #0a2c59;
 	--rule: #e5e5e5;
+	--code-bg: #f3f3f3;
+}
+
+/* Dark: explicit choice, or the system preference when no choice was made. */
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--bg: #121212;
+	--text: #e6e6e6;
+	--muted: #9a9a9a;
+	--link: #7db3f5;
+	--link-hover: #a9ccf8;
+	--rule: #2c2c2c;
+	--code-bg: #232323;
 }
 
 *,
@@ -90,7 +103,7 @@ a:focus-visible {
 .prose :not(pre) > code {
 	padding: 0.1em 0.35em;
 	border-radius: 4px;
-	background: #f3f3f3;
+	background: var(--code-bg);
 	font-size: 0.9em;
 }
 
@@ -99,4 +112,43 @@ a:focus-visible {
 	padding-left: 16px;
 	border-left: 3px solid var(--rule);
 	color: var(--muted);
+}
+
+.prose h2 {
+	margin-top: 40px;
+}
+
+.prose h3 {
+	margin: 28px 0 12px;
+	font-size: 1.05rem;
+}
+
+.prose ul,
+.prose ol {
+	margin: 0 0 14px;
+	padding-left: 24px;
+}
+
+.prose li {
+	margin-bottom: 6px;
+}
+
+.prose figure {
+	margin: 24px 0;
+}
+
+.prose figcaption {
+	margin-top: 6px;
+	color: var(--muted);
+	font-size: 0.875rem;
+}
+
+.prose img {
+	cursor: zoom-in;
+	transition: box-shadow 0.15s ease;
+}
+
+.prose img:hover,
+.prose img:focus-visible {
+	box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
 }

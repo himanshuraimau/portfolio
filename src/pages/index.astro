@@ -1,12 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostList from '../components/PostList.astro';
+import { getPosts, byDateDesc } from '../lib/blog';
 import { SITE, LINKS } from '../consts';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-	.slice(0, 5);
+const posts = (await getPosts()).sort(byDateDesc).slice(0, 5);
 ---
 
 <BaseLayout>
@@ -35,8 +33,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 		posts.length > 0 && (
 			<section>
 				<h2>Latest writing</h2>
-				<PostList posts={posts} />
-				<p><a href="/blog">All posts →</a></p>
+				<PostList posts={posts} showCategory />
+				<p><a href="/blog">Browse all sections →</a></p>
 			</section>
 		)
 	}

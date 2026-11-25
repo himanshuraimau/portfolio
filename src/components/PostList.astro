@@ -1,11 +1,13 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { Post } from '../lib/blog';
+import { categoryInfo } from '../lib/blog';
 
 interface Props {
-	posts: CollectionEntry<'blog'>[];
+	posts: Post[];
+	showCategory?: boolean;
 }
 
-const { posts } = Astro.props;
+const { posts, showCategory = false } = Astro.props;
 const fmt = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'UTC' });
 ---
 
@@ -13,7 +15,12 @@ const fmt = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'U
 	{
 		posts.map((post) => (
 			<li>
-				<a href={`/blog/${post.id}`}>{post.data.title}</a>
+				<span>
+					<a href={`/blog/${post.id}`}>{post.data.title}</a>
+					{showCategory && (
+						<span class="muted"> · {categoryInfo(post.section, post.category).title}</span>
+					)}
+				</span>
 				<time class="muted" datetime={post.data.date.toISOString()}>
 					{fmt.format(post.data.date)}
 				</time>

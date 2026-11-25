@@ -16,3 +16,29 @@ export const NAV = [
 	{ label: 'Home', href: '/' },
 	{ label: 'Blog', href: '/blog' },
 ];
+
+// Blog structure: src/content/blog/<section>/<category>/<post>.md
+// Folder names are the URL slugs. Add an entry here to give one a nice title
+// and description; anything missing falls back to a title-cased folder name.
+export const SECTIONS: Record<string, { title: string; description: string }> = {
+	finance: {
+		title: 'Finance',
+		description: 'Notes and learnings on finance.',
+	},
+	tech: {
+		title: 'Tech',
+		description: 'Software, AI infrastructure and performance engineering.',
+	},
+};
+
+export const CATEGORIES: Record<string, { title: string; description: string }> = {
+	'finance/corporate-finance': {
+		title: 'Corporate Finance',
+		description:
+			"My notes from Aswath Damodaran's corporate finance lectures, generated with Google NotebookLM.",
+	},
+	'tech/general': {
+		title: 'General',
+		description: 'Miscellaneous posts.',
+	},
+};

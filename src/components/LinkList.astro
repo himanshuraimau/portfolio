@@ -1,0 +1,35 @@
+---
+interface Props {
+	items: { href: string; title: string; description?: string; meta?: string }[];
+}
+const { items } = Astro.props;
+---
+
+<ul>
+	{
+		items.map((item) => (
+			<li>
+				<a href={item.href}>{item.title}</a>
+				{item.meta && <span class="muted"> · {item.meta}</span>}
+				{item.description && <p class="muted">{item.description}</p>}
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		padding: 12px 0;
+	}
+	a {
+		font-size: 1.125rem;
+	}
+	p {
+		margin: 4px 0 0;
+	}
+</style>
