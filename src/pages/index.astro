@@ -5,9 +5,31 @@ import { getPosts, byDateDesc } from '../lib/blog';
 import { SITE, LINKS } from '../consts';
 
 const posts = (await getPosts()).sort(byDateDesc).slice(0, 5);
+
+const jsonLd = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		'@id': `${SITE.url}/#person`,
+		name: SITE.name,
+		url: SITE.url,
+		jobTitle: SITE.jobTitle,
+		description: SITE.description,
+		worksFor: { '@type': 'Organization', name: SITE.employer },
+		sameAs: LINKS.filter((l) => l.href.startsWith('http')).map((l) => l.href),
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: SITE.name,
+		url: SITE.url,
+		description: SITE.description,
+		author: { '@id': `${SITE.url}/#person` },
+	},
+];
 ---
 
-<BaseLayout>
+<BaseLayout jsonLd={jsonLd}>
 	<h1>{SITE.name}</h1>
 	<p>
 		I'm a software engineer currently interning at Morgan Stanley. I'm interested in AI
@@ -34,7 +56,7 @@ const posts = (await getPosts()).sort(byDateDesc).slice(0, 5);
 			<section>
 				<h2>Latest writing</h2>
 				<PostList posts={posts} showCategory />
-				<p><a href="/blog">Browse all sections →</a></p>
+				<p><a href="/blog/">Browse all sections →</a></p>
 			</section>
 		)
 	}

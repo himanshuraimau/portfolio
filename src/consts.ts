@@ -1,5 +1,12 @@
 export const SITE = {
 	name: 'Himanshu Rai',
+	url: 'https://enghimanshu.online',
+	tagline: 'Software Engineer',
+	jobTitle: 'Software Engineer',
+	employer: 'Morgan Stanley',
+	twitter: '@himanshura_i',
+	locale: 'en_US',
+	ogImage: '/og-default.png',
 	description:
 		'Himanshu Rai is a software engineer interested in AI infrastructure and performance engineering.',
 };
@@ -14,7 +21,7 @@ export const LINKS = [
 
 export const NAV = [
 	{ label: 'Home', href: '/' },
-	{ label: 'Blog', href: '/blog' },
+	{ label: 'Blog', href: '/blog/' },
 ];
 
 // Blog structure: src/content/blog/<section>/<category>/<post>.md

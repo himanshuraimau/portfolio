@@ -27,8 +27,8 @@ const cat = categoryInfo(section, category);
 <BaseLayout title={cat.title} description={cat.description || undefined}>
 	<Breadcrumbs
 		items={[
-			{ label: 'Blog', href: '/blog' },
-			{ label: sec.title, href: `/blog/${section}` },
+			{ label: 'Blog', href: '/blog/' },
+			{ label: sec.title, href: `/blog/${section}/` },
 			{ label: cat.title },
 		]}
 	/>

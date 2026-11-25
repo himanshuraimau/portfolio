@@ -9,7 +9,7 @@ const sections = unique(posts.map((p) => p.section)).map((section) => {
 	const count = posts.filter((p) => p.section === section).length;
 	const info = sectionInfo(section);
 	return {
-		href: `/blog/${section}`,
+		href: `/blog/${section}/`,
 		title: info.title,
 		description: info.description,
 		meta: `${count} ${count === 1 ? 'post' : 'posts'}`,

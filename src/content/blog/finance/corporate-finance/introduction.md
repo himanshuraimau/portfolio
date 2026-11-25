@@ -3,6 +3,7 @@ title: Introduction
 description: What corporate finance is, the three core principles, and why acting your age matters.
 date: 2026-11-25
 order: 1
+image: ./images/three-core-principles.png
 ---
 
 What if almost every single decision made within a business (from launching a global ad campaign to installing a new office water cooler) is secretly a corporate finance decision in disguise?

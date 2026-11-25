@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 					).length;
 					const info = categoryInfo(section, category);
 					return {
-						href: `/blog/${section}/${category}`,
+						href: `/blog/${section}/${category}/`,
 						title: info.title,
 						description: info.description,
 						meta: `${count} ${count === 1 ? 'post' : 'posts'}`,
@@ -33,7 +33,7 @@ const info = sectionInfo(section);
 ---
 
 <BaseLayout title={info.title} description={info.description || undefined}>
-	<Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: info.title }]} />
+	<Breadcrumbs items={[{ label: 'Blog', href: '/blog/' }, { label: info.title }]} />
 	<h1>{info.title}</h1>
 	{info.description && <p class="muted">{info.description}</p>}
 	<LinkList items={categories} />

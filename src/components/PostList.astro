@@ -16,7 +16,7 @@ const fmt = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'U
 		posts.map((post) => (
 			<li>
 				<span>
-					<a href={`/blog/${post.id}`}>{post.data.title}</a>
+					<a href={`/blog/${post.id}/`}>{post.data.title}</a>
 					{showCategory && (
 						<span class="muted"> · {categoryInfo(post.section, post.category).title}</span>
 					)}
